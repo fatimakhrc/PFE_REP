@@ -7,17 +7,25 @@ import org.springframework.data.annotation.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table (name = "Client")
 public class Client {
     @Id
     @Column(name = "CIN",length = 15 , nullable = false)
     private String cin ;
+    @Column(name="nom_clt")
     private String nom_clt ;
+    @Column(name="prenom_clt")
     private String prenom_clt ;
+    @Column(name="clt_adress")
     private String clt_adress ;
+    @Column(name="phone_number")
     private int phone_number ;
+    @Column(name="email")
     private String email ;
+    @Column(name="role")
     private String role ;
 
     public Client(String cin, String nom_clt, String prenom_clt, String clt_adress, int phone_number, String email,

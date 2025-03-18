@@ -1,5 +1,5 @@
 package pfe.example.Services;
 
-public class RecusService {
+public interface RecusService {
     
 }

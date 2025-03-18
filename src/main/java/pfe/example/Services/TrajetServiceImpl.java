@@ -1,5 +1,6 @@
 package pfe.example.Services;
 
-public class TrajetServiceImpl {
+public class TrajetServiceImpl implements TrajetService {
+    
     
 }

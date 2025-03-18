@@ -13,20 +13,35 @@ public class Pricing {
     @Id
     @Column(name = "trj_id")
     private String trj_id ;
+    @Column(name="poids_min")
     private Double poids_min ;
+    @Column(name="poids_max")
     private Double poids_max ;
+    @Column(name="prix_uni")
     private Double prix_uni ;
+    
 
     @ManyToOne
     @JoinColumn(name = "trj_id" , referencedColumnName = "trj_id")
     private Trajet trajetPricing;
 
     
-    public Pricing(String trj_id, Double poids_min, Double poids_max, Double prix_uni) {
+    public Pricing(String trj_id, Double poids_min, Double poids_max, Double prix_uni ) {
         this.trj_id = trj_id;
         this.poids_min = poids_min;
         this.poids_max = poids_max;
         this.prix_uni = prix_uni;
+        
+    }
+
+
+    public Pricing() {
+        
+    }
+
+
+    public Pricing(double d, double e, double f) {
+        //TODO Auto-generated constructor stub
     }
 
 
@@ -54,5 +69,7 @@ public class Pricing {
     public void setPrix_uni(Double prix_uni) {
         this.prix_uni = prix_uni;
     }
+    
+
     
 }

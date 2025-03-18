@@ -1,5 +1,5 @@
 package pfe.example.Services;
 
-public class DepartServiceImpl {
+public class DepartServiceImpl implements DepartService {
     
 }

@@ -1,6 +1,6 @@
 package pfe.example.Entities;
 
-import java.time.Duration;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,10 +15,6 @@ public class Vehicule {
     @Id
     @Column (name = "immatriculation" , nullable = false )
     private String imtrc;
-    @Column (name = "duree_transport")
-    private Duration duree_transport;
-    @Column (name = "nature_transport")
-    private String nature_transport ;
     @Column (name = "capacite")
     private float capacite ;
     @Column (name = "trj_id")
@@ -27,11 +23,8 @@ public class Vehicule {
     private String trs_CIN ;
 
 
-    public Vehicule(String imtrc, Duration duree_transport, String nature_transport, float capacite, String trj_id,
-            String trs_CIN) {
+    public Vehicule(String imtrc, float capacite, String trj_id,String trs_CIN) {
         this.imtrc = imtrc;
-        this.duree_transport = duree_transport;
-        this.nature_transport = nature_transport;
         this.capacite = capacite;
         this.trj_id = trj_id;
         this.trs_CIN = trs_CIN;
@@ -52,18 +45,6 @@ public class Vehicule {
     }
     public void setImtrc(String imtrc) {
         this.imtrc = imtrc;
-    }
-    public Duration getDuree_transport() {
-        return duree_transport;
-    }
-    public void setDuree_transport(Duration duree_transport) {
-        this.duree_transport = duree_transport;
-    }
-    public String getNature_transport() {
-        return nature_transport;
-    }
-    public void setNature_transport(String nature_transport) {
-        this.nature_transport = nature_transport;
     }
     public float getCapacite() {
         return capacite;

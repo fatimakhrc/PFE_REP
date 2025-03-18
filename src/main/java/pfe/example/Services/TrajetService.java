@@ -1,5 +1,7 @@
 package pfe.example.Services;
 
-public class TrajetService {
+public interface TrajetService {
     
+    
+
 }

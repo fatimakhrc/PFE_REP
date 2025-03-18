@@ -19,8 +19,6 @@ public class Courrier {
     @Id   // indique qu'il s'agit d'un identifiant
     @Column(name = "ID" , nullable = false) // definit des prop d'une champ dans une table ici c l'idetifiant
     private UUID id;
-    @Column (name = "type_service")
-    private String type_service ;
     @Column (name = "date_envoie")
     private Date date_envoie ;
     @Column (name = "poids")
@@ -33,8 +31,7 @@ public class Courrier {
     private String cIN_expd ;
     @Column (name = "trj_id")
     private String trj_id ;
-    @Column (name = "etat_env")
-    private String etat_env ;
+    
 
 
     @ManyToOne
@@ -56,17 +53,16 @@ public class Courrier {
     @JoinColumn(name = "id")
     private Recus recus;
 
-    public Courrier(UUID id, String type_service, Date date_envoie, double poids, String statut, String cIN_dest,
-            String cIN_expd, String trj_id, String etat_env) {
+    public Courrier(UUID id, Date date_envoie, double poids, String statut, String cIN_dest,
+            String cIN_expd, String trj_id) {
         this.id = id;
-        this.type_service = type_service;
         this.date_envoie = date_envoie;
         this.poids = poids;
-        this.statut = statut;
+        this.statut = statut; //paye ou pas 
         this.cIN_dest = cIN_dest;
         this.cIN_expd = cIN_expd;
         this.trj_id = trj_id;
-        this.etat_env = etat_env;
+       
     }
 
     public UUID getId() {
@@ -76,15 +72,7 @@ public class Courrier {
     public void setId(UUID id) {
         this.id = id;
     }
-
-    public String getType_service() {
-        return type_service;
-    }
-
-    public void setType_service(String type_service) {
-        this.type_service = type_service;
-    }
-
+    
     public Date getDate_envoie() {
         return date_envoie;
     }
@@ -133,13 +121,7 @@ public class Courrier {
         this.trj_id = trj_id;
     }
 
-    public String getEtat_env() {
-        return etat_env;
-    }
-
-    public void setEtat_env(String etat_env) {
-        this.etat_env = etat_env;
-    }
+   
 
 
     

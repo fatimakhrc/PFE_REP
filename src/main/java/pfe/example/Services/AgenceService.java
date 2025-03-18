@@ -1,5 +1,5 @@
 package pfe.example.Services;
 
-public class AgenceService {
+public interface AgenceService {
     
 }

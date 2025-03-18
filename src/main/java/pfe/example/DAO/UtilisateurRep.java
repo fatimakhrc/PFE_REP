@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,24 +12,41 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
-import pfe.example.Entities.Trajet;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
+import pfe.example.Entities.Utilisateur;
 
-public class TrajetRep implements JpaRepository <Trajet,String>{
+public class UtilisateurRep implements JpaRepository<Utilisateur,String> {
+
+    @Autowired
+    private EntityManager entityManager;
+    public Utilisateur findByEmail(String email){
+        String jpql = "SELECT u FROM Utilisateur u WHERE u.email = :email";
+        TypedQuery<Utilisateur> query = entityManager.createQuery(jpql,Utilisateur.class);
+        query.setParameter("email", email);
+        try {
+            return query.getSingleResult(); //recupere l'utilisateur unique correspond a l'email 
+        }
+        catch (NoResultException e){
+            return null ;// si aucun utilisateur est trouve 
+        }
+    }
 
     @Override
-    public List<Trajet> findAll() {
+    public List<Utilisateur> findAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     }
 
     @Override
-    public List<Trajet> findAllById(Iterable<String> ids) {
+    public List<Utilisateur> findAllById(Iterable<String> ids) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAllById'");
     }
 
     @Override
-    public <S extends Trajet> List<S> saveAll(Iterable<S> entities) {
+    public <S extends Utilisateur> List<S> saveAll(Iterable<S> entities) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveAll'");
     }
@@ -40,7 +58,7 @@ public class TrajetRep implements JpaRepository <Trajet,String>{
     }
 
     @Override
-    public void delete(Trajet entity) {
+    public void delete(Utilisateur entity) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
@@ -52,7 +70,7 @@ public class TrajetRep implements JpaRepository <Trajet,String>{
     }
 
     @Override
-    public void deleteAll(Iterable<? extends Trajet> entities) {
+    public void deleteAll(Iterable<? extends Utilisateur> entities) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
     }
@@ -76,55 +94,55 @@ public class TrajetRep implements JpaRepository <Trajet,String>{
     }
 
     @Override
-    public Optional<Trajet> findById(String id) {
+    public Optional<Utilisateur> findById(String id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
 
     @Override
-    public <S extends Trajet> S save(S entity) {
+    public <S extends Utilisateur> S save(S entity) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
 
     @Override
-    public List<Trajet> findAll(Sort sort) {
+    public List<Utilisateur> findAll(Sort sort) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     }
 
     @Override
-    public Page<Trajet> findAll(Pageable pageable) {
+    public Page<Utilisateur> findAll(Pageable pageable) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     }
 
     @Override
-    public <S extends Trajet> long count(Example<S> example) {
+    public <S extends Utilisateur> long count(Example<S> example) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'count'");
     }
 
     @Override
-    public <S extends Trajet> boolean exists(Example<S> example) {
+    public <S extends Utilisateur> boolean exists(Example<S> example) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'exists'");
     }
 
     @Override
-    public <S extends Trajet> Page<S> findAll(Example<S> example, Pageable pageable) {
+    public <S extends Utilisateur> Page<S> findAll(Example<S> example, Pageable pageable) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     }
 
     @Override
-    public <S extends Trajet, R> R findBy(Example<S> example, Function<FetchableFluentQuery<S>, R> queryFunction) {
+    public <S extends Utilisateur, R> R findBy(Example<S> example, Function<FetchableFluentQuery<S>, R> queryFunction) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findBy'");
     }
 
     @Override
-    public <S extends Trajet> Optional<S> findOne(Example<S> example) {
+    public <S extends Utilisateur> Optional<S> findOne(Example<S> example) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findOne'");
     }
@@ -142,19 +160,19 @@ public class TrajetRep implements JpaRepository <Trajet,String>{
     }
 
     @Override
-    public void deleteAllInBatch(Iterable<Trajet> entities) {
+    public void deleteAllInBatch(Iterable<Utilisateur> entities) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteAllInBatch'");
     }
 
     @Override
-    public <S extends Trajet> List<S> findAll(Example<S> example) {
+    public <S extends Utilisateur> List<S> findAll(Example<S> example) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     }
 
     @Override
-    public <S extends Trajet> List<S> findAll(Example<S> example, Sort sort) {
+    public <S extends Utilisateur> List<S> findAll(Example<S> example, Sort sort) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAll'");
     }
@@ -166,31 +184,31 @@ public class TrajetRep implements JpaRepository <Trajet,String>{
     }
 
     @Override
-    public Trajet getById(String arg0) {
+    public Utilisateur getById(String arg0) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getById'");
     }
 
     @Override
-    public Trajet getOne(String arg0) {
+    public Utilisateur getOne(String arg0) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getOne'");
     }
 
     @Override
-    public Trajet getReferenceById(String id) {
+    public Utilisateur getReferenceById(String id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getReferenceById'");
     }
 
     @Override
-    public <S extends Trajet> List<S> saveAllAndFlush(Iterable<S> entities) {
+    public <S extends Utilisateur> List<S> saveAllAndFlush(Iterable<S> entities) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveAllAndFlush'");
     }
 
     @Override
-    public <S extends Trajet> S saveAndFlush(S entity) {
+    public <S extends Utilisateur> S saveAndFlush(S entity) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveAndFlush'");
     }

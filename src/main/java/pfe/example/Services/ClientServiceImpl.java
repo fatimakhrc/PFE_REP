@@ -1,5 +1,5 @@
 package pfe.example.Services;
 
-public class ClientServiceImpl {
+public class ClientServiceImpl implements ClientService {
     
 }
