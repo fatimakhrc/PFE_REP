@@ -1,6 +1,5 @@
 package pfe.example.Configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,42 +8,46 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pfe.example.Services.UtilisateurService;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+//import pfe.example.Services.CustomUtilisateurDetailService;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig  {
+public class SecurityConfig {
 
-    /* @Autowired
-    //private CustomUserDetailsService customUserDetailsService;
+    /* private final UtilisateurService utilisateurService;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
+    public SecurityConfig(UtilisateurService utilisateurService) {
+        this.utilisateurService = utilisateurService;
     }
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/api/auth/**").permitAll()  // Autoriser certaines routes sans authentification
-        .antMatchers("/api/admin/**").hasRole("ADMINISTRATEUR")  // Restreindre les routes aux admins
-        .antMatchers("/api/operator/**").hasRole("OPERATORATEUR")  // Restreindre les routes aux opérateurs
-        .anyRequest().authenticated()  // Autres routes nécessitant une authentification
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/api/auth/**").permitAll()
+            .antMatchers("/api/admin/**").hasRole("ADMIN")
+            .antMatchers("/api/operator/**").hasRole("OPERATOR")
+            .anyRequest().authenticated()
             .and()
-            .formLogin().permitAll()  // Autoriser le formulaire de login par défaut
-            .and().httpBasic();  // Activer HTTP Basic Authentication
-        }
-     */
-        @Bean
-        public PasswordEncoder passwordEncoder() {
-            return new BCryptPasswordEncoder();
-        }
-    
-       /*  @Override
-        @Bean
-        public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+            .addFilter(new JwtAuthenticationFilter(authenticationManager(http)))
+            .addFilterBefore(new JwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+            .userDetailsService(utilisateurService)
+            .passwordEncoder(passwordEncoder())
+            .and()
+            .build();
     } */
 
-
-
-
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

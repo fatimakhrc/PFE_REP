@@ -32,6 +32,9 @@ public class Agence {
 
     @OneToMany (mappedBy = "agence")
     private List <Recus> recus;
+
+    @OneToMany(mappedBy = "agence")
+    private List<Employe> employes;  // Liste des employés affectés à cette agence
     
     
     public String getId_agence() {
@@ -52,6 +55,13 @@ public class Agence {
     public void setAdresse_agence(String adresse_agence) {
         this.adresse_agence = adresse_agence;
     }
+    public List<Employe> getEmployes() {
+        return employes;
+    }
+    public void setEmployes(List<Employe> employes) {
+        this.employes = employes;
+    }
+    
   
 
     

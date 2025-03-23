@@ -18,10 +18,13 @@ public class Employe {
     @Column (name="prenom_emp")
     private String prenom_emp; 
 
-    public Employe(String emp_cin, String nom_emp, String prenom_emp) {
+    public Employe(String emp_cin, String nom_emp, String prenom_emp,Utilisateur utilisateur , Agence agence) {
         this.emp_cin = emp_cin;
         this.nom_emp = nom_emp;
         this.prenom_emp = prenom_emp;
+        this.utilisateur = utilisateur;
+        this.agence = agence;
+
     }
 
     
@@ -43,8 +46,25 @@ public class Employe {
     public void setPrenom_emp(String prenom_emp) {
         this.prenom_emp = prenom_emp;
     }
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+    public Agence getAgence() {
+        return agence;
+    }
+    public void setAgence (Agence agence){
+        this.agence=agence;
+    }
+
     @ManyToOne
     @JoinColumn(name = "agence_id")  // Clé étrangère vers Agence
     private Agence agence;  // L'agence à laquelle l'employé appartient
+
+    @ManyToOne
+    @JoinColumn(name = "utilisateur_email")
+    private Utilisateur utilisateur;  // Relation avec l'entité Utilisateur
 
 }
