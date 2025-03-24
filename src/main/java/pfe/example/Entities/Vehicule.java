@@ -17,15 +17,18 @@ public class Vehicule {
     private String imtrc;
     @Column (name = "capacite")
     private float capacite ;
+    @Column (name = "type")
+    private String type ;
     @Column (name = "trj_id")
     private String trj_id ;
     @Column (name = "trs_CIN")
     private String trs_CIN ;
 
 
-    public Vehicule(String imtrc, float capacite, String trj_id,String trs_CIN) {
+    public Vehicule(String imtrc, float capacite, String type, String trj_id,String trs_CIN) {
         this.imtrc = imtrc;
         this.capacite = capacite;
+        this.type = type;
         this.trj_id = trj_id;
         this.trs_CIN = trs_CIN;
     }
@@ -63,6 +66,24 @@ public class Vehicule {
     }
     public void setTrs_CIN(String trs_CIN) {
         this.trs_CIN = trs_CIN;
+    }
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+    public Trajet getTrajetVehicule() {
+        return trajetVehicule;
+    }
+    public void setTrajetVehicule(Trajet trajetVehicule) {
+        this.trajetVehicule = trajetVehicule;
+    }
+    public Transporteur getTransporteurVehicule() {
+        return transporteurVehicule;
+    }
+    public void setTransporteurVehicule(Transporteur transporteurVehicule) {
+        this.transporteurVehicule = transporteurVehicule;
     }
 
 
