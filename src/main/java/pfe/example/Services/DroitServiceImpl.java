@@ -19,7 +19,7 @@ public class DroitServiceImpl implements DroitService{
         droit.setNomDroit(nomDroit);
         return droitRepository.save(droit);
     }
-
+    // 7ta nt2ekdo mn hady 
    /*  @Override
     public Droits getDroitByNomDroit(String nomDroit) {
         return droitRepository.findByNomDroit(nomDroit);
