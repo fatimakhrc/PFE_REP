@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
 @Entity
@@ -18,7 +19,7 @@ import jakarta.persistence.Column;
 public class Courrier {
     @Id   // indique qu'il s'agit d'un identifiant
     @Column(name = "ID" , nullable = false) // definit des prop d'une champ dans une table ici c l'idetifiant
-    private UUID id;
+    private Long id;
     @Column (name = "date_envoie")
     private Date date_envoie ;
     @Column (name = "poids")
@@ -34,26 +35,26 @@ public class Courrier {
     
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cIN_DEST", referencedColumnName = "CIN")
     private Client destinataire;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cIN_EXP", referencedColumnName = "CIN")
     private Client expediteur;
     
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "trj_id" , referencedColumnName = "trj_id")
     private Trajet trajetCourrier;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
     private Recus recus;
 
-    public Courrier(UUID id, Date date_envoie, double poids, String statut, String cIN_dest,
+    public Courrier(Long id, Date date_envoie, double poids, String statut, String cIN_dest,
             String cIN_expd, String trj_id) {
         this.id = id;
         this.date_envoie = date_envoie;
@@ -65,11 +66,11 @@ public class Courrier {
        
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
     

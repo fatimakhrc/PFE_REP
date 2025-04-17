@@ -1,5 +1,6 @@
 package pfe.example.Entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -59,11 +60,11 @@ public class Employe {
         this.agence=agence;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "agence_id")  // Clé étrangère vers Agence
     private Agence agence;  // L'agence à laquelle l'employé appartient
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "utilisateur_email")
     private Utilisateur utilisateur;  // Relation avec l'entité Utilisateur
 

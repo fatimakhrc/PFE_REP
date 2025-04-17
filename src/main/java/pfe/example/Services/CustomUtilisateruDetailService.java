@@ -1,4 +1,4 @@
- package pfe.example.Services;
+/*  package pfe.example.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -12,7 +12,7 @@ import pfe.example.Entities.Utilisateur;
 
 public class CustomUtilisateruDetailService implements UserDetailsService{
     /*cette class est une service qui implemet l'interface predefinis dans spring security il va permet
-     * de recuperer les infos d'un utilisateur pour l'authentification et l'autorisation .*/
+     * de recuperer les infos d'un utilisateur pour l'authentification et l'autorisation .
     
     @Autowired 
     private UtilisateurRep utilisateurRep;
@@ -34,3 +34,4 @@ public class CustomUtilisateruDetailService implements UserDetailsService{
     }
 
 }
+ */

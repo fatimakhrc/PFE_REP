@@ -1,5 +1,6 @@
 package pfe.example.Entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -21,7 +22,7 @@ public class Pricing {
     private Double prix_uni ;
     
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "trj_id" , referencedColumnName = "trj_id")
     private Trajet trajetPricing;
 

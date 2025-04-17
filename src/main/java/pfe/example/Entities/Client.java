@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -40,10 +41,10 @@ public class Client {
     }
 
 
-    @OneToMany(mappedBy = "clientDest")
+    @OneToMany(mappedBy = "clientDest",cascade = CascadeType.ALL)
     private List<Courrier> courriersDest;
   
-    @OneToMany(mappedBy = "clientExped")
+    @OneToMany(mappedBy = "clientExped",cascade = CascadeType.ALL)
     private List<Courrier> courriersExped;
     
 
