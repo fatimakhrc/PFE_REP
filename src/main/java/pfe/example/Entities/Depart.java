@@ -2,6 +2,7 @@ package pfe.example.Entities;
 
 import java.time.LocalTime;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,7 +21,7 @@ public class Depart {
     @Column (name = "heure_arrv")
     private LocalTime heure_arrv ;
 
-    @ManyToOne 
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn( name = "trj_id" , referencedColumnName = "trj_id")
     private Trajet trajetDepart ;
 

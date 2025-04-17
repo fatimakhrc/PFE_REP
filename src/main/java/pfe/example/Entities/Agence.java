@@ -2,6 +2,7 @@ package pfe.example.Entities;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -27,13 +28,13 @@ public class Agence {
     }
 
 
-    @OneToMany (mappedBy = "agence")   // on utilise mappedby pour dire que la relation entre transporteur et agence est geree par agence.
+    @OneToMany (mappedBy = "agence",cascade = CascadeType.ALL)   // on utilise mappedby pour dire que la relation entre transporteur et agence est geree par agence.
     private List <Transporteur> transporteurs;
 
-    @OneToMany (mappedBy = "agence")
+    @OneToMany (mappedBy = "agence",cascade = CascadeType.ALL)
     private List <Recus> recus;
 
-    @OneToMany(mappedBy = "agence")
+    @OneToMany(mappedBy = "agence",cascade = CascadeType.ALL)
     private List<Employe> employes;  // Liste des employés affectés à cette agence
     
     

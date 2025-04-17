@@ -3,6 +3,7 @@ package pfe.example.Entities;
 import java.util.Date;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -23,11 +24,11 @@ public class Recus {
     @Column (name = "date_livraison")
     private Date date_livraison ;
 
-    @ManyToOne 
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "id_agence" , referencedColumnName = "id_agence")
     private Agence agenceRecus;
 
-    @OneToOne 
+    @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "id" , referencedColumnName = "id")
     private Courrier courreirRecus;
 

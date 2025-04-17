@@ -1,8 +1,9 @@
 package pfe.example.DAO;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
 import java.util.function.Function;
 
 import org.springframework.data.domain.Example;
@@ -12,9 +13,25 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import pfe.example.Entities.Courrier;
 
-public class CourrierRep  implements JpaRepository <Courrier,UUID>{
+public class CourrierRep  implements JpaRepository <Courrier,Long>{
+    private EntityManager entityManager;
+    public long countByDateEnvoi(LocalDate dateEnvoi) {
+        String jpql = "SELECT COUNT(c) FROM Courrier c WHERE c.dateEnvoi = :dateEnvoi";
+        TypedQuery<Long> query = entityManager.createQuery(jpql, Long.class);
+        query.setParameter("dateEnvoi", dateEnvoi);
+        return query.getSingleResult();
+    }
+
+    public List<Courrier> findByStatut(String statut) {
+        String jpql = "SELECT c FROM Courrier c WHERE c.statut = :statut";
+        TypedQuery<Courrier> query = entityManager.createQuery(jpql, Courrier.class);
+        query.setParameter("statut", statut);
+        return query.getResultList();
+    }
 
     @Override
     public List<Courrier> findAll() {
@@ -23,7 +40,7 @@ public class CourrierRep  implements JpaRepository <Courrier,UUID>{
     }
 
     @Override
-    public List<Courrier> findAllById(Iterable<UUID> ids) {
+    public List<Courrier> findAllById(Iterable<Long> ids) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAllById'");
     }
@@ -59,25 +76,25 @@ public class CourrierRep  implements JpaRepository <Courrier,UUID>{
     }
 
     @Override
-    public void deleteAllById(Iterable<? extends UUID> ids) {
+    public void deleteAllById(Iterable<? extends Long> ids) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteAllById'");
     }
 
     @Override
-    public void deleteById(UUID id) {
+    public void deleteById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
     }
 
     @Override
-    public boolean existsById(UUID id) {
+    public boolean existsById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'existsById'");
     }
 
     @Override
-    public Optional<Courrier> findById(UUID id) {
+    public Optional<Courrier> findById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
@@ -131,7 +148,7 @@ public class CourrierRep  implements JpaRepository <Courrier,UUID>{
     }
 
     @Override
-    public void deleteAllByIdInBatch(Iterable<UUID> ids) {
+    public void deleteAllByIdInBatch(Iterable<Long> ids) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteAllByIdInBatch'");
     }
@@ -167,19 +184,19 @@ public class CourrierRep  implements JpaRepository <Courrier,UUID>{
     }
 
     @Override
-    public Courrier getById(UUID arg0) {
+    public Courrier getById(Long arg0) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getById'");
     }
 
     @Override
-    public Courrier getOne(UUID arg0) {
+    public Courrier getOne(Long arg0) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getOne'");
     }
 
     @Override
-    public Courrier getReferenceById(UUID id) {
+    public Courrier getReferenceById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getReferenceById'");
     }
@@ -195,5 +212,4 @@ public class CourrierRep  implements JpaRepository <Courrier,UUID>{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveAndFlush'");
     }
-    
 }

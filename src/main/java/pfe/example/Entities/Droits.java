@@ -2,6 +2,7 @@ package pfe.example.Entities;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -43,7 +44,7 @@ public class Droits {
         this.nomDroit = nomDroit;
     }
 
-    @ManyToMany(mappedBy = "droits")
+    @ManyToMany(mappedBy = "droits",cascade = CascadeType.ALL)
     private List<Roles> roles ;
 
 
