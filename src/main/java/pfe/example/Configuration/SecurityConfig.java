@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 import pfe.example.Security.CustomAuthenticationProvider;
 import pfe.example.Security.JwtFilter;
@@ -28,21 +29,19 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .cors()  // Permet la communication entre les origines (CORS)
-            .and().csrf().disable()  // Désactiver CSRF pour les APIs
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)// pour blocker la creation d'une session en parallele avec le token jwt
-            .and()
-            .authorizeRequests()
-            .requestMatchers("/api/auth/**").permitAll()  // Permet d'accéder à la route d'authentification sans token
-            .anyRequest().authenticated()  // Toutes les autres routes nécessitent une authentification
-            .and()
-            .authenticationProvider(customAuthenticationProvider)
-            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);  // Ajoute le filtre JWT
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    return http
+        .cors(cors -> cors.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())) // Nouvelle syntaxe pour CORS
+        .csrf(csrf -> csrf.disable()) // Désactiver CSRF
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // JWT : pas de session
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/api/auth/**").permitAll() // Auth publique
+            .anyRequest().authenticated()) // Protection des autres routes
+        .authenticationProvider(customAuthenticationProvider)
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // Filtre JWT
+        .build();
+}
 
-        return http.build();
-    }
 
 
     @Bean
