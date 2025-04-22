@@ -2,11 +2,11 @@ package pfe.example.Entities;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 @Table (name = "Client")
 public class Client {
     @Id
-    @Column(name = "CIN",length = 15 , nullable = false)
+    @Column(name = "cin",length = 15 , nullable = false)
     private String cin ;
     @Column(name="nom_clt")
     private String nom_clt ;

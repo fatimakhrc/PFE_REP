@@ -7,7 +7,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.sql.Date;
-import java.util.UUID;
+
 
 import org.springframework.data.annotation.Id;
 
