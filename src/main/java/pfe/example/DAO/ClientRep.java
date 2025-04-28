@@ -10,9 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+import org.springframework.stereotype.Repository;
 
 import pfe.example.Entities.Client;
 
+@Repository
 public class ClientRep implements JpaRepository<Client,String> {
     //le premier parametre "Client" indique le type de l'entite qu'on veux gerer avec ce repository 
     // le deuxieme parametre "String" indique le type de l'identifiant (cle primaire)

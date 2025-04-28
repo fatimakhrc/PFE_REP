@@ -12,9 +12,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import pfe.example.Entities.Pricing;
 
+@Repository
 public class PricingRep implements JpaRepository <Pricing,String>{
      /* 
     @Query("SELECT poids FROM Courrier c join Pricing p WHERE p.poidsMin <= :poids AND p.poidsMax >= :poids")

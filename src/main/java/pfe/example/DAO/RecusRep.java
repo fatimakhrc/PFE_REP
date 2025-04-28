@@ -11,10 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+import org.springframework.stereotype.Repository;
 
 import pfe.example.Entities.Pricing;
 import pfe.example.Entities.Recus;
 
+@Repository
 public class RecusRep implements JpaRepository <Recus,UUID> {
 
     @Override

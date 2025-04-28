@@ -1,12 +1,12 @@
 package pfe.example.DTO;
 
-public class PoditionDTO {
+public class PositionDTO {
     private Long courrierId;
     private double latitude;
     private double longitude;
 
     
-    public PoditionDTO(Long courrierId, double latitude, double longitude) {
+    public PositionDTO(Long courrierId, double latitude, double longitude) {
         this.courrierId = courrierId;
         this.latitude = latitude;
         this.longitude = longitude;

@@ -30,6 +30,11 @@ public class Transporteur {
     @OneToMany (mappedBy = "Vehicule")
     private List <Vehicule> vehiculeTransporteur;
 
+    @ManyToOne
+    @JoinColumn(name = "agence_id")
+    private Agence agence;
+
+
 
     public Transporteur(String trs_CIN, String trs_nom, String trs_prenom, int trs_phone, String trs_adress,
             String id_agence) {

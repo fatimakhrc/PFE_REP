@@ -10,9 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
+import org.springframework.stereotype.Repository;
 
 import pfe.example.Entities.Vehicule;
 
+@Repository
 public class VehiculeRep implements JpaRepository<Vehicule,String> {
 
     @Override

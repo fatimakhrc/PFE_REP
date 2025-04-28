@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>facturePfe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header, .footer {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+        }
+        .title {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <p class="title">Facture</p>
+    </div>
+
+    <div>
+        <h3>Destination</h3>
+        <p><strong>Nom:</strong> <span th:text="destinataire.nomClt"></span> <span th:text="{destinataire.prenomClt}"></span></p>
+        <p><strong>Adresse:</strong> <span th:text="destinataire.adresse"></span></p>
+    </div>
+
+    <div>
+        <h3>Emetteur</h3>
+        <p><strong>Nom:</strong> <span th:text="{emetteur.nomClt}"></span> <span th:text="emetteur.prenomClt"></span></p>
+        <p><strong>Adresse:</strong> <span th:text="{emetteur.adresse}"></span></p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID Courrier</th>
+                <th>Poids (kg)</th>
+                <th>Prix Transmission (DH)</th>
+                <th>Statut Paiement</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td th:text="courrier.id"></td>
+                <td th:text="{courrier.poids}"></td>
+                <td th:text="courrier.prixTransmission"></td>
+                <td th:text="{courrier.paiementEffectue ? 'Payé' : 'Non Payé'}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>Merci pour votre confiance</p>
+    </div>
+    
+</body>
+</html>

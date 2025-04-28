@@ -1,12 +1,11 @@
 package pfe.example.Entities;
 
 import java.util.Date;
-import java.util.UUID;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -14,53 +13,56 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table (name = "Recus")
+@IdClass(RecusId.class)
 public class Recus {
-    @Id 
-    @Column (name = "id" , nullable = false )
-    private UUID id ;
+   
     @Id
-    @Column (name = "id_agence" , nullable = false)
-    private String id_agence ;
-    @Column (name = "date_livraison")
-    private Date date_livraison ;
-
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_agence" , referencedColumnName = "id_agence")
-    private Agence agenceRecus;
-
-    @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "id" , referencedColumnName = "id")
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private Courrier courreirRecus;
 
-    
-    public Recus(UUID id, String id_agence, Date date_livraison) {
-        this.id = id;
-        this.id_agence = id_agence;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "id_agence", referencedColumnName = "id_agence")
+    private Agence agenceRecus;
+
+    @Column(name = "date_livraison")
+    private Date date_livraison;
+
+    public Recus() {}
+
+    public Recus(Courrier courreirRecus, Agence agenceRecus, Date date_livraison) {
+        this.courreirRecus = courreirRecus;
+        this.agenceRecus = agenceRecus;
         this.date_livraison = date_livraison;
     }
 
+    public Courrier getCourreirRecus() {
+        return courreirRecus;
+    }
 
-    public UUID getId() {
-        return id;
+    public void setCourreirRecus(Courrier courreirRecus) {
+        this.courreirRecus = courreirRecus;
     }
-    public void setId(UUID id) {
-        this.id = id;
+
+    public Agence getAgenceRecus() {
+        return agenceRecus;
     }
-    public String getId_agence() {
-        return id_agence;
+
+    public void setAgenceRecus(Agence agenceRecus) {
+        this.agenceRecus = agenceRecus;
     }
-    public void setId_agence(String id_agence) {
-        this.id_agence = id_agence;
-    }
+
     public Date getDate_livraison() {
         return date_livraison;
     }
+
     public void setDate_livraison(Date date_livraison) {
         this.date_livraison = date_livraison;
     }
-
-
-    
-    
-    
 }
+
+
+
+
+

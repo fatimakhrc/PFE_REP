@@ -1,6 +1,9 @@
 package pfe.example.Entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
@@ -9,7 +12,6 @@ import jakarta.persistence.Table;
 import java.sql.Date;
 
 
-import org.springframework.data.annotation.Id;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,6 +26,7 @@ public class Courrier {
     private Date date_envoie ;
     @Column (name = "poids")
     private double poids ;
+    @Enumerated(EnumType.STRING)
     @Column (name = "statut")
     private String statut ;
     @Column (name = "cIN_dest")
