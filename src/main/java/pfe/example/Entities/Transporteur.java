@@ -15,43 +15,40 @@ import jakarta.persistence.Table;
 public class Transporteur {
     @Id
     @Column (name = "trs_CIN" , nullable = false)
-    private String trs_CIN ;
+    private String trs_Cin ;
     private String trs_nom ;
     private String trs_prenom ;
     private int trs_phone ;
     private String trs_adress ;
-    private String id_agence ;
+    private String id_Agence ;
 
 
     @ManyToOne 
-    @JoinColumn (name = "id_agence" , referencedColumnName = "id_agence")
+    @JoinColumn (name = "id_agence" , referencedColumnName = "id_agence",insertable = false, updatable = false)
     private Agence agenceTransporteur;
 
-    @OneToMany (mappedBy = "Vehicule")
+    @OneToMany (mappedBy = "transporteurVehicule")
     private List <Vehicule> vehiculeTransporteur;
 
-    @ManyToOne
-    @JoinColumn(name = "agence_id")
-    private Agence agence;
+    
 
 
-
-    public Transporteur(String trs_CIN, String trs_nom, String trs_prenom, int trs_phone, String trs_adress,
-            String id_agence) {
-        this.trs_CIN = trs_CIN;
+    public Transporteur(String trs_Cin, String trs_nom, String trs_prenom, int trs_phone, String trs_adress,
+            String id_Agence) {
+        this.trs_Cin = trs_Cin;
         this.trs_nom = trs_nom;
         this.trs_prenom = trs_prenom;
         this.trs_phone = trs_phone;
         this.trs_adress = trs_adress;
-        this.id_agence = id_agence;
+        this.id_Agence = id_Agence;
     }
 
     
-    public String getTrs_CIN() {
-        return trs_CIN;
+    public String getTrs_Cin() {
+        return trs_Cin;
     }
-    public void setTrs_CIN(String trs_CIN) {
-        this.trs_CIN = trs_CIN;
+    public void setTrs_Cin(String trs_Cin) {
+        this.trs_Cin = trs_Cin;
     }
     public String getTrs_nom() {
         return trs_nom;
@@ -78,10 +75,10 @@ public class Transporteur {
         this.trs_adress = trs_adress;
     }
     public String getId_agence() {
-        return id_agence;
+        return id_Agence;
     }
-    public void setId_agence(String id_agence) {
-        this.id_agence = id_agence;
+    public void setId_agence(String id_Agence) {
+        this.id_Agence = id_Agence;
     }
     
     

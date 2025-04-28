@@ -36,8 +36,8 @@ public class VehiculeServiceImpl implements VehiculeService{
             Vehicule vehicule = existingVehicule.get();
             vehicule.setCapacite(vehiculeDetails.getCapacite());
             vehicule.setType(vehiculeDetails.getType());
-            vehicule.setTrj_id(vehiculeDetails.getTrj_id());
-            vehicule.setTrs_CIN(vehiculeDetails.getTrs_CIN());
+            vehicule.setTrajetId(vehiculeDetails.getTrajetId());
+            vehicule.setTrs_cin(vehiculeDetails.getTrs_cin());
             return vehiculeRepository.save(vehicule);
         }
         return null;

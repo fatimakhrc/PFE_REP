@@ -1,5 +1,9 @@
 package pfe.example.Entities;
 
+import java.sql.Date;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -8,13 +12,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-
-import java.sql.Date;
-
-
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 
 @Entity
 @Table (name = "courrier")
@@ -28,23 +25,18 @@ public class Courrier {
     private double poids ;
     @Enumerated(EnumType.STRING)
     @Column (name = "statut")
-    private String statut ;
-    @Column (name = "cIN_dest")
-    private String cIN_dest ;
-    @Column (name = "cIN_expd")
-    private String cIN_expd ;
-    @Column (name = "trj_id")
-    private String trj_id ;
+    private StatusCourrier statut;
+   
     
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cIN_DEST", referencedColumnName = "CIN")
-    private Client destinataire;
+    @JoinColumn(name = "cIN_DEST", referencedColumnName = "CIN" )
+    private Client clientDest;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cIN_EXP", referencedColumnName = "CIN")
-    private Client expediteur;
+    private Client clientExped;
     
 
 
@@ -57,15 +49,11 @@ public class Courrier {
     @JoinColumn(name = "id")
     private Recus recus;
 
-    public Courrier(Long id, Date date_envoie, double poids, String statut, String cIN_dest,
-            String cIN_expd, String trj_id) {
+    public Courrier(Long id, Date date_envoie, double poids, StatusCourrier statut) {
         this.id = id;
         this.date_envoie = date_envoie;
         this.poids = poids;
         this.statut = statut; //paye ou pas 
-        this.cIN_dest = cIN_dest;
-        this.cIN_expd = cIN_expd;
-        this.trj_id = trj_id;
        
     }
 
@@ -93,40 +81,14 @@ public class Courrier {
         this.poids = poids;
     }
 
-    public String getStatut() {
+    public StatusCourrier getStatut() {
         return statut;
     }
 
-    public void setStatut(String statut) {
+    public void setStatut(StatusCourrier statut) {
         this.statut = statut;
     }
 
-    public String getCIN_dest() {
-        return cIN_dest;
-    }
-
-    public void setCIN_dest(String cIN_dest) {
-        this.cIN_dest = cIN_dest;
-    }
-
-    public String getCIN_expd() {
-        return cIN_expd;
-    }
-
-    public void setCIN_expd(String cIN_expd) {
-        this.cIN_expd = cIN_expd;
-    }
-
-    public String getTrj_id() {
-        return trj_id;
-    }
-
-    public void setTrj_id(String trj_id) {
-        this.trj_id = trj_id;
-    }
-
-   
-
-
+    
     
 }

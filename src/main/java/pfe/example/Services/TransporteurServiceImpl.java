@@ -22,7 +22,7 @@ public class TransporteurServiceImpl implements TransporeteurService{
             .orElseThrow(() -> new RuntimeException("Transporteur not found"));
         existingTransporteur.setTrs_nom(transporteur.getTrs_nom());
         existingTransporteur.setTrs_prenom(transporteur.getTrs_prenom());
-        existingTransporteur.setTrs_CIN(transporteur.getTrs_CIN());
+        existingTransporteur.setTrs_Cin(transporteur.getTrs_Cin());
         existingTransporteur.setTrs_adress(transporteur.getTrs_adress());
         return transporteurRepository.save(existingTransporteur);
     }

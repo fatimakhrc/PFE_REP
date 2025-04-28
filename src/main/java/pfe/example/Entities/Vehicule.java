@@ -20,26 +20,26 @@ public class Vehicule {
     @Column (name = "type")
     private String type ;
     @Column (name = "trj_id")
-    private String trj_id ;
-    @Column (name = "trs_CIN")
-    private String trs_CIN ;
+    private String trajetId ;
+    @Column (name = "trs_cin")
+    private String trs_cin;
 
 
-    public Vehicule(String imtrc, float capacite, String type, String trj_id,String trs_CIN) {
+    public Vehicule(String imtrc, float capacite, String type, String trajetId,String trs_cin) {
         this.imtrc = imtrc;
         this.capacite = capacite;
         this.type = type;
-        this.trj_id = trj_id;
-        this.trs_CIN = trs_CIN;
+        this.trajetId = trajetId;
+        this.trs_cin = trs_cin;
     }
 
     
     @ManyToOne
-    @JoinColumn (name = "trj_id" , referencedColumnName = "trj_id")
+    @JoinColumn (name = "trj_id" , referencedColumnName = "trj_id" ,insertable = false, updatable = false)
     private Trajet trajetVehicule;
 
     @ManyToOne 
-    @JoinColumn (name = "trs_CIN" , referencedColumnName = "trs_CIN")
+    @JoinColumn (name = "trs_CIN" , referencedColumnName = "trs_CIN", insertable = false, updatable = false)
     private Transporteur transporteurVehicule;
 
     
@@ -55,17 +55,17 @@ public class Vehicule {
     public void setCapacite(float capacite) {
         this.capacite = capacite;
     }
-    public String getTrj_id() {
-        return trj_id;
+    public String getTrajetId() {
+        return trajetId;
     }
-    public void setTrj_id(String trj_id) {
-        this.trj_id = trj_id;
+    public void setTrajetId(String trajetId) {
+        this.trajetId = trajetId;
     }
-    public String getTrs_CIN() {
-        return trs_CIN;
+    public String getTrs_cin() {
+        return trs_cin;
     }
-    public void setTrs_CIN(String trs_CIN) {
-        this.trs_CIN = trs_CIN;
+    public void setTrs_cin(String trs_cin) {
+        this.trs_cin = trs_cin;
     }
     public String getType() {
         return type;

@@ -19,7 +19,7 @@ public class Recus {
     @Id
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id")
-    private Courrier courreirRecus;
+    private Courrier courrierRecus;
 
     @Id
     @ManyToOne
@@ -31,18 +31,18 @@ public class Recus {
 
     public Recus() {}
 
-    public Recus(Courrier courreirRecus, Agence agenceRecus, Date date_livraison) {
-        this.courreirRecus = courreirRecus;
+    public Recus(Courrier courrierRecus, Agence agenceRecus, Date date_livraison) {
+        this.courrierRecus = courrierRecus;
         this.agenceRecus = agenceRecus;
         this.date_livraison = date_livraison;
     }
 
     public Courrier getCourreirRecus() {
-        return courreirRecus;
+        return courrierRecus;
     }
 
-    public void setCourreirRecus(Courrier courreirRecus) {
-        this.courreirRecus = courreirRecus;
+    public void setCourreirRecus(Courrier courrrRecus) {
+        this.courrierRecus = courrierRecus;
     }
 
     public Agence getAgenceRecus() {

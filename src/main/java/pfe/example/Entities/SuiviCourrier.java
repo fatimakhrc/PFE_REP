@@ -14,7 +14,7 @@ import jakarta.persistence.ManyToOne;
 public class SuiviCourrier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id_suivi;
 
     private double latitude;
     private double longitude;
@@ -27,20 +27,20 @@ public class SuiviCourrier {
     public SuiviCourrier() {
     }
 
-    public SuiviCourrier(Long id, double latitude, double longitude, LocalDateTime dateSuivi, Courrier courrier) {
-        this.id = id;
+    public SuiviCourrier(Long id_suivi, double latitude, double longitude, LocalDateTime dateSuivi, Courrier courrier) {
+        this.id_suivi = id_suivi;
         this.latitude = latitude;
         this.longitude = longitude;
         this.dateSuivi = dateSuivi;
         this.courrier = courrier;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdSuivi() {
+        return id_suivi;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId_suivi(Long id_suivi) {
+        this.id_suivi = id_suivi;
     }
 
     public double getLatitude() {

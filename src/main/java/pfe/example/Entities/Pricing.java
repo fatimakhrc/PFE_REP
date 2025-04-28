@@ -23,9 +23,8 @@ public class Pricing {
     
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "trj_id" , referencedColumnName = "trj_id")
+    @JoinColumn(name = "trj_id", referencedColumnName = "trj_id" , insertable = false , updatable = false)  // insertable = false, updatable = false pour éviter les erreurs de mise à jour
     private Trajet trajetPricing;
-
     
     public Pricing(String trj_id, Double poids_min, Double poids_max, Double prix_uni ) {
         this.trj_id = trj_id;
