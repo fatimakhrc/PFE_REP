@@ -3,6 +3,8 @@ package pfe.example.Entities;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -12,8 +14,9 @@ import jakarta.persistence.Table;
 @Table (name = "Pricing")
 public class Pricing {
     @Id
-    @Column(name = "trj_id")
-    private String trj_id ;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pricing_id")
+    private int pricing_id ;
     @Column(name="poids_min")
     private Double poids_min ;
     @Column(name="poids_max")
@@ -23,11 +26,11 @@ public class Pricing {
     
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "trj_id", referencedColumnName = "trj_id" , insertable = false , updatable = false)  // insertable = false, updatable = false pour éviter les erreurs de mise à jour
+    @JoinColumn(name = "trj_id", referencedColumnName = "trj_id") 
     private Trajet trajetPricing;
     
-    public Pricing(String trj_id, Double poids_min, Double poids_max, Double prix_uni ) {
-        this.trj_id = trj_id;
+    public Pricing(int pricing_id, Double poids_min, Double poids_max, Double prix_uni ) {
+        this.pricing_id = pricing_id;
         this.poids_min = poids_min;
         this.poids_max = poids_max;
         this.prix_uni = prix_uni;
@@ -45,12 +48,6 @@ public class Pricing {
     }
 
 
-    public String getTrj_id() {
-        return trj_id;
-    }
-    public void setTrj_id(String trj_id) {
-        this.trj_id = trj_id;
-    }
     public Double getPoids_min() {
         return poids_min;
     }
@@ -68,6 +65,26 @@ public class Pricing {
     }
     public void setPrix_uni(Double prix_uni) {
         this.prix_uni = prix_uni;
+    }
+
+
+    public int getPricing_id() {
+        return pricing_id;
+    }
+
+
+    public void setPricing_id(int pricing_id) {
+        this.pricing_id = pricing_id;
+    }
+
+
+    public Trajet getTrajetPricing() {
+        return trajetPricing;
+    }
+
+
+    public void setTrajetPricing(Trajet trajetPricing) {
+        this.trajetPricing = trajetPricing;
     }
     
 

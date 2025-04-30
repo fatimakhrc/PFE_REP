@@ -1,6 +1,7 @@
 package pfe.example.Entities;
 
 import java.time.LocalTime;
+import java.util.LongSummaryStatistics;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,7 +19,7 @@ public class Depart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idDepart")
-    private String idDepart;
+    private Long idDepart;
 
     @Column(name = "heure_dep")
     private LocalTime heure_dep;
@@ -28,21 +29,24 @@ public class Depart {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "trj_id", referencedColumnName = "trj_id")
-    private Trajet trajetDepart; // Cette relation est correcte
+    private Trajet trajetDepart; 
 
-    // Constructeurs, getters, et setters
-    public Depart(String idDepart, LocalTime heure_dep, LocalTime heure_arrv, Trajet trajetDepart) {
+    public Depart(Long idDepart, LocalTime heure_dep, LocalTime heure_arrv, Trajet trajetDepart) {
         this.idDepart = idDepart;
         this.heure_dep = heure_dep;
         this.heure_arrv = heure_arrv;
         this.trajetDepart = trajetDepart;
     }
 
-    public String getIdDepart() {
+    public Depart(){
+
+    }
+
+    public Long getIdDepart() {
         return idDepart;
     }
 
-    public void setIdDepart(String idDepart) {
+    public void setIdDepart(Long idDepart) {
         this.idDepart = idDepart;
     }
 

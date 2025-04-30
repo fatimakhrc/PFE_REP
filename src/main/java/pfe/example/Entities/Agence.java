@@ -10,7 +10,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name = "Agence ")
+@Table (name = "Agence")
 public class Agence {
     @Id
     @Column(name = "id_agence" , nullable = false )
@@ -25,6 +25,10 @@ public class Agence {
         this.id_agence = id_agence;
         this.nom_agence = nom_agence;
         this.adresse_agence = adresse_agence;
+    }
+
+    public Agence (){
+
     }
 
 

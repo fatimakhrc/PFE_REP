@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import pfe.example.Entities.Trajet;
 
 @Repository
-public class TrajetRep implements JpaRepository <Trajet,String>{
+public class TrajetRep implements JpaRepository <Trajet,Long>{
 
     @Override
     public List<Trajet> findAll() {
@@ -24,7 +24,7 @@ public class TrajetRep implements JpaRepository <Trajet,String>{
     }
 
     @Override
-    public List<Trajet> findAllById(Iterable<String> ids) {
+    public List<Trajet> findAllById(Iterable<Long> ids) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAllById'");
     }
@@ -60,25 +60,25 @@ public class TrajetRep implements JpaRepository <Trajet,String>{
     }
 
     @Override
-    public void deleteAllById(Iterable<? extends String> ids) {
+    public void deleteAllById(Iterable<? extends Long> ids) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteAllById'");
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
     }
 
     @Override
-    public boolean existsById(String id) {
+    public boolean existsById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'existsById'");
     }
 
     @Override
-    public Optional<Trajet> findById(String id) {
+    public Optional<Trajet> findById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
@@ -132,7 +132,7 @@ public class TrajetRep implements JpaRepository <Trajet,String>{
     }
 
     @Override
-    public void deleteAllByIdInBatch(Iterable<String> ids) {
+    public void deleteAllByIdInBatch(Iterable<Long> ids) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteAllByIdInBatch'");
     }
@@ -168,19 +168,19 @@ public class TrajetRep implements JpaRepository <Trajet,String>{
     }
 
     @Override
-    public Trajet getById(String arg0) {
+    public Trajet getById(Long arg0) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getById'");
     }
 
     @Override
-    public Trajet getOne(String arg0) {
+    public Trajet getOne(Long arg0) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getOne'");
     }
 
     @Override
-    public Trajet getReferenceById(String id) {
+    public Trajet getReferenceById(Long id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getReferenceById'");
     }
@@ -196,6 +196,8 @@ public class TrajetRep implements JpaRepository <Trajet,String>{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveAndFlush'");
     }
+
+    
 
     
 }

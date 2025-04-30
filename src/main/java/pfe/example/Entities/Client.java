@@ -23,13 +23,13 @@ public class Client {
     @Column(name="clt_adress")
     private String clt_adress ;
     @Column(name="phone_number")
-    private int phone_number ;
+    private String phone_number ;
     @Column(name="email")
     private String email ;
     @Column(name="role")
     private String role ;
 
-    public Client(String cin, String nom_clt, String prenom_clt, String clt_adress, int phone_number, String email,
+    public Client(String cin, String nom_clt, String prenom_clt, String clt_adress, String phone_number, String email,
             String role) {
         this.cin = cin;
         this.nom_clt = nom_clt;
@@ -38,6 +38,10 @@ public class Client {
         this.phone_number = phone_number;
         this.email = email;
         this.role = role;
+    }
+
+    public Client (){
+
     }
 
 
@@ -80,11 +84,11 @@ public class Client {
         this.clt_adress = clt_adress;
     }
 
-    public int getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(int phone_number) {
+    public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 

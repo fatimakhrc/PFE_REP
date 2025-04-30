@@ -10,7 +10,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -39,23 +38,23 @@ public class Courrier {
     private Client clientExped;
     
 
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "trj_id" , referencedColumnName = "trj_id")
     private Trajet trajetCourrier;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private Recus recus;
-
     public Courrier(Long id, Date date_envoie, double poids, StatusCourrier statut) {
         this.id = id;
         this.date_envoie = date_envoie;
         this.poids = poids;
-        this.statut = statut; //paye ou pas 
+        this.statut = statut;  
        
     }
+
+    public Courrier (){
+
+    }
+
 
     public Long getId() {
         return id;

@@ -18,6 +18,10 @@ public class Droits {
     private long id_droit;
     private String nomDroit;
 
+    @ManyToMany(mappedBy = "droits",cascade = CascadeType.ALL)
+    private List<Roles> roles ;
+
+
     public Droits() {
     }
 
@@ -44,9 +48,7 @@ public class Droits {
         this.nomDroit = nomDroit;
     }
 
-    @ManyToMany(mappedBy = "droits",cascade = CascadeType.ALL)
-    private List<Roles> roles ;
-
+  
 
     
 }

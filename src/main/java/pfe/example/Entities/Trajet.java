@@ -47,6 +47,11 @@ public class Trajet {
         this.ville_arrivee = ville_arrivee;
     }
 
+    public Trajet (){
+
+    }
+    
+
     public Long getTrj_id() {
         return trj_id;
     }

@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name = "Utlilisateur")
+@Table (name = "Utilisateur")
 public class Utilisateur {
     @Id
     @Column (name = "email" , unique = true)
@@ -21,11 +21,18 @@ public class Utilisateur {
     private String mot_passe;
     
 
+    @ManyToOne(fetch = FetchType.EAGER)// Cela permet de récupérer le rôle de l'utilisateur au moment de la connexion
+    @JoinColumn(name = "id_role", referencedColumnName = "id_role") 
+    private Roles role; // Le rôle de l'utilisateur
 
     public Utilisateur(String email, String mot_passe ) {
         this.email = email;
         this.mot_passe = mot_passe;
         
+    }
+
+    public Utilisateur (){
+
     }
 
     
@@ -49,15 +56,5 @@ public class Utilisateur {
     public void setRole(Roles role) {
         this.role = role;
     }
-    @ManyToOne(fetch = FetchType.EAGER)// Cela permet de récupérer le rôle de l'utilisateur au moment de la connexion
-    @JoinColumn(name = "id_role", referencedColumnName = "id_role") 
-    private Roles role; // Le rôle de l'utilisateur
-
-
     
-
-
-    
-
-
 }

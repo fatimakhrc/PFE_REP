@@ -15,9 +15,11 @@ import org.springframework.stereotype.Repository;
 
 import pfe.example.Entities.Pricing;
 import pfe.example.Entities.Recus;
+import pfe.example.Entities.RecusId;
 
 @Repository
-public class RecusRep implements JpaRepository <Recus,UUID> {
+public class RecusRep implements JpaRepository <Recus,RecusId>{
+
 
     @Override
     public List<Recus> findAll() {
@@ -26,7 +28,7 @@ public class RecusRep implements JpaRepository <Recus,UUID> {
     }
 
     @Override
-    public List<Recus> findAllById(Iterable<UUID> ids) {
+    public List<Recus> findAllById(Iterable<RecusId> ids) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findAllById'");
     }
@@ -62,25 +64,25 @@ public class RecusRep implements JpaRepository <Recus,UUID> {
     }
 
     @Override
-    public void deleteAllById(Iterable<? extends UUID> ids) {
+    public void deleteAllById(Iterable<? extends RecusId> ids) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteAllById'");
     }
 
     @Override
-    public void deleteById(UUID id) {
+    public void deleteById(RecusId id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
     }
 
     @Override
-    public boolean existsById(UUID id) {
+    public boolean existsById(RecusId id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'existsById'");
     }
 
     @Override
-    public Optional<Recus> findById(UUID id) {
+    public Optional<Recus> findById(RecusId id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'findById'");
     }
@@ -134,7 +136,7 @@ public class RecusRep implements JpaRepository <Recus,UUID> {
     }
 
     @Override
-    public void deleteAllByIdInBatch(Iterable<UUID> ids) {
+    public void deleteAllByIdInBatch(Iterable<RecusId> ids) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteAllByIdInBatch'");
     }
@@ -170,19 +172,19 @@ public class RecusRep implements JpaRepository <Recus,UUID> {
     }
 
     @Override
-    public Recus getById(UUID arg0) {
+    public Recus getById(RecusId arg0) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getById'");
     }
 
     @Override
-    public Recus getOne(UUID arg0) {
+    public Recus getOne(RecusId arg0) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getOne'");
     }
 
     @Override
-    public Recus getReferenceById(UUID id) {
+    public Recus getReferenceById(RecusId id) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getReferenceById'");
     }
@@ -198,5 +200,6 @@ public class RecusRep implements JpaRepository <Recus,UUID> {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'saveAndFlush'");
     }
-    
+
+
 }

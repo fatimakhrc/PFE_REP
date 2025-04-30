@@ -20,7 +20,7 @@ public class Transporteur {
     private String trs_prenom ;
     private int trs_phone ;
     private String trs_adress ;
-    private String id_Agence ;
+   
 
 
     @ManyToOne 
@@ -33,15 +33,19 @@ public class Transporteur {
     
 
 
-    public Transporteur(String trs_Cin, String trs_nom, String trs_prenom, int trs_phone, String trs_adress,
-            String id_Agence) {
+    public Transporteur(String trs_Cin, String trs_nom, String trs_prenom, int trs_phone, String trs_adress) {
         this.trs_Cin = trs_Cin;
         this.trs_nom = trs_nom;
         this.trs_prenom = trs_prenom;
         this.trs_phone = trs_phone;
         this.trs_adress = trs_adress;
-        this.id_Agence = id_Agence;
+       
     }
+
+    public Transporteur (){
+
+    }
+
 
     
     public String getTrs_Cin() {
@@ -74,12 +78,7 @@ public class Transporteur {
     public void setTrs_adress(String trs_adress) {
         this.trs_adress = trs_adress;
     }
-    public String getId_agence() {
-        return id_Agence;
-    }
-    public void setId_agence(String id_Agence) {
-        this.id_Agence = id_Agence;
-    }
+
     
     
 }

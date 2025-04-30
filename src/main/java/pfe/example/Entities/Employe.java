@@ -1,6 +1,5 @@
 package pfe.example.Entities;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,6 +18,16 @@ public class Employe {
     @Column (name="prenom_emp")
     private String prenom_emp; 
 
+
+    @ManyToOne
+    @JoinColumn(name = "agence_id")  // Clé étrangère vers Agence
+    private Agence agence;  // L'agence à laquelle l'employé appartient
+
+    @ManyToOne
+    @JoinColumn(name = "utilisateur_email")
+    private Utilisateur utilisateur;  // Relation avec l'entité Utilisateur
+
+
     public Employe(String emp_cin, String nom_emp, String prenom_emp,Utilisateur utilisateur , Agence agence) {
         this.emp_cin = emp_cin;
         this.nom_emp = nom_emp;
@@ -27,7 +36,10 @@ public class Employe {
         this.agence = agence;
 
     }
+    
+    public Employe (){
 
+    }
     
     public String getEmp_cin() {
         return emp_cin;
@@ -60,12 +72,5 @@ public class Employe {
         this.agence=agence;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "agence_id")  // Clé étrangère vers Agence
-    private Agence agence;  // L'agence à laquelle l'employé appartient
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "utilisateur_email")
-    private Utilisateur utilisateur;  // Relation avec l'entité Utilisateur
-
+   
 }

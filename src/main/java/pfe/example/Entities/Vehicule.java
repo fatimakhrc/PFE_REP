@@ -14,26 +14,25 @@ import jakarta.persistence.Table;
 public class Vehicule {
     @Id
     @Column (name = "immatriculation" , nullable = false )
-    private String imtrc;
+    private String immatriculation;
     @Column (name = "capacite")
     private float capacite ;
     @Column (name = "type")
     private String type ;
-    @Column (name = "trj_id")
-    private String trajetId ;
-    @Column (name = "trs_cin")
-    private String trs_cin;
 
 
-    public Vehicule(String imtrc, float capacite, String type, String trajetId,String trs_cin) {
-        this.imtrc = imtrc;
+    public Vehicule(String immatriculation, float capacite, String type) {
+        this.immatriculation = immatriculation;
         this.capacite = capacite;
         this.type = type;
-        this.trajetId = trajetId;
-        this.trs_cin = trs_cin;
+    }
+
+    public Vehicule (){
+
     }
 
     
+
     @ManyToOne
     @JoinColumn (name = "trj_id" , referencedColumnName = "trj_id" ,insertable = false, updatable = false)
     private Trajet trajetVehicule;
@@ -44,28 +43,16 @@ public class Vehicule {
 
     
     public String getImtrc() {
-        return imtrc;
+        return immatriculation;
     }
-    public void setImtrc(String imtrc) {
-        this.imtrc = imtrc;
+    public void setImtrc(String immatriculation) {
+        this.immatriculation = immatriculation;
     }
     public float getCapacite() {
         return capacite;
     }
     public void setCapacite(float capacite) {
         this.capacite = capacite;
-    }
-    public String getTrajetId() {
-        return trajetId;
-    }
-    public void setTrajetId(String trajetId) {
-        this.trajetId = trajetId;
-    }
-    public String getTrs_cin() {
-        return trs_cin;
-    }
-    public void setTrs_cin(String trs_cin) {
-        this.trs_cin = trs_cin;
     }
     public String getType() {
         return type;
