@@ -6,18 +6,25 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import jakarta.transaction.Transactional;
+import pfe.example.DAO.EmployeRep;
 import pfe.example.DAO.PricingRep;
 import pfe.example.DAO.RoleRep;
 import pfe.example.DAO.UtilisateurRep;
+import pfe.example.Entities.Employe;
 import pfe.example.Entities.Pricing;
 import pfe.example.Entities.Roles;
 import pfe.example.Entities.Utilisateur;
 
 @Component
+@Transactional // Annotation pour indiquer que cette classe gère les transactions
 public class Initialisation implements CommandLineRunner {
 
     @Autowired
     private RoleRep rolesRepository;
+
+    @Autowired
+    private EmployeRep employeRep;
 
     @Autowired
     private UtilisateurRep utilisateurRep;
@@ -54,18 +61,28 @@ public class Initialisation implements CommandLineRunner {
                     return rolesRepository.save(role);
                 });
                 
-        // Création de l'utilisateur admin
         String email = "admin1@gmail.com";
-        if (utilisateurRep.findByEmail(email) == null) {
-            Utilisateur admin = new Utilisateur();
-            admin.setEmail(email);
-            admin.setMot_passe(passwordEncoder.encode("admin123"));
-            admin.setRole(adminRole);
-            utilisateurRep.save(admin);
-            System.out.println("✅ Utilisateur ADMIN créé avec succès !");
-        } else {
-            System.out.println("ℹ️ L'utilisateur ADMIN existe déjà.");
-        }
+    if (utilisateurRep.findByEmail(email) == null) {
+
+        // Création de l'employé
+        Employe employe = new Employe();
+        employe.setEmp_cin("D1234");
+        employe.setNom_emp("flan");
+        employe.setPrenom_emp("flani");
+        Employe savedEmploye = employeRep.save(employe);
+
+        // Création de l'utilisateur
+        Utilisateur admin = new Utilisateur();
+        admin.setEmail(email);
+        admin.setMot_passe(passwordEncoder.encode("admin123"));
+        admin.setRole(adminRole);
+        admin.setEmploye(savedEmploye); // Lier l'employé
+        utilisateurRep.save(admin);
+
+        System.out.println("✅ Utilisateur ADMIN et Employé associés créés !");
+    } else {
+        System.out.println("ℹ️ L'utilisateur ADMIN existe déjà.");
+    }
         // Création des tranches de prix s'il n'y en a pas déjà
         if (pricingRep.count() == 0) {
             Pricing prix1 = new Pricing(0.0, 2.0, 20.0);

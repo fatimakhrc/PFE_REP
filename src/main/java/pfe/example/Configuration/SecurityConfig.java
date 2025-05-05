@@ -1,5 +1,6 @@
 package pfe.example.Configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,13 +21,11 @@ import pfe.example.Security.JwtFilter;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final JwtFilter jwtFilter;
-    private final CustomAuthenticationProvider customAuthenticationProvider;
-
-    public SecurityConfig(JwtFilter jwtFilter, CustomAuthenticationProvider customAuthenticationProvider) {
-        this.jwtFilter = jwtFilter;
-        this.customAuthenticationProvider = customAuthenticationProvider;
-    }
+    @Autowired
+    private JwtFilter jwtFilter;
+    
+    @Autowired
+    private CustomAuthenticationProvider customAuthenticationProvider;
 
     @Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -49,8 +48,5 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         return authConfig.getAuthenticationManager();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    
 }

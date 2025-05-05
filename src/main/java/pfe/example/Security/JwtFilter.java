@@ -1,7 +1,6 @@
 package pfe.example.Security;
 
 import java.io.IOException;
-import java.security.Key;
 import java.util.Collections;
 
 import javax.crypto.SecretKey;
@@ -9,6 +8,7 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -21,6 +21,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@Component
 public class JwtFilter extends OncePerRequestFilter {
 
     // Charger la clé secrète depuis application.properties
@@ -37,12 +38,13 @@ public class JwtFilter extends OncePerRequestFilter {
             try {
                 
 
-                Claims claims = Jwts.parser()
-                        .verifyWith(getSigningKey())
+                Claims claims = Jwts.parserBuilder()
+                        .setSigningKey(getSigningKey())
                         .build()
-                        .parseSignedClaims(token)
-                        .getPayload();
-                        String email = claims.getSubject();
+                        .parseClaimsJws(token)
+                        .getBody();
+
+                String email = claims.getSubject();
                 String role = claims.get("role", String.class);
 
                  // Crée un token standard avec email et rôle

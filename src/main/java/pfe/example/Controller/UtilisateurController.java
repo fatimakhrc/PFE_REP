@@ -1,8 +1,16 @@
 package pfe.example.Controller;
 
+import java.util.Collections;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import pfe.example.DTO.LoginRequest;
 import pfe.example.Entities.Utilisateur;
 import pfe.example.Services.RoleService;
@@ -23,10 +34,41 @@ public class UtilisateurController {
     @Autowired 
     private UtilisateurService utilisateurService;
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    
+    @Value("${jwt.secret}")
+    private String secretKey;
+
     @Autowired 
     private RoleService roleService;
     //METHODE DE L'AUTHENTIFICATION
     @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        try {
+            // Authentifie l'utilisateur avec Spring Security
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getMot_passe())
+            );
+
+            // Récupère le rôle à partir des autorités
+            String role = authentication.getAuthorities().iterator().next().getAuthority();
+
+            // Crée le JWT
+            String token = Jwts.builder()
+                    .setSubject(loginRequest.getEmail())
+                    .claim("role", role)
+                    .setIssuedAt(new Date())
+                    .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // Token valide 24h
+                    .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)))
+                    .compact();
+
+            return ResponseEntity.ok(Collections.singletonMap("token", token));
+        } catch (AuthenticationException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou mot de passe incorrect.");
+        }
+    }
+   /*  @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         Utilisateur utilisateur = utilisateurService.login(loginRequest.getEmail(), loginRequest.getMot_passe());
         if (utilisateur != null) {
@@ -43,7 +85,7 @@ public class UtilisateurController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials.");
         }
-    }
+    } */
 
     @GetMapping ("/{email}")
     public ResponseEntity<Utilisateur> getUtilisateurByEmail(@PathVariable String email){

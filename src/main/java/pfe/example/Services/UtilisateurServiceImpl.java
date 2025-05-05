@@ -6,6 +6,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import pfe.example.DAO.UtilisateurRep;
+import pfe.example.Entities.Employe;
+import pfe.example.Entities.Roles;
+import pfe.example.DAO.EmployeRep;
+import pfe.example.DAO.AgenceRep;
 import pfe.example.Entities.Utilisateur;
 
 @Service
@@ -14,6 +18,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private UtilisateurRep utilisateurRepository;
      @Autowired
     private PasswordEncoder passwordEncoder; // Injecter l'encodeur de mot de passe
+    @Autowired
+    private EmployeRep employeRep;
+    @Autowired
+    private AgenceRep agenceRep;
 
 
     @Override
@@ -36,20 +44,47 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public Utilisateur createUtilisateur(Utilisateur utilisateur) {
-    // Vérification si l'email existe déjà
-    Utilisateur existingUser = utilisateurRepository.findByEmail(utilisateur.getEmail());
-    if (existingUser != null) {
-        throw new RuntimeException("Email already exists!");
-    }
+        // Vérification si l'email existe déjà
+        Utilisateur existingUser = utilisateurRepository.findByEmail(utilisateur.getEmail());
+        if (existingUser != null) {
+            throw new RuntimeException("Email already exists!");
+        }
     
-    // Encoder le mot de passe avant de le sauvegarder
-    utilisateur.setMot_passe(passwordEncoder.encode(utilisateur.getMot_passe()));
+        // Encoder le mot de passe avant de le sauvegarder
+        utilisateur.setMot_passe(passwordEncoder.encode(utilisateur.getMot_passe()));
+    
+        // Sauvegarder l'utilisateur dans la base de données
+        return utilisateurRepository.save(utilisateur);
+    }
 
-    // Sauvegarder l'utilisateur dans la base de données
-    return utilisateurRepository.save(utilisateur);
+    @Override
+    public Utilisateur createUtilisateurAvecEmploye(String email, String motDePasse, String cin, String nom, String prenom, Roles role, String id_agence) {
+    // Vérifier si l'utilisateur existe déjà
+    if (utilisateurRepository.findByEmail(email) != null) {
+        throw new RuntimeException("Email déjà utilisé");
+    }
+
+    // Créer l'utilisateur
+    Utilisateur utilisateur = new Utilisateur();
+    utilisateur.setEmail(email);
+    utilisateur.setMot_passe(passwordEncoder.encode(motDePasse));
+    utilisateur.setRole(role);
+
+    Utilisateur savedUtilisateur = utilisateurRepository.save(utilisateur);
+
+    // Créer l'employé associé
+    Employe employe = new Employe();
+    employe.setEmp_cin(cin);
+    employe.setNom_emp(nom);
+    employe.setPrenom_emp(prenom);
+    employe.setUtilisateur(savedUtilisateur);
+    employe.setAgence(agenceRep.findById(id_agence)
+        .orElseThrow(() -> new RuntimeException("Agence introuvable")));
+
+    employeRep.save(employe);
+
+    return savedUtilisateur;
 }
-
-
     @Override
     public boolean deleteUtilisateur(String email) {
         Utilisateur utilisateur = utilisateurRepository.findByEmail(email);
@@ -85,5 +120,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     return null;
    }
     
+
 
 }

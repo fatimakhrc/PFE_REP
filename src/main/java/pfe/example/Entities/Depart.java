@@ -1,7 +1,6 @@
 package pfe.example.Entities;
 
 import java.time.LocalTime;
-import java.util.LongSummaryStatistics;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

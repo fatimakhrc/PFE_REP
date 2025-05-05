@@ -8,5 +8,5 @@ import pfe.example.Entities.Agence;
 
 @Repository
 public interface AgenceRep extends JpaRepository<Agence,String> {
-
+    
 }

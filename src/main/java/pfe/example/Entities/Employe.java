@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,10 +24,9 @@ public class Employe {
     @JoinColumn(name = "agence_id")  // Clé étrangère vers Agence
     private Agence agence;  // L'agence à laquelle l'employé appartient
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "utilisateur_email")
-    private Utilisateur utilisateur;  // Relation avec l'entité Utilisateur
-
+    private Utilisateur utilisateur;
 
     public Employe(String emp_cin, String nom_emp, String prenom_emp,Utilisateur utilisateur , Agence agence) {
         this.emp_cin = emp_cin;

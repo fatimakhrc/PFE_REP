@@ -3,12 +3,14 @@ package pfe.example.Entities;
 
 
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,7 +27,12 @@ public class Utilisateur {
     @JoinColumn(name = "id_role", referencedColumnName = "id_role") 
     private Roles role; // Le rôle de l'utilisateur
 
-    public Utilisateur(String email, String mot_passe ) {
+    @OneToOne(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+    private Employe employe;
+
+
+    public Utilisateur(String email, String mot_passe, Roles role) {
+        this.role = role;
         this.email = email;
         this.mot_passe = mot_passe;
         
@@ -55,6 +62,14 @@ public class Utilisateur {
 
     public void setRole(Roles role) {
         this.role = role;
+    }
+
+    public Employe getEmploye() {
+        return employe;
+    }
+    
+    public void setEmploye(Employe employe) {
+        this.employe = employe;
     }
     
 }
