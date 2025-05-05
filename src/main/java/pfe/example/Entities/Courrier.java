@@ -25,6 +25,8 @@ public class Courrier {
     @Enumerated(EnumType.STRING)
     @Column (name = "statut")
     private StatusCourrier statut;
+    @Column(name = "prix_transmission")
+    private double prixTransmission; // Prix de transmission calculé
    
     
 
@@ -43,12 +45,12 @@ public class Courrier {
     private Trajet trajetCourrier;
 
 
-    public Courrier(Long id, Date date_envoie, double poids, StatusCourrier statut) {
+    public Courrier(Long id, Date date_envoie, double poids, StatusCourrier statut , double prixTransmission) {
         this.id = id;
         this.date_envoie = date_envoie;
         this.poids = poids;
         this.statut = statut;  
-       
+        this.prixTransmission = prixTransmission;
     }
 
     public Courrier (){
@@ -78,6 +80,14 @@ public class Courrier {
 
     public void setPoids(double poids) {
         this.poids = poids;
+    }
+
+    public double getPrixTransmission() {
+        return prixTransmission;
+    }
+
+    public void setPrix_transmission(double prixTransmission) {
+        this.prixTransmission = prixTransmission;
     }
 
     public StatusCourrier getStatut() {

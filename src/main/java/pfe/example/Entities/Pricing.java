@@ -29,6 +29,14 @@ public class Pricing {
     @JoinColumn(name = "trj_id", referencedColumnName = "trj_id") 
     private Trajet trajetPricing;
     
+
+    public Pricing(Double poids_min, Double poids_max, Double prix_uni) {
+        this.poids_min = poids_min;
+        this.poids_max = poids_max;
+        this.prix_uni = prix_uni;
+    }
+
+
     public Pricing(int pricing_id, Double poids_min, Double poids_max, Double prix_uni ) {
         this.pricing_id = pricing_id;
         this.poids_min = poids_min;
@@ -41,12 +49,6 @@ public class Pricing {
     public Pricing() {
         
     }
-
-
-    public Pricing(double d, double e, double f) {
-        //TODO Auto-generated constructor stub
-    }
-
 
     public Double getPoids_min() {
         return poids_min;

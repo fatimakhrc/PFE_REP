@@ -16,6 +16,9 @@ public class CourrierServiceImpl implements CourrierService {
     @Autowired
     private CourrierRep courrierRepository;
 
+    @Autowired
+    private PricingService pricingService; // Injecter le service de pricing
+
     @Override
     public synchronized long genererIdCourrier() {
         LocalDate dateActuelle = LocalDate.now();
@@ -30,6 +33,10 @@ public class CourrierServiceImpl implements CourrierService {
     @Override
     public Courrier creerCourrier(Courrier courrier) {
         courrier.setId(genererIdCourrier());
+        // Calcul du prix de transmission basé sur le poids
+        double prix = pricingService.prixTransmission(courrier.getPoids());
+        courrier.setPrix_transmission(prix);  // Mettre à jour le prix de transmission dans l'entité
+
         return courrierRepository.save(courrier);
     }
     @Override
@@ -56,6 +63,7 @@ public class CourrierServiceImpl implements CourrierService {
             courrier.setDate_envoie(courrierDetails.getDate_envoie());
             courrier.setPoids(courrierDetails.getPoids());
             courrier.setStatut(courrierDetails.getStatut());
+            courrier.setPrix_transmission(pricingService.prixTransmission(courrierDetails.getPoids())); // Mise à jour du prix
             return courrierRepository.save(courrier);
         }
         return null;

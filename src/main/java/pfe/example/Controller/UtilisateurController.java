@@ -26,6 +26,7 @@ public class UtilisateurController {
     @Autowired 
     private RoleService roleService;
     //METHODE DE L'AUTHENTIFICATION
+    @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         Utilisateur utilisateur = utilisateurService.login(loginRequest.getEmail(), loginRequest.getMot_passe());
         if (utilisateur != null) {

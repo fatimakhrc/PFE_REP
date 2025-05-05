@@ -35,11 +35,19 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-       public Utilisateur createUtilisateur(Utilisateur utilisateur) {
-           // Encoder le mot de passe avant de le sauvegarder
-           utilisateur.setMot_passe(passwordEncoder.encode(utilisateur.getMot_passe()));
-              return utilisateurRepository.save(utilisateur);
-        }
+    public Utilisateur createUtilisateur(Utilisateur utilisateur) {
+    // Vérification si l'email existe déjà
+    Utilisateur existingUser = utilisateurRepository.findByEmail(utilisateur.getEmail());
+    if (existingUser != null) {
+        throw new RuntimeException("Email already exists!");
+    }
+    
+    // Encoder le mot de passe avant de le sauvegarder
+    utilisateur.setMot_passe(passwordEncoder.encode(utilisateur.getMot_passe()));
+
+    // Sauvegarder l'utilisateur dans la base de données
+    return utilisateurRepository.save(utilisateur);
+}
 
 
     @Override
