@@ -6,6 +6,7 @@ import java.util.Collections;
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private String secretKey;  // Injecter la clé secrète ici
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,@NonNull FilterChain filterChain)
             throws ServletException, IOException {
         
         String token = extractToken(request);
@@ -38,12 +39,11 @@ public class JwtFilter extends OncePerRequestFilter {
             try {
                 
 
-                Claims claims = Jwts.parserBuilder()
-                        .setSigningKey(getSigningKey())
-                        .build()
-                        .parseClaimsJws(token)
-                        .getBody();
-
+                Claims claims = Jwts.parser()
+                .verifyWith(getSigningKey())  // 
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
                 String email = claims.getSubject();
                 String role = claims.get("role", String.class);
 

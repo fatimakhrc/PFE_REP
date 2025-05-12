@@ -24,7 +24,7 @@ public class CourrierServiceImpl implements CourrierService {
         LocalDate dateActuelle = LocalDate.now();
         String datePart = dateActuelle.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         // Compter le nombre de courriers envoyés aujourd'hui
-        long nombreCourriersAujourdHui = courrierRepository.countByDateEnvoi(dateActuelle);
+        long nombreCourriersAujourdHui = courrierRepository.countByDateEnvoie(dateActuelle);
 
         // Générer l'ID en ajoutant le compteur au format XXXXX (5 chiffres)
         return Long.parseLong(datePart + String.format("%05d", nombreCourriersAujourdHui + 1));
@@ -60,7 +60,7 @@ public class CourrierServiceImpl implements CourrierService {
         Optional<Courrier> existingCourrier = courrierRepository.findById(id);
         if (existingCourrier.isPresent()) {
             Courrier courrier = existingCourrier.get();
-            courrier.setDate_envoie(courrierDetails.getDate_envoie());
+            courrier.setDateEnvoie(courrierDetails.getDateEnvoie());
             courrier.setPoids(courrierDetails.getPoids());
             courrier.setStatut(courrierDetails.getStatut());
             courrier.setPrix_transmission(pricingService.prixTransmission(courrierDetails.getPoids())); // Mise à jour du prix

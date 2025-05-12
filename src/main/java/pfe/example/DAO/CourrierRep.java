@@ -11,7 +11,7 @@ import pfe.example.Entities.Courrier;
 
 @Repository
 public interface CourrierRep  extends JpaRepository <Courrier,Long>{
-    long countByDateEnvoi(LocalDate dateEnvoi);
+    long countByDateEnvoie(LocalDate dateEnvoie);
     List<Courrier> findByStatut(String statut);
     
 }

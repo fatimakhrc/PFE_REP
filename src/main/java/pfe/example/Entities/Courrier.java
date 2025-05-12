@@ -1,6 +1,7 @@
 package pfe.example.Entities;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -19,7 +20,7 @@ public class Courrier {
     @Column(name = "ID" , nullable = false) // definit des prop d'une champ dans une table ici c l'idetifiant
     private Long id;
     @Column (name = "date_envoie")
-    private Date date_envoie ;
+    private LocalDate dateEnvoie ;
     @Column (name = "poids")
     private double poids ;
     @Enumerated(EnumType.STRING)
@@ -45,9 +46,9 @@ public class Courrier {
     private Trajet trajetCourrier;
 
 
-    public Courrier(Long id, Date date_envoie, double poids, StatusCourrier statut , double prixTransmission) {
+    public Courrier(Long id, LocalDate dateEnvoie, double poids, StatusCourrier statut , double prixTransmission) {
         this.id = id;
-        this.date_envoie = date_envoie;
+        this.dateEnvoie = dateEnvoie;
         this.poids = poids;
         this.statut = statut;  
         this.prixTransmission = prixTransmission;
@@ -66,12 +67,12 @@ public class Courrier {
         this.id = id;
     }
     
-    public Date getDate_envoie() {
-        return date_envoie;
+    public LocalDate getDateEnvoie() {
+        return dateEnvoie;
     }
 
-    public void setDate_envoie(Date date_envoie) {
-        this.date_envoie = date_envoie;
+    public void setDateEnvoie(LocalDate dateEnvoie) {
+        this.dateEnvoie = dateEnvoie;
     }
 
     public double getPoids() {
