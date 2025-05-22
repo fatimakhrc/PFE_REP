@@ -24,7 +24,7 @@ public class Transporteur {
 
 
     @ManyToOne 
-    @JoinColumn (name = "id_agence" , referencedColumnName = "id_agence",insertable = false, updatable = false)
+    @JoinColumn (name = "id_agence" , referencedColumnName = "id_agence")
     private Agence agenceTransporteur;
 
     @OneToMany (mappedBy = "transporteurVehicule")

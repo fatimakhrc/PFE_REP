@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import pfe.example.DAO.CourrierRep;
 import pfe.example.Entities.Courrier;
+import pfe.example.Entities.StatusCourrier;
 
 @Service
 public class CourrierServiceImpl implements CourrierService {
@@ -35,7 +36,7 @@ public class CourrierServiceImpl implements CourrierService {
         courrier.setId(genererIdCourrier());
         // Calcul du prix de transmission basé sur le poids
         double prix = pricingService.prixTransmission(courrier.getPoids());
-        courrier.setPrix_transmission(prix);  // Mettre à jour le prix de transmission dans l'entité
+        courrier.setPrixTransmission(prix);  // Mettre à jour le prix de transmission dans l'entité
 
         return courrierRepository.save(courrier);
     }
@@ -51,7 +52,7 @@ public class CourrierServiceImpl implements CourrierService {
     }
 
     @Override
-    public List<Courrier> getCourriersByStatut(String statut) {
+    public List<Courrier> getCourriersByStatut(StatusCourrier statut) {
         return courrierRepository.findByStatut(statut);
     }
 
@@ -63,7 +64,7 @@ public class CourrierServiceImpl implements CourrierService {
             courrier.setDateEnvoie(courrierDetails.getDateEnvoie());
             courrier.setPoids(courrierDetails.getPoids());
             courrier.setStatut(courrierDetails.getStatut());
-            courrier.setPrix_transmission(pricingService.prixTransmission(courrierDetails.getPoids())); // Mise à jour du prix
+            courrier.setPrixTransmission(pricingService.prixTransmission(courrierDetails.getPoids())); // Mise à jour du prix
             return courrierRepository.save(courrier);
         }
         return null;

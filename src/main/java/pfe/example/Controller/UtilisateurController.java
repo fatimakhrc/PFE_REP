@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import pfe.example.DTO.CreeEmployeUtilisateurDto;
 import pfe.example.DTO.LoginRequest;
 import pfe.example.Entities.Utilisateur;
 import pfe.example.Services.RoleService;
@@ -36,6 +37,7 @@ public class UtilisateurController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+    
     
     @Value("${jwt.secret}")
     private String secretKey;
@@ -96,8 +98,15 @@ public class UtilisateurController {
         return ResponseEntity.notFound().build();
         //retourne un erreur 404 si l'utilisateur n'est pas trouve 
     }
+
+    @PostMapping("/create-with-employe")
+    public ResponseEntity<?> createUtilisateurWithEmploye(@RequestBody CreeEmployeUtilisateurDto dto) {
+    utilisateurService.createUtilisateurWithEmploye(dto);
+    return ResponseEntity.status(HttpStatus.CREATED).body("Utilisateur créé avec succès.");
+}
+
     //creer un nouveau utilisateur 
-    @PostMapping 
+    @PostMapping ("/create")
     public ResponseEntity<Utilisateur> createUtilisateur (@RequestBody Utilisateur utilisateur){
         Utilisateur createdUtilisateur = utilisateurService.createUtilisateur(utilisateur);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUtilisateur);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pfe.example.Entities.Courrier;
+import pfe.example.Entities.StatusCourrier;
 import pfe.example.Services.CourrierService;
 
 @RestController
@@ -40,7 +41,7 @@ public class CourrierController {
     }
 
     @GetMapping("/statut/{statut}")
-    public List<Courrier> getCourriersByStatut(@PathVariable String statut) {
+    public List<Courrier> getCourriersByStatut(@PathVariable StatusCourrier statut) {
         return courrierService.getCourriersByStatut(statut);
     }
 

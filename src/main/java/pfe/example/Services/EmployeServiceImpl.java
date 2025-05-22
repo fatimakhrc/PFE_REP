@@ -25,8 +25,8 @@ public class EmployeServiceImpl implements EmployeService {
     }
 
     @Override
-    public Employe updateEmploye(String cin, Employe updatedEmploye) {
-        Optional<Employe> employeOpt = employeRepository.findByCin(cin);
+    public Employe updateEmploye(String emp_cin, Employe updatedEmploye) {
+        Optional<Employe> employeOpt = employeRepository.findByEmp_cin(emp_cin);
         if (employeOpt.isPresent()) {
             Employe employe = employeOpt.get();
             if (updatedEmploye.getNom_emp() != null) employe.setNom_emp(updatedEmploye.getNom_emp());
@@ -39,17 +39,17 @@ public class EmployeServiceImpl implements EmployeService {
     }
 
     @Override
-    public boolean deleteEmploye(String cin) {
-        if (employeRepository.existsById(cin)) {
-            employeRepository.deleteById(cin);
+    public boolean deleteEmploye(String emp_cin) {
+        if (employeRepository.existsById(emp_cin)) {
+            employeRepository.deleteById(emp_cin);
             return true;
         }
         return false;
     }
 
     @Override
-    public Employe getEmployeByCin(String cin) {
-        return employeRepository.findByCin(cin).orElse(null);
+    public Employe getEmployeByCin(String emp_cin) {
+        return employeRepository.findByEmp_cin(emp_cin).orElse(null);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class EmployeServiceImpl implements EmployeService {
 
     @Override
     public Employe affecterEmployeAgence(String employeCin, String agenceId) {
-        Optional<Employe> employeOpt = employeRepository.findByCin(employeCin);
+        Optional<Employe> employeOpt = employeRepository.findByEmp_cin(employeCin);
         if (employeOpt.isPresent()) {
             Employe employe = employeOpt.get();
             Agence agence = agenceService.getAgenceById(agenceId);

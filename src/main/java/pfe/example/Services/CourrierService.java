@@ -4,13 +4,14 @@ import java.util.List;
 
 
 import pfe.example.Entities.Courrier;
+import pfe.example.Entities.StatusCourrier;
 
 public interface CourrierService {
     long genererIdCourrier();
     Courrier creerCourrier(Courrier courrier);
     List<Courrier> getAllCourriers();
     Courrier getCourrierById(Long id);
-    List<Courrier> getCourriersByStatut(String statut);
+    List<Courrier> getCourriersByStatut(StatusCourrier statut);
     Courrier updateCourrier(Long id, Courrier courrierDetails);
     void deleteCourrier(Long id);
     

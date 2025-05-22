@@ -28,14 +28,13 @@ public class SecurityConfig {
     @Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http
-        .cors(cors -> cors.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())) // Nouvelle syntaxe pour CORS
-        .csrf(csrf -> csrf.disable()) // Désactiver CSRF
-        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // JWT : pas de session
+        .csrf(csrf -> csrf.disable())
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(utilisateur -> utilisateur
-            .requestMatchers("/api/utilisateur/**").permitAll() // Auth publique
-            .anyRequest().authenticated()) // Protection des autres routes
+            .requestMatchers("/api/utilisateur/**").permitAll()
+            .anyRequest().authenticated())
         .authenticationProvider(customAuthenticationProvider)
-        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class) // Filtre JWT
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
 }
 

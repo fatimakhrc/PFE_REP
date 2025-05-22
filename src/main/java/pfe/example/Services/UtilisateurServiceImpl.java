@@ -6,9 +6,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import pfe.example.DAO.UtilisateurRep;
+import pfe.example.DTO.CreeEmployeUtilisateurDto;
+import pfe.example.Entities.Agence;
 import pfe.example.Entities.Employe;
 import pfe.example.Entities.Roles;
 import pfe.example.DAO.EmployeRep;
+import pfe.example.DAO.RoleRep;
 import pfe.example.DAO.AgenceRep;
 import pfe.example.Entities.Utilisateur;
 
@@ -22,9 +25,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private EmployeRep employeRep;
     @Autowired
     private AgenceRep agenceRep;
+    @Autowired
+    private RoleRep roleRep;
+    
 
 
-    @Override
+    /* @Override
     public Utilisateur login(String email, String motDePasse) {
         // Récupérer l'utilisateur en fonction de l'email
         Utilisateur utilisateur = utilisateurRepository.findByEmail(email);
@@ -33,7 +39,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         }
 
         return null;  // Le mot de passe ne correspond pas
-    }
+    } */
     
     
     @Override
@@ -41,6 +47,47 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         // Récupérer l'utilisateur en fonction de l'email
         return utilisateurRepository.findByEmail(email);
     }
+
+    @Override
+    public void createUtilisateurWithEmploye(CreeEmployeUtilisateurDto dto) {
+
+    //  1. Vérifier les doublons
+    if (utilisateurRepository.findByEmail(dto.getEmail()) != null) {
+        throw new RuntimeException("Email déjà utilisé.");
+    }
+
+    if (employeRep.findByEmp_cin(dto.getEmp_cin()).isPresent()) {
+        throw new RuntimeException("CIN déjà utilisé.");
+    }
+
+    //  2. Récupérer le rôle
+    Roles role = roleRep.findRoleByNom(dto.getRole())
+                        .orElseThrow(() -> new RuntimeException("Rôle invalide"));
+
+    //  3. Créer Utilisateur
+    Utilisateur utilisateur = new Utilisateur();
+    utilisateur.setEmail(dto.getEmail());
+    utilisateur.setMot_passe(passwordEncoder.encode(dto.getMot_passe()));
+    utilisateur.setRole(role);
+
+    //  4. Récupérer l'agence
+    Agence agence = agenceRep.findById(dto.getId_agence())
+                              .orElseThrow(() -> new RuntimeException("Agence introuvable"));
+
+    //  5. Créer Employé
+    Employe employe = new Employe();
+    employe.setEmp_cin(dto.getEmp_cin());
+    employe.setNom_emp(dto.getNom_emp());
+    employe.setPrenom_emp(dto.getPrenom_emp());
+    employe.setAgence(agence);
+    employe.setUtilisateur(utilisateur);
+
+    utilisateur.setEmploye(employe);
+
+    // 🔄 6. Sauvegarder
+    utilisateurRepository.save(utilisateur);
+}
+
 
     @Override
     public Utilisateur createUtilisateur(Utilisateur utilisateur) {
@@ -57,7 +104,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         return utilisateurRepository.save(utilisateur);
     }
 
-    @Override
+    /* @Override
     public Utilisateur createUtilisateurAvecEmploye(String email, String motDePasse, String cin, String nom, String prenom, Roles role, String id_agence) {
     // Vérifier si l'utilisateur existe déjà
     if (utilisateurRepository.findByEmail(email) != null) {
@@ -84,7 +131,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     employeRep.save(employe);
 
     return savedUtilisateur;
-}
+} */
     @Override
     public boolean deleteUtilisateur(String email) {
         Utilisateur utilisateur = utilisateurRepository.findByEmail(email);
@@ -102,8 +149,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         // Vérifier si le mot de passe a été mis à jour et l'encoder si nécessaire
         if (updatedUtilisateur.getMot_passe() != null) {
             // Encoder le mot de passe avant de le sauvegarder
-            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            utilisateur.setMot_passe(passwordEncoder.encode(updatedUtilisateur.getMot_passe()));
+            utilisateur.setMot_passe(this.passwordEncoder.encode(updatedUtilisateur.getMot_passe()));
         }
         // Mettre à jour le rôle si nécessaire
         if (updatedUtilisateur.getRole() != null) {

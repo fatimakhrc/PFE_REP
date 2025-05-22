@@ -41,7 +41,7 @@ public class Courrier {
     private Client clientExped;
     
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "trj_id" , referencedColumnName = "trj_id")
     private Trajet trajetCourrier;
 
@@ -87,7 +87,7 @@ public class Courrier {
         return prixTransmission;
     }
 
-    public void setPrix_transmission(double prixTransmission) {
+    public void setPrixTransmission(double prixTransmission) {
         this.prixTransmission = prixTransmission;
     }
 
