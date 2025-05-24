@@ -66,7 +66,7 @@ public class Initialisation implements CommandLineRunner {
 
         // Création de l'employé
         Employe employe = new Employe();
-        employe.setEmp_cin("D1234");
+        employe.setEmpCin("D1234");
         employe.setNom_emp("flan");
         employe.setPrenom_emp("flani");
         Employe savedEmploye = employeRep.save(employe);

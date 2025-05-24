@@ -11,5 +11,5 @@ import pfe.example.Entities.Employe;
 
 @Repository
 public interface EmployeRep extends JpaRepository<Employe, String> {
-    Optional <Employe> findByEmp_cin(String emp_cin);
+    Optional <Employe> findByEmpCin(String empCin);
 }

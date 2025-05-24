@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 public class Employe {
     @Id 
     @Column (name = "emp_cin" , unique =true)
-    private String emp_cin;
+    private String empCin;
     @Column (name = "nom_emp")
     private String nom_emp;
     @Column (name="prenom_emp")
@@ -28,8 +28,8 @@ public class Employe {
     @JoinColumn(name = "utilisateur_email")
     private Utilisateur utilisateur;
 
-    public Employe(String emp_cin, String nom_emp, String prenom_emp,Utilisateur utilisateur /* , Agence agence*/) {
-        this.emp_cin = emp_cin;
+    public Employe(String empCin, String nom_emp, String prenom_emp,Utilisateur utilisateur /* , Agence agence*/) {
+        this.empCin = empCin;
         this.nom_emp = nom_emp;
         this.prenom_emp = prenom_emp;
         this.utilisateur = utilisateur;
@@ -41,11 +41,11 @@ public class Employe {
 
     }
     
-    public String getEmp_cin() {
-        return emp_cin;
+    public String getEmpCin() {
+        return empCin;
     }
-    public void setEmp_cin(String emp_cin) {
-        this.emp_cin = emp_cin;
+    public void setEmpCin(String empCin) {
+        this.empCin = empCin;
     }
     public String getNom_emp() {
         return nom_emp;

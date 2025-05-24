@@ -1,7 +1,7 @@
 package pfe.example.DTO;
 
 public class CreeEmployeUtilisateurDto {
-    private String emp_cin;
+    private String empCin;
     private String nom_emp;
     private String prenom_emp;
     private String id_agence;
@@ -10,9 +10,9 @@ public class CreeEmployeUtilisateurDto {
     private String mot_passe;
     private String role;
 
-    public CreeEmployeUtilisateurDto(String emp_cin, String nom_emp, String prenom_emp, String id_agence, String email,
+    public CreeEmployeUtilisateurDto(String empCin, String nom_emp, String prenom_emp, String id_agence, String email,
             String mot_passe, String role) {
-        this.emp_cin = emp_cin;
+        this.empCin = empCin;
         this.nom_emp = nom_emp;
         this.prenom_emp = prenom_emp;
         this.id_agence = id_agence;
@@ -26,11 +26,11 @@ public class CreeEmployeUtilisateurDto {
 }
 
 
-    public String getEmp_cin() {
-        return emp_cin;
+    public String getEmpCin() {
+        return empCin;
  }
-    public void setEmp_cin(String emp_cin) {
-        this.emp_cin = emp_cin;
+    public void setEmpCin(String empCin) {
+        this.empCin = empCin;
     }
     public String getNom_emp() {
         return nom_emp;

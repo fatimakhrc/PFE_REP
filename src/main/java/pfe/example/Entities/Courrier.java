@@ -33,8 +33,6 @@ public class Courrier {
     @Column (name = "agenceDest")
     private String agenceDest;
     //ajouter les infos dyal destinataire
-    @Column (name = "cin_dest")
-    private String cin_dest;
     @Column (name = "nom_complet_dest")
     private String nom_complet_dest;
     @Column (name = "adresse_dest")

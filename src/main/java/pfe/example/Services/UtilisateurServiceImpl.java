@@ -56,7 +56,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         throw new RuntimeException("Email déjà utilisé.");
     }
 
-    if (employeRep.findByEmp_cin(dto.getEmp_cin()).isPresent()) {
+    if (employeRep.findByEmpCin(dto.getEmpCin()).isPresent()) {
         throw new RuntimeException("CIN déjà utilisé.");
     }
 
@@ -76,7 +76,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     //  5. Créer Employé
     Employe employe = new Employe();
-    employe.setEmp_cin(dto.getEmp_cin());
+    employe.setEmpCin(dto.getEmpCin());
     employe.setNom_emp(dto.getNom_emp());
     employe.setPrenom_emp(dto.getPrenom_emp());
     //employe.setAgence(agence);
