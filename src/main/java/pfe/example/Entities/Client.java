@@ -24,20 +24,17 @@ public class Client {
     private String clt_adress ;
     @Column(name="phone_number")
     private String phone_number ;
-    @Column(name="email")
-    private String email ;
-    @Column(name="role")
-    private String role ;
+    
+    
 
-    public Client(String cin, String nom_clt, String prenom_clt, String clt_adress, String phone_number, String email,
-            String role) {
+    public Client(String cin, String nom_clt, String prenom_clt, String clt_adress, String phone_number) {
         this.cin = cin;
         this.nom_clt = nom_clt;
         this.prenom_clt = prenom_clt;
         this.clt_adress = clt_adress;
         this.phone_number = phone_number;
-        this.email = email;
-        this.role = role;
+      
+
     }
 
     public Client (){
@@ -92,24 +89,4 @@ public class Client {
         this.phone_number = phone_number;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    
-
-    
-    
 }

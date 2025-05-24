@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import pfe.example.Entities.Pricing;
 import pfe.example.Services.PricingService;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
 @RequestMapping("/api/pricing")
 public class PricingController {
     @Autowired

@@ -83,6 +83,9 @@ public Vehicule updateVehicule(String imtrc, Vehicule vehiculeDetails) {
             .orElseThrow(() -> new RuntimeException("Vehicule not found"));
     }
 
-        
+    @Override
+    public List<String> getAllImmatriculations() {
+        return vehiculeRepository.findAllImmatriculations();
+    }
     
 }

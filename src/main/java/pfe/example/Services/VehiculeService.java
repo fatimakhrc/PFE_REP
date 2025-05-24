@@ -24,6 +24,8 @@ public interface VehiculeService {
     //methode pour avoir une vehicule selon son immatriculation
     Vehicule getVehiculeById(String imtrc);
 
+    //recuperer tous les vehicule par immatriculation
+    List<String> getAllImmatriculations();
 }
 
     

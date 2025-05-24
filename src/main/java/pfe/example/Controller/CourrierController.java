@@ -3,6 +3,7 @@ package pfe.example.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import pfe.example.DTO.CreeClientCourrierDto;
 import pfe.example.Entities.Courrier;
 import pfe.example.Entities.StatusCourrier;
 import pfe.example.Services.CourrierService;
@@ -56,5 +59,23 @@ public class CourrierController {
         courrierService.deleteCourrier(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/create-with-client")
+    public ResponseEntity<Courrier> createCourrierAvecClient(@RequestBody CreeClientCourrierDto dto) {
+        Courrier courrier = courrierService.creerCourrierDepuisDto(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(courrier);
+    }
+
+    @PutMapping("/status/{id}")
+    public ResponseEntity<Courrier> changerStatut(@PathVariable Long id,@RequestParam("newStatus") StatusCourrier newStatus) {
+
+        Courrier courrier = courrierService.getCourrierById(id);
+        if (courrier == null) return ResponseEntity.notFound().build();
+
+        courrier.setStatut(newStatus);
+        return ResponseEntity.ok(courrierService.updateCourrier(id, courrier));
+    }
+
+
 
 }

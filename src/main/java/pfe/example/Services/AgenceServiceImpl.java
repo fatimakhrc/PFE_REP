@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 import java.util.Optional;
+import java.util.List;
 
 import pfe.example.DAO.AgenceRep;
 import pfe.example.Entities.Agence;
@@ -36,6 +37,11 @@ public class AgenceServiceImpl implements AgenceService {
         Agence agence = agenceRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Agence not found"));
             agenceRepository.delete(agence);
+    }
+
+    @Override
+    public List<String> getAllAdresses() {
+        return agenceRepository.findAllAdresses();
     }
 
     

@@ -9,8 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pfe.example.DAO.CourrierRep;
+import pfe.example.DAO.TrajetRep;
+import pfe.example.DAO.VehiculeRep;
+import pfe.example.DTO.CreeClientCourrierDto;
 import pfe.example.Entities.Courrier;
 import pfe.example.Entities.StatusCourrier;
+import pfe.example.Entities.Trajet;
+import pfe.example.Entities.Transporteur;
+import pfe.example.Entities.Vehicule;
+import pfe.example.Entities.Client;
 
 @Service
 public class CourrierServiceImpl implements CourrierService {
@@ -20,6 +27,9 @@ public class CourrierServiceImpl implements CourrierService {
     @Autowired
     private PricingService pricingService; // Injecter le service de pricing
 
+    @Autowired
+    private VehiculeRep vehiculeRepository;
+    
     @Override
     public synchronized long genererIdCourrier() {
         LocalDate dateActuelle = LocalDate.now();
@@ -75,6 +85,33 @@ public class CourrierServiceImpl implements CourrierService {
         courrierRepository.deleteById(id);
     }
 
+    @Override
+    public Courrier creerCourrierDepuisDto(CreeClientCourrierDto dto) {
+    Courrier courrier = new Courrier();
+    courrier.setId(genererIdCourrier());
+    courrier.setDateEnvoie(LocalDate.now());
+    courrier.setStatut(StatusCourrier.depose); // état initial
+    courrier.setPoids(dto.getPoids());
+    courrier.setPrixTransmission(pricingService.prixTransmission(dto.getPoids()));
 
+    // Informations du destinataire
+    courrier.setNom_complet_dest(dto.getNom_complet_dest());
+    courrier.setCin_dest(dto.getCin_dest());
+    courrier.setAdresse_dest(dto.getAdresse_dest());
+    courrier.setAgenceExped(dto.getAgenceExped());
+    courrier.setAgenceDest(dto.getAgenceDest());
+
+    // Création du client expéditeur
+    Client clientExp = new Client();
+    clientExp.setCin(dto.getCin());
+    clientExp.setNom_clt(dto.getNom_clt());
+    clientExp.setPrenom_clt(dto.getPrenom_clt());
+    clientExp.setClt_adress(dto.getClt_adress()); // correction ici
+    clientExp.setPhone_number(dto.getPhone_number());
+
+    courrier.setClientExped(clientExp);
+    return courrierRepository.save(courrier);
+}
+ 
     
 }

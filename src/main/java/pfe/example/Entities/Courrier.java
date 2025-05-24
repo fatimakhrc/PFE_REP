@@ -28,9 +28,17 @@ public class Courrier {
     private StatusCourrier statut;
     @Column(name = "prix_transmission")
     private double prixTransmission; // Prix de transmission calculé
-   
-    
-
+    @Column (name = "agenceExped")
+    private String agenceExped;
+    @Column (name = "agenceDest")
+    private String agenceDest;
+    //ajouter les infos dyal destinataire
+    @Column (name = "cin_dest")
+    private String cin_dest;
+    @Column (name = "nom_complet_dest")
+    private String nom_complet_dest;
+    @Column (name = "adresse_dest")
+    private String adresse_dest;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cIN_DEST", referencedColumnName = "CIN" )
@@ -46,18 +54,27 @@ public class Courrier {
     private Trajet trajetCourrier;
 
 
-    public Courrier(Long id, LocalDate dateEnvoie, double poids, StatusCourrier statut , double prixTransmission) {
+
+    public Courrier(Long id, LocalDate dateEnvoie, double poids, StatusCourrier statut, double prixTransmission,
+            String cin_dest, String nom_complet_dest, String adresse_dest, Client clientDest, Client clientExped,
+            String agenceDest, String agenceExped) {
         this.id = id;
         this.dateEnvoie = dateEnvoie;
         this.poids = poids;
-        this.statut = statut;  
+        this.statut = statut;
         this.prixTransmission = prixTransmission;
+        this.cin_dest = cin_dest;
+        this.nom_complet_dest = nom_complet_dest;
+        this.adresse_dest = adresse_dest;
+        this.clientDest = clientDest;
+        this.clientExped = clientExped;
+        this.agenceDest = agenceDest;
+        this.agenceExped = agenceExped;
     }
 
     public Courrier (){
 
     }
-
 
     public Long getId() {
         return id;
@@ -66,7 +83,7 @@ public class Courrier {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public LocalDate getDateEnvoie() {
         return dateEnvoie;
     }
@@ -83,14 +100,6 @@ public class Courrier {
         this.poids = poids;
     }
 
-    public double getPrixTransmission() {
-        return prixTransmission;
-    }
-
-    public void setPrixTransmission(double prixTransmission) {
-        this.prixTransmission = prixTransmission;
-    }
-
     public StatusCourrier getStatut() {
         return statut;
     }
@@ -99,6 +108,77 @@ public class Courrier {
         this.statut = statut;
     }
 
+    public double getPrixTransmission() {
+        return prixTransmission;
+    }
+
+    public void setPrixTransmission(double prixTransmission) {
+        this.prixTransmission = prixTransmission;
+    }
+
+    public String getCin_dest() {
+        return cin_dest;
+    }
+
+    public void setCin_dest(String cin_dest) {
+        this.cin_dest = cin_dest;
+    }
+
+    public String getNom_complet_dest() {
+        return nom_complet_dest;
+    }
+
+    public void setNom_complet_dest(String nom_complet_dest) {
+        this.nom_complet_dest = nom_complet_dest;
+    }
+
+    public String getAdresse_dest() {
+        return adresse_dest;
+    }
+
+    public void setAdresse_dest(String adresse_dest) {
+        this.adresse_dest = adresse_dest;
+    }
+
+    public Client getClientDest() {
+        return clientDest;
+    }
+
+    public void setClientDest(Client clientDest) {
+        this.clientDest = clientDest;
+    }
+
+    public Client getClientExped() {
+        return clientExped;
+    }
+
+    public void setClientExped(Client clientExped) {
+        this.clientExped = clientExped;
+    }
+
+    public Trajet getTrajetCourrier() {
+        return trajetCourrier;
+    }
+
+    public void setTrajetCourrier(Trajet trajetCourrier) {
+        this.trajetCourrier = trajetCourrier;
+    }
+
+    public String getAgenceDest() {
+        return agenceDest;
+    }
+
+    public void setAgenceDest(String agenceDest) {
+        this.agenceDest = agenceDest;
+    }
+
+    public String getAgenceExped() {
+        return agenceExped;
+    }
+
+    public void setAgenceExped(String agenceExped) {
+        this.agenceExped = agenceExped;
+    }
     
-    
+
 }

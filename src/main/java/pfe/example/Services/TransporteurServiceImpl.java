@@ -20,10 +20,10 @@ public class TransporteurServiceImpl implements TransporeteurService{
     public Transporteur updateTransporteur(String trs_cin, Transporteur transporteur) {
         Transporteur existingTransporteur = transporteurRepository.findById(trs_cin)
             .orElseThrow(() -> new RuntimeException("Transporteur not found"));
-        existingTransporteur.setTrs_nom(transporteur.getTrs_nom());
-        existingTransporteur.setTrs_prenom(transporteur.getTrs_prenom());
+        existingTransporteur.setNom_complet_trs(transporteur.getNom_complet_trs());
         existingTransporteur.setTrs_Cin(transporteur.getTrs_Cin());
         existingTransporteur.setTrs_adress(transporteur.getTrs_adress());
+        existingTransporteur.setTrs_phone(transporteur.getTrs_phone());
         return transporteurRepository.save(existingTransporteur);
     }
 

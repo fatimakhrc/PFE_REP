@@ -16,8 +16,7 @@ public class Transporteur {
     @Id
     @Column (name = "trs_CIN" , nullable = false)
     private String trs_Cin ;
-    private String trs_nom ;
-    private String trs_prenom ;
+    private String nom_complet_trs;
     private int trs_phone ;
     private String trs_adress ;
    
@@ -33,10 +32,9 @@ public class Transporteur {
     
 
 
-    public Transporteur(String trs_Cin, String trs_nom, String trs_prenom, int trs_phone, String trs_adress) {
+    public Transporteur(String trs_Cin, String nom_complet_trs ,int trs_phone , String trs_adress) {
         this.trs_Cin = trs_Cin;
-        this.trs_nom = trs_nom;
-        this.trs_prenom = trs_prenom;
+        this.nom_complet_trs = nom_complet_trs;
         this.trs_phone = trs_phone;
         this.trs_adress = trs_adress;
        
@@ -54,17 +52,11 @@ public class Transporteur {
     public void setTrs_Cin(String trs_Cin) {
         this.trs_Cin = trs_Cin;
     }
-    public String getTrs_nom() {
-        return trs_nom;
+    public String getNom_complet_trs() {
+        return nom_complet_trs;
     }
-    public void setTrs_nom(String trs_nom) {
-        this.trs_nom = trs_nom;
-    }
-    public String getTrs_prenom() {
-        return trs_prenom;
-    }
-    public void setTrs_prenom(String trs_prenom) {
-        this.trs_prenom = trs_prenom;
+    public void setNom_complet_trs(String nom_complet_trs) {
+        this.nom_complet_trs = nom_complet_trs;
     }
     public int getTrs_phone() {
         return trs_phone;
