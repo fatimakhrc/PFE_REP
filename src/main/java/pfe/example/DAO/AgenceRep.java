@@ -1,4 +1,4 @@
-package pfe.example.DAO;
+/* package pfe.example.DAO;
 
 
 import java.util.List;
@@ -14,4 +14,4 @@ import pfe.example.Entities.Agence;
 public interface AgenceRep extends JpaRepository<Agence,String> {
     @Query("SELECT a.adresse_agence FROM Agence a ")
     List<String> findAllAdresses();
-}
+} */

@@ -1,4 +1,4 @@
-package pfe.example.Services;
+/*package pfe.example.Services;
 
 import java.util.List;
 
@@ -9,4 +9,4 @@ public interface PricingService {
     List<Pricing> getAllPricing();
 
     
-}
+}*/

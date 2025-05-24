@@ -1,4 +1,4 @@
-package pfe.example.Services;
+/*package pfe.example.Services;
 
 import pfe.example.Entities.SuiviCourrier;
 
@@ -7,3 +7,4 @@ public interface SuiviCourrierService {
     SuiviCourrier obtenirDernierePosition(Long courrierId);
 
 }
+*/

@@ -1,4 +1,4 @@
-package pfe.example.DTO;
+/* package pfe.example.DTO;
 
 public class PositionDTO {
     private Long courrierId;
@@ -33,3 +33,4 @@ public class PositionDTO {
     
 
 }
+ */

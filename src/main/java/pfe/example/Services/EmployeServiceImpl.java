@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import pfe.example.DAO.EmployeRep;
-import pfe.example.Entities.Agence;
+//import pfe.example.Entities.Agence;
 import pfe.example.Entities.Employe;
 
 @Service
@@ -16,9 +16,9 @@ public class EmployeServiceImpl implements EmployeService {
     @Autowired
     private EmployeRep employeRepository;
 
-    @Autowired
+    /*@Autowired
     private AgenceService agenceService; // service pour obtenir les agences
-
+*/
     @Override
     public Employe createEmploye(Employe employe) {
         return employeRepository.save(employe);
@@ -32,7 +32,7 @@ public class EmployeServiceImpl implements EmployeService {
             if (updatedEmploye.getNom_emp() != null) employe.setNom_emp(updatedEmploye.getNom_emp());
             if (updatedEmploye.getPrenom_emp() != null) employe.setPrenom_emp(updatedEmploye.getPrenom_emp());
             if (updatedEmploye.getEmp_cin() != null) employe.setEmp_cin(updatedEmploye.getEmp_cin());
-            if (updatedEmploye.getAgence() != null) employe.setAgence(updatedEmploye.getAgence());
+            //if (updatedEmploye.getAgence() != null) employe.setAgence(updatedEmploye.getAgence());
             return employeRepository.save(employe);
         }
         return null;
@@ -62,12 +62,12 @@ public class EmployeServiceImpl implements EmployeService {
         Optional<Employe> employeOpt = employeRepository.findByEmp_cin(employeCin);
         if (employeOpt.isPresent()) {
             Employe employe = employeOpt.get();
-            Agence agence = agenceService.getAgenceById(agenceId);
-            if (agence != null) {
-                employe.setAgence(agence);
+            //Agence agence = agenceService.getAgenceById(agenceId);
+            /*if (agence != null) {
+                employe.setAgence(agence);*/
                 return employeRepository.save(employe);
             }
-        }
+        
         return null;
     }
 }

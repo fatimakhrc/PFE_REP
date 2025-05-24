@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 
 import jakarta.transaction.Transactional;
 import pfe.example.DAO.EmployeRep;
-import pfe.example.DAO.PricingRep;
+//import pfe.example.DAO.PricingRep;
 import pfe.example.DAO.RoleRep;
 import pfe.example.DAO.UtilisateurRep;
 import pfe.example.Entities.Employe;
-import pfe.example.Entities.Pricing;
+//import pfe.example.Entities.Pricing;
 import pfe.example.Entities.Roles;
 import pfe.example.Entities.Utilisateur;
 
@@ -29,8 +29,8 @@ public class Initialisation implements CommandLineRunner {
     @Autowired
     private UtilisateurRep utilisateurRep;
 
-    @Autowired
-    private PricingRep pricingRep;
+   /* @Autowired
+    private PricingRep pricingRep;*/
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -84,7 +84,7 @@ public class Initialisation implements CommandLineRunner {
         System.out.println("ℹ️ L'utilisateur ADMIN existe déjà.");
     }
         // Création des tranches de prix s'il n'y en a pas déjà
-        if (pricingRep.count() == 0) {
+       /* if (pricingRep.count() == 0) {
             Pricing prix1 = new Pricing(0.0, 2.0, 20.0);
             Pricing prix2 = new Pricing(2.1, 4.0, 35.0);
             Pricing prix3 = new Pricing(4.1, 6.0, 45.0);
@@ -106,7 +106,7 @@ public class Initialisation implements CommandLineRunner {
             System.out.println("✅ Tranches de prix enregistrées !");
         } else {
             System.out.println("ℹ️ Les tranches de prix existent déjà.");
-        }
+        }*/
     }
 }
 

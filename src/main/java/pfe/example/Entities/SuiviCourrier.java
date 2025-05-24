@@ -1,4 +1,4 @@
-package pfe.example.Entities;
+/* package pfe.example.Entities;
 
 import java.time.LocalDateTime;
 
@@ -78,3 +78,4 @@ public class SuiviCourrier {
     }
 
 }
+ */

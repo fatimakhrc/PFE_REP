@@ -1,4 +1,4 @@
-package pfe.example.Entities;
+/* package pfe.example.Entities;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -181,4 +181,4 @@ public class Courrier {
     }
     
 
-}
+} */

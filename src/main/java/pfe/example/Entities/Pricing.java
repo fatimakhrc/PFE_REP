@@ -1,4 +1,4 @@
-package pfe.example.Entities;
+/* package pfe.example.Entities;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -92,3 +92,4 @@ public class Pricing {
 
     
 }
+ */

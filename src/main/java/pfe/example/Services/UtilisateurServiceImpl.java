@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 
 import pfe.example.DAO.UtilisateurRep;
 import pfe.example.DTO.CreeEmployeUtilisateurDto;
-import pfe.example.Entities.Agence;
+//import pfe.example.Entities.Agence;
 import pfe.example.Entities.Employe;
 import pfe.example.Entities.Roles;
 import pfe.example.DAO.EmployeRep;
 import pfe.example.DAO.RoleRep;
-import pfe.example.DAO.AgenceRep;
+//import pfe.example.DAO.AgenceRep;
 import pfe.example.Entities.Utilisateur;
 
 @Service
@@ -23,8 +23,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private PasswordEncoder passwordEncoder; // Injecter l'encodeur de mot de passe
     @Autowired
     private EmployeRep employeRep;
-    @Autowired
-    private AgenceRep agenceRep;
+    /*@Autowired
+    private AgenceRep agenceRep;*/
     @Autowired
     private RoleRep roleRep;
     
@@ -71,15 +71,15 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     utilisateur.setRole(role);
 
     //  4. Récupérer l'agence
-    Agence agence = agenceRep.findById(dto.getId_agence())
-                              .orElseThrow(() -> new RuntimeException("Agence introuvable"));
+    /*Agence agence = agenceRep.findById(dto.getId_agence())
+                              .orElseThrow(() -> new RuntimeException("Agence introuvable"));*/
 
     //  5. Créer Employé
     Employe employe = new Employe();
     employe.setEmp_cin(dto.getEmp_cin());
     employe.setNom_emp(dto.getNom_emp());
     employe.setPrenom_emp(dto.getPrenom_emp());
-    employe.setAgence(agence);
+    //employe.setAgence(agence);
     employe.setUtilisateur(utilisateur);
 
     utilisateur.setEmploye(employe);

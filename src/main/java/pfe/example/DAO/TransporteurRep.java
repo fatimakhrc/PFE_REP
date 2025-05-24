@@ -1,4 +1,4 @@
-package pfe.example.DAO;
+/* package pfe.example.DAO;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,4 +9,4 @@ import pfe.example.Entities.Transporteur;
 @Repository
 public interface TransporteurRep extends JpaRepository <Transporteur,String> {
 
-}
+} */

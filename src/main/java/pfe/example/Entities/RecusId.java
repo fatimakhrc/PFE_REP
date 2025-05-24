@@ -1,4 +1,4 @@
-package pfe.example.Entities;
+/* package pfe.example.Entities;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -29,3 +29,4 @@ public class RecusId implements Serializable{
     }
 
 }
+ */

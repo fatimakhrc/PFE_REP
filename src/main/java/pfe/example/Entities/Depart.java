@@ -1,4 +1,4 @@
-package pfe.example.Entities;
+/* package pfe.example.Entities;
 
 import java.time.LocalTime;
 
@@ -72,4 +72,4 @@ public class Depart {
     public void setTrajetDepart(Trajet trajetDepart) {
         this.trajetDepart = trajetDepart;
     }
-}
+} */

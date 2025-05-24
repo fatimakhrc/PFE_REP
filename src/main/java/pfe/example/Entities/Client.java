@@ -1,4 +1,4 @@
-package pfe.example.Entities;
+/* package pfe.example.Entities;
 
 import java.util.List;
 
@@ -89,4 +89,4 @@ public class Client {
         this.phone_number = phone_number;
     }
 
-}
+} */

@@ -1,4 +1,4 @@
-package pfe.example.Entities;
+/* package pfe.example.Entities;
 
 import java.util.List;
 
@@ -115,4 +115,4 @@ public class Trajet {
     public void setPricingTrajet(List<Pricing> pricingTrajet) {
         this.pricingTrajet = pricingTrajet;
     }
-}
+} */

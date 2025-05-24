@@ -1,4 +1,4 @@
-package pfe.example.Entities;
+/* package pfe.example.Entities;
 
 public enum StatusCourrier {
     depose, //depose a l'agence 
@@ -6,3 +6,4 @@ public enum StatusCourrier {
     livre  // livre au destinataire
 
 }
+ */
