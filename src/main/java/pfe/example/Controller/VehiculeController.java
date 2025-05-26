@@ -1,4 +1,4 @@
-/* package pfe.example.Controller;
+package pfe.example.Controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -58,8 +58,3 @@ public class VehiculeController {
                        : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
-    
-    
-
-
- */

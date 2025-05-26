@@ -1,4 +1,4 @@
-/* package pfe.example.DAO;
+package pfe.example.DAO;
 
 
 import java.util.List;
@@ -15,4 +15,3 @@ public interface VehiculeRep extends JpaRepository<Vehicule,String> {
     List<String> findAllImmatriculations();
 
 }
- */

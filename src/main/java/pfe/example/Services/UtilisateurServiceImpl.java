@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 
 import pfe.example.DAO.UtilisateurRep;
 import pfe.example.DTO.CreeEmployeUtilisateurDto;
-//import pfe.example.Entities.Agence;
+import pfe.example.Entities.Agence;
 import pfe.example.Entities.Employe;
 import pfe.example.Entities.Roles;
 import pfe.example.DAO.EmployeRep;
 import pfe.example.DAO.RoleRep;
-//import pfe.example.DAO.AgenceRep;
+import pfe.example.DAO.AgenceRep;
 import pfe.example.Entities.Utilisateur;
 
 @Service
@@ -23,14 +23,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private PasswordEncoder passwordEncoder; // Injecter l'encodeur de mot de passe
     @Autowired
     private EmployeRep employeRep;
-    /*@Autowired
-    private AgenceRep agenceRep;*/
+    @Autowired
+    private AgenceRep agenceRep;
     @Autowired
     private RoleRep roleRep;
     
 
 
-    /* @Override
+    @Override
     public Utilisateur login(String email, String motDePasse) {
         // Récupérer l'utilisateur en fonction de l'email
         Utilisateur utilisateur = utilisateurRepository.findByEmail(email);
@@ -39,7 +39,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         }
 
         return null;  // Le mot de passe ne correspond pas
-    } */
+    } 
     
     
     @Override
@@ -71,8 +71,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     utilisateur.setRole(role);
 
     //  4. Récupérer l'agence
-    /*Agence agence = agenceRep.findById(dto.getId_agence())
-                              .orElseThrow(() -> new RuntimeException("Agence introuvable"));*/
+    Agence agence = agenceRep.findById(dto.getId_agence())
+                              .orElseThrow(() -> new RuntimeException("Agence introuvable"));
 
     //  5. Créer Employé
     Employe employe = new Employe();

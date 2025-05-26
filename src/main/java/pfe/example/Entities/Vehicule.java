@@ -1,4 +1,4 @@
-/* package pfe.example.Entities;
+package pfe.example.Entities;
 
 
 
@@ -33,13 +33,13 @@ public class Vehicule {
 
     
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn (name = "trj_id" , referencedColumnName = "trj_id" ,insertable = false, updatable = false)
     private Trajet trajetVehicule;
 
     @ManyToOne 
     @JoinColumn (name = "trs_CIN" , referencedColumnName = "trs_CIN", insertable = false, updatable = false)
-    private Transporteur transporteurVehicule;
+    private Transporteur transporteurVehicule;*/
 
     
     public String getImtrc() {
@@ -60,7 +60,7 @@ public class Vehicule {
     public void setType(String type) {
         this.type = type;
     }
-    public Trajet getTrajetVehicule() {
+    /*public Trajet getTrajetVehicule() {
         return trajetVehicule;
     }
     public void setTrajetVehicule(Trajet trajetVehicule) {
@@ -71,7 +71,7 @@ public class Vehicule {
     }
     public void setTransporteurVehicule(Transporteur transporteurVehicule) {
         this.transporteurVehicule = transporteurVehicule;
-    }
+    }*/
 
 
     
@@ -79,4 +79,3 @@ public class Vehicule {
 
     
 }
- */

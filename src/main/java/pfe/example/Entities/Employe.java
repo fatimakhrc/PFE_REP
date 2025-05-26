@@ -20,10 +20,10 @@ public class Employe {
     private String prenom_emp; 
 
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "agence_id")  // Clé étrangère vers Agence
     private Agence agence;  // L'agence à laquelle l'employé appartient
-*/
+
     @OneToOne
     @JoinColumn(name = "utilisateur_email")
     private Utilisateur utilisateur;
@@ -65,12 +65,12 @@ public class Employe {
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }
-    /*public Agence getAgence() {
+    public Agence getAgence() {
         return agence;
     }
     public void setAgence (Agence agence){
         this.agence=agence;
     }
-*/
+
    
 }

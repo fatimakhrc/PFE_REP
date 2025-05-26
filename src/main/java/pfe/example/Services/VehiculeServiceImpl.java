@@ -1,4 +1,4 @@
-/*package pfe.example.Services;
+package pfe.example.Services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,11 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pfe.example.DAO.TrajetRep;
-import pfe.example.DAO.TransporteurRep;
+/* import pfe.example.DAO.TrajetRep;
+import pfe.example.DAO.TransporteurRep; */
 import pfe.example.DAO.VehiculeRep;
-import pfe.example.Entities.Trajet;
-import pfe.example.Entities.Transporteur;
+/* import pfe.example.Entities.Trajet;
+import pfe.example.Entities.Transporteur; */
 import pfe.example.Entities.Vehicule;
 
 @Service
@@ -18,11 +18,11 @@ public class VehiculeServiceImpl implements VehiculeService{
     @Autowired
     private VehiculeRep vehiculeRepository;
 
-    @Autowired
+    /* @Autowired
     private TrajetRep trajetRepository;
 
     @Autowired
-    private TransporteurRep transporteurRepository;
+    private TransporteurRep transporteurRepository; */
 
     @Override
     public List<Vehicule> getAllVehicules() {
@@ -51,7 +51,7 @@ public Vehicule updateVehicule(String imtrc, Vehicule vehiculeDetails) {
         
         // Mise à jour des entités liées (Trajet et Transporteur)
         // Hibernate va automatiquement mettre à jour la clé étrangère 'trj_id' et 'trs_CIN'
-        if (vehiculeDetails.getTrajetVehicule() != null) {
+       /*  if (vehiculeDetails.getTrajetVehicule() != null) {
             Trajet trajet = trajetRepository.findById(vehiculeDetails.getTrajetVehicule().getTrj_id())
                                            .orElseThrow(() -> new RuntimeException("Trajet non trouvé"));
             vehicule.setTrajetVehicule(trajet);
@@ -61,7 +61,7 @@ public Vehicule updateVehicule(String imtrc, Vehicule vehiculeDetails) {
             Transporteur transporteur = transporteurRepository.findById(vehiculeDetails.getTransporteurVehicule().getTrs_Cin())
                                                                .orElseThrow(() -> new RuntimeException("Transporteur non trouvé"));
             vehicule.setTransporteurVehicule(transporteur);
-        }
+        } */
 
         // Sauvegarde de l'entité mise à jour
         return vehiculeRepository.save(vehicule);
@@ -89,4 +89,3 @@ public Vehicule updateVehicule(String imtrc, Vehicule vehiculeDetails) {
     }
     
 }
-*/
