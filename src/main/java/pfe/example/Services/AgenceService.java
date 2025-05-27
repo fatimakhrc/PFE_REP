@@ -1,5 +1,6 @@
 package pfe.example.Services;
 
+import pfe.example.DTO.AgenceDetailsDto;
 import pfe.example.Entities.Agence;
 import java.util.List;
 
@@ -9,6 +10,7 @@ public interface AgenceService {
     Agence updateAgence(String id, Agence agence);
     void deleteAgence(String id);
     List <String> getAllAdresses();
+    AgenceDetailsDto getDetailsParNomAgence (String nomAgence);
     
     
 }

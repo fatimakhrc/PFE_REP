@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import pfe.example.DTO.AgenceDetailsDto;
 import pfe.example.Entities.Agence;
 import pfe.example.Services.AgenceService;
 
@@ -49,5 +50,10 @@ public class AgenceController {
     public ResponseEntity<List<String>> getAllAdresses() {
         List<String> adresses = agenceService.getAllAdresses();
         return ResponseEntity.ok(adresses);
+    }
+
+    @GetMapping("/details/{nomAgence}")
+    public ResponseEntity<AgenceDetailsDto> getDetailsAgence(@PathVariable String nomAgence) {
+        return ResponseEntity.ok(agenceService.getDetailsParNomAgence(nomAgence));
     }
 } 

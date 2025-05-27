@@ -35,11 +35,11 @@ public class Vehicule {
 
     /*@ManyToOne
     @JoinColumn (name = "trj_id" , referencedColumnName = "trj_id" ,insertable = false, updatable = false)
-    private Trajet trajetVehicule;
+    private Trajet trajetVehicule;*/
 
     @ManyToOne 
     @JoinColumn (name = "trs_CIN" , referencedColumnName = "trs_CIN", insertable = false, updatable = false)
-    private Transporteur transporteurVehicule;*/
+    private Transporteur transporteurVehicule;
 
     
     public String getImtrc() {
@@ -65,13 +65,13 @@ public class Vehicule {
     }
     public void setTrajetVehicule(Trajet trajetVehicule) {
         this.trajetVehicule = trajetVehicule;
-    }
+    }*/
     public Transporteur getTransporteurVehicule() {
         return transporteurVehicule;
     }
     public void setTransporteurVehicule(Transporteur transporteurVehicule) {
         this.transporteurVehicule = transporteurVehicule;
-    }*/
+    }
 
 
     

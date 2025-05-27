@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+
+
 @Entity
 @Table (name = "Agence")
 public class Agence {
@@ -32,10 +34,10 @@ public class Agence {
     }
 
 
-    /* @OneToMany (mappedBy = "agenceTransporteur",cascade = CascadeType.ALL)   // on utilise mappedby pour dire que la relation entre transporteur et agence est geree par agence.
+    @OneToMany (mappedBy = "agenceTransporteur",cascade = CascadeType.ALL)   // on utilise mappedby pour dire que la relation entre transporteur et agence est geree par agence.
     private List <Transporteur> transporteurs;
 
-    @OneToMany (mappedBy = "agenceRecus",cascade = CascadeType.ALL)
+    /*@OneToMany (mappedBy = "agenceRecus",cascade = CascadeType.ALL)
     private List <Recus> recus; */
 
     @OneToMany(mappedBy = "agence",cascade = CascadeType.ALL)

@@ -4,15 +4,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 import java.util.Optional;
+import java.util.ArrayList;
 import java.util.List;
 
 import pfe.example.DAO.AgenceRep;
+import pfe.example.DAO.TransporteurRep;
+import pfe.example.DAO.UtilisateurRep;
+import pfe.example.DAO.VehiculeRep;
+import pfe.example.DTO.AgenceDetailsDto;
+import pfe.example.DTO.EmployeAgenceDto;
+import pfe.example.DTO.VehiculeDto;
 import pfe.example.Entities.Agence;
+import pfe.example.Entities.Employe;
+import pfe.example.Entities.Transporteur;
+import pfe.example.Entities.Vehicule;
+
 
 @Service
 public class AgenceServiceImpl implements AgenceService {
     @Autowired
     private AgenceRep agenceRepository;
+
+    @Autowired 
+    private VehiculeRep vehiculeRepository;
+
+    @Autowired 
+    private UtilisateurRep utilisateurRepository;
+
+    @Autowired 
+    private TransporteurRep transporteurRepository;
 
     @Override
     public Agence getAgenceById(String id) {
@@ -43,6 +63,61 @@ public class AgenceServiceImpl implements AgenceService {
     public List<String> getAllAdresses() {
         return agenceRepository.findAllAdresses();
     }
+
+
+    @Override
+    public AgenceDetailsDto getDetailsParNomAgence(String nomAgence) {
+    Agence agence = agenceRepository.findByNomAgence(nomAgence)
+        .orElseThrow(() -> new RuntimeException("Agence non trouvée"));
+
+    AgenceDetailsDto dto = new AgenceDetailsDto();
+    dto.setNomAgence(agence.getNom_agence());
+
+    // Employés
+    List<EmployeAgenceDto> employesDtos = new ArrayList<>();
+
+    for (Employe e : agence.getEmployes()) {
+        EmployeAgenceDto edto = new EmployeAgenceDto();
+        edto.setCin(e.getEmpCin());
+        edto.setNom(e.getNom_emp());
+        edto.setPrenom(e.getPrenom_emp());
+        edto.setAdresse(e.getEmp_adresse());
+        edto.setEmp_phone(e.getEmp_phone());
+
+        utilisateurRepository.findByEmploye(e).ifPresent(u -> {
+            edto.setEmail(u.getEmail());
+            edto.setMot_passe(u.getMot_passe());
+        });
+
+        employesDtos.add(edto);
+    }
+
+    // Transporteurs & Véhicules
+    List<VehiculeDto> vehiculesDtos = new ArrayList<>();
+    List<Transporteur> transporteurs = transporteurRepository.findByAgenceTransporteur(agence);
+    for (Transporteur t : transporteurs) {
+        EmployeAgenceDto tDto = new EmployeAgenceDto();
+        tDto.setCin(t.getTrs_Cin());
+        tDto.setNom(t.getNom_trs());
+        tDto.setPrenom(t.getPrenom_trs());
+        tDto.setAdresse(t.getTrs_adress());
+        tDto.setEmail("-");
+        tDto.setMot_passe("-");
+        employesDtos.add(tDto);
+
+        for (Vehicule v : t.getVehiculeTransporteur()) {
+            VehiculeDto vdto = new VehiculeDto();
+            vdto.setImmatriculation(v.getImtrc());
+            vdto.setCapacite(v.getCapacite());
+            vdto.setType(v.getType());
+            vehiculesDtos.add(vdto);
+        }
+    }
+
+    dto.setEmployes(employesDtos);
+    dto.setVehicules(vehiculesDtos);
+    return dto;
+}
 
     
 } 

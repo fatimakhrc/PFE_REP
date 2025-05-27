@@ -1,4 +1,4 @@
-/*package pfe.example.Services;
+package pfe.example.Services;
 
 import pfe.example.Entities.Transporteur;
 
@@ -9,4 +9,3 @@ public interface TransporeteurService {
     Transporteur getTransporteurById(String trs_cin);
     
 }
-*/
