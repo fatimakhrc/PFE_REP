@@ -18,14 +18,14 @@ public class Agence {
     @Column(name = "id_agence" , nullable = false )
     private String id_agence;
     @Column(name = "nom_agence")
-    private String nom_agence;
+    private String nomAgence;
     @Column(name = "adresse_agence")
     private String adresse_agence ;
 
 
-    public Agence(String id_agence, String nom_agence, String adresse_agence) {
+    public Agence(String id_agence, String nomAgence, String adresse_agence) {
         this.id_agence = id_agence;
-        this.nom_agence = nom_agence;
+        this.nomAgence = nomAgence;
         this.adresse_agence = adresse_agence;
     }
 
@@ -50,11 +50,11 @@ public class Agence {
     public void setId_agence(String id_agence) {
         this.id_agence = id_agence;
     }
-    public String getNom_agence() {
-        return nom_agence;
+    public String getNomAgence() {
+        return nomAgence;
     }
-    public void setNom_agence(String nom_agence) {
-        this.nom_agence = nom_agence;
+    public void setNomAgence(String nomAgence) {
+        this.nomAgence = nomAgence;
     }
     public String getAdresse_agence() {
         return adresse_agence;

@@ -48,7 +48,7 @@ public class AgenceServiceImpl implements AgenceService {
     public Agence updateAgence(String id, Agence agence) {
         Agence existingAgence = agenceRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Agence not found"));
-        existingAgence.setNom_agence(agence.getNom_agence());
+        existingAgence.setNomAgence(agence.getNomAgence());
         existingAgence.setAdresse_agence(agence.getAdresse_agence());
         return agenceRepository.save(existingAgence);
     }
@@ -71,7 +71,7 @@ public class AgenceServiceImpl implements AgenceService {
         .orElseThrow(() -> new RuntimeException("Agence non trouvée"));
 
     AgenceDetailsDto dto = new AgenceDetailsDto();
-    dto.setNomAgence(agence.getNom_agence());
+    dto.setNomAgence(agence.getNomAgence());
 
     // Employés
     List<EmployeAgenceDto> employesDtos = new ArrayList<>();
