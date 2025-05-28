@@ -105,11 +105,12 @@ public class AgenceServiceImpl implements AgenceService {
         tDto.setMot_passe("-");
         employesDtos.add(tDto);
 
-        for (Vehicule v : t.getVehiculeTransporteur()) {
+        Vehicule vehicule = t.getVehiculeTransporteur();
+        if (vehicule != null) {
             VehiculeDto vdto = new VehiculeDto();
-            vdto.setImmatriculation(v.getImtrc());
-            vdto.setCapacite(v.getCapacite());
-            vdto.setType(v.getType());
+            vdto.setImmatriculation(vehicule.getImtrc());
+            vdto.setCapacite(vehicule.getCapacite());
+            vdto.setType(vehicule.getType());
             vehiculesDtos.add(vdto);
         }
     }

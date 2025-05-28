@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,8 +28,16 @@ public class Transporteur {
     @JoinColumn (name = "id_agence" , referencedColumnName = "id_agence")
     private Agence agenceTransporteur;
 
-    @OneToMany (mappedBy = "transporteurVehicule")
-    private List <Vehicule> vehiculeTransporteur;
+    @OneToOne
+    @JoinColumn(name = "immatriculation")
+    private Vehicule vehiculeTransporteur;
+
+    @OneToOne(mappedBy = "transporteur")
+    private Employe employe;
+
+    @ManyToOne 
+    @JoinColumn(name = "id_role")
+    private Roles role;
 
     
 
@@ -94,16 +103,29 @@ public class Transporteur {
         this.agenceTransporteur = agenceTransporteur;
     }
 
-    public List<Vehicule> getVehiculeTransporteur() {
+    public Vehicule getVehiculeTransporteur() {
         return vehiculeTransporteur;
     }
 
-    public void setVehiculeTransporteur(List<Vehicule> vehiculeTransporteur) {
+    public void setVehiculeTransporteur(Vehicule vehiculeTransporteur) {
         this.vehiculeTransporteur = vehiculeTransporteur;
     }
 
+    public Employe getEmploye() {
+        return employe;
+    }
 
+    public void setEmploye(Employe employe) {
+        this.employe = employe;
+    }
 
-    
-    
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
+     
 }

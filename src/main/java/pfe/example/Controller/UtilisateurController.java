@@ -101,8 +101,12 @@ public class UtilisateurController {
 
     @PostMapping("/create-with-employe")
     public ResponseEntity<?> createUtilisateurWithEmploye(@RequestBody CreeEmployeUtilisateurDto dto) {
-    utilisateurService.createUtilisateurWithEmploye(dto);
-    return ResponseEntity.status(HttpStatus.CREATED).body("Utilisateur créé avec succès.");
+    try {
+        utilisateurService.createUtilisateurWithEmploye(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Employé créé avec succès.");
+    } catch (RuntimeException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
 }
 
     //creer un nouveau utilisateur 

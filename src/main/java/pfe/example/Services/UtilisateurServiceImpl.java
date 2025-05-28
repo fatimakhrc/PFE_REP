@@ -1,19 +1,24 @@
 package pfe.example.Services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import pfe.example.DAO.UtilisateurRep;
+import pfe.example.DAO.VehiculeRep;
 import pfe.example.DTO.CreeEmployeUtilisateurDto;
 import pfe.example.Entities.Agence;
 import pfe.example.Entities.Employe;
 import pfe.example.Entities.Roles;
+import pfe.example.Entities.Transporteur;
 import pfe.example.DAO.EmployeRep;
 import pfe.example.DAO.RoleRep;
 import pfe.example.DAO.AgenceRep;
 import pfe.example.Entities.Utilisateur;
+import pfe.example.Entities.Vehicule;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
@@ -27,6 +32,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private AgenceRep agenceRep;
     @Autowired
     private RoleRep roleRep;
+    @Autowired 
+    private VehiculeRep vehiculeRep;
     
 
 
@@ -51,43 +58,65 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public void createUtilisateurWithEmploye(CreeEmployeUtilisateurDto dto) {
 
-    //  1. Vérifier les doublons
-    if (utilisateurRepository.findByEmail(dto.getEmail()) != null) {
-        throw new RuntimeException("Email déjà utilisé.");
-    }
-
+    // Vérification CIN doublon (commun à tous)
     if (employeRep.findByEmpCin(dto.getEmpCin()).isPresent()) {
         throw new RuntimeException("CIN déjà utilisé.");
     }
 
-    //  2. Récupérer le rôle
+    // Récupérer le rôle
     Roles role = roleRep.findRoleByNom(dto.getRole())
                         .orElseThrow(() -> new RuntimeException("Rôle invalide"));
 
-    //  3. Créer Utilisateur
-    Utilisateur utilisateur = new Utilisateur();
-    utilisateur.setEmail(dto.getEmail());
-    utilisateur.setMot_passe(passwordEncoder.encode(dto.getMot_passe()));
-    utilisateur.setRole(role);
-
-    //  4. Récupérer l'agence
+    // Récupérer l'agence
     Agence agence = agenceRep.findById(dto.getId_agence())
                               .orElseThrow(() -> new RuntimeException("Agence introuvable"));
 
-    //  5. Créer Employé
+    // Créer Employé avec données communes
     Employe employe = new Employe();
     employe.setEmpCin(dto.getEmpCin());
     employe.setNom_emp(dto.getNom_emp());
     employe.setPrenom_emp(dto.getPrenom_emp());
-    //employe.setAgence(agence);
-    employe.setUtilisateur(utilisateur);
+    employe.setAgence(agence);
+    employe.setEmp_phone(dto.getEmp_phone());
+    employe.setEmp_adresse(dto.getEmp_adresse());
 
-    utilisateur.setEmploye(employe);
+    if ("OPERATEUR".equalsIgnoreCase(dto.getRole())) {
+        // Vérifier email doublon pour opérateur
+        if (utilisateurRepository.findByEmail(dto.getEmail()) != null) {
+            throw new RuntimeException("Email déjà utilisé.");
+        }
 
-    // 🔄 6. Sauvegarder
-    utilisateurRepository.save(utilisateur);
+        // Créer Utilisateur
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setEmail(dto.getEmail());
+        utilisateur.setMot_passe(passwordEncoder.encode(dto.getMot_passe()));
+        utilisateur.setRole(role);
+        utilisateur.setEmploye(employe);
+
+        employe.setUtilisateur(utilisateur);
+
+        // Sauvegarder via repository utilisateur (cascade devrait sauvegarder employé)
+        utilisateurRepository.save(utilisateur);
+
+    } else if ("TRANSPORTEUR".equalsIgnoreCase(dto.getRole())) {
+        // Chercher véhicule par immatriculation
+        // Récupérer le véhicule choisi dans le formulaire via DTO
+    Vehicule vehicule = vehiculeRep.findByImmatriculation(dto.getImmatriculation())
+        .orElseThrow(() -> new RuntimeException("Véhicule introuvable"));
+
+        // Créer Transporteur lié à employé et véhicule
+        Transporteur transporteur = new Transporteur();
+        transporteur.setEmploye(employe);
+        transporteur.setVehiculeTransporteur(vehicule);
+        transporteur.setRole(role);
+
+        employe.setTransporteur(transporteur);
+        employeRep.save(employe);
+
+    } else {
+        throw new RuntimeException("Rôle non supporté pour la création.");
+    }
 }
-
 
     @Override
     public Utilisateur createUtilisateur(Utilisateur utilisateur) {

@@ -23,11 +23,17 @@ import pfe.example.Services.VehiculeService;
 public class VehiculeController {
     @Autowired
     private VehiculeService vehiculeService;
+
     // Endpoint pour récupérer tous les véhicules
     @GetMapping("/")
     public ResponseEntity<List<Vehicule>> getAllVehicules() {
         List<Vehicule> vehicules = vehiculeService.getAllVehicules();
         return new ResponseEntity<>(vehicules, HttpStatus.OK);
+    }
+    //endpoint pour afficher tous les immatriculations des vehicules 
+    @GetMapping("/allImmatriculations")
+    public List<String> getAllImmatriculation(){
+        return vehiculeService.getAllImmatriculations();
     }
 
     // Endpoint pour récupérer un véhicule par son immatriculation
@@ -38,7 +44,7 @@ public class VehiculeController {
     }
 
     // Endpoint pour ajouter un nouveau véhicule
-    @PostMapping("/")
+    @PostMapping("/create")
     public ResponseEntity<Vehicule> addVehicule(@RequestBody Vehicule vehicule) {
         Vehicule createdVehicule = vehiculeService.addVehicule(vehicule);
         return new ResponseEntity<>(createdVehicule, HttpStatus.CREATED);

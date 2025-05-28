@@ -32,9 +32,20 @@ public class Employe {
     @JoinColumn(name = "utilisateur_email")
     private Utilisateur utilisateur;
 
+    @ManyToOne
+    @JoinColumn(name ="id_role")
+    private Roles role;
+
+    @OneToOne
+    @JoinColumn(name = "trs_cin")  // Clé étrangère vers Agence
+    private Transporteur transporteur;  
+
+
+
+    
     
     public Employe(String empCin, String nom_emp, String prenom_emp, String emp_phone, String emp_adresse,
-            Agence agence, Utilisateur utilisateur) {
+            Agence agence, Utilisateur utilisateur, Roles role, Transporteur transporteur) {
         this.empCin = empCin;
         this.nom_emp = nom_emp;
         this.prenom_emp = prenom_emp;
@@ -42,11 +53,15 @@ public class Employe {
         this.emp_adresse = emp_adresse;
         this.agence = agence;
         this.utilisateur = utilisateur;
+        this.role = role;
+        this.transporteur = transporteur;
     }
+
 
     public Employe (){
 
     }
+
 
     public String getEmpCin() {
         return empCin;
@@ -103,8 +118,22 @@ public class Employe {
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }
-    
-    
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
+    public Transporteur getTransporteur() {
+        return transporteur;
+    }
+
+    public void setTransporteur(Transporteur transporteur) {
+        this.transporteur = transporteur;
+    }
 
    
 }

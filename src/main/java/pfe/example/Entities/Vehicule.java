@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -37,8 +38,7 @@ public class Vehicule {
     @JoinColumn (name = "trj_id" , referencedColumnName = "trj_id" ,insertable = false, updatable = false)
     private Trajet trajetVehicule;*/
 
-    @ManyToOne 
-    @JoinColumn (name = "trs_CIN" , referencedColumnName = "trs_CIN", insertable = false, updatable = false)
+    @OneToOne(mappedBy = "vehicule")
     private Transporteur transporteurVehicule;
 
     
