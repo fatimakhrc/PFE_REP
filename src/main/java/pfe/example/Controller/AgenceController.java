@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import pfe.example.DTO.AgenceDashboardDto;
 import pfe.example.DTO.AgenceDetailsDto;
 import pfe.example.Entities.Agence;
 import pfe.example.Services.AgenceService;
@@ -25,10 +26,10 @@ public class AgenceController {
     private AgenceService agenceService;
 
     @PostMapping("/create")
-    public ResponseEntity<Agence> createAgence(@RequestBody Agence agence){
-        Agence newAgence = agenceService.createAgence(agence);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newAgence);
-    }
+    public ResponseEntity<AgenceDashboardDto> createAgence(@RequestBody Agence agence) {
+    Agence saved = agenceService.createAgence(agence);
+    return ResponseEntity.status(HttpStatus.CREATED).body(new AgenceDashboardDto(saved));
+}
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Agence> updateAgence(@PathVariable String id, @RequestBody Agence agence) {

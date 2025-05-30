@@ -37,6 +37,7 @@ public class Courrier {
     private String nom_complet_dest;
     @Column (name = "adresse_dest")
     private String adresse_dest;
+    
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cIN_DEST", referencedColumnName = "CIN" )

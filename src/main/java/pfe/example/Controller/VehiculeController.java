@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import pfe.example.DTO.VehiculeDashboardDto;
 import pfe.example.Entities.Vehicule;
 import pfe.example.Services.VehiculeService;
 
@@ -25,7 +26,7 @@ public class VehiculeController {
     private VehiculeService vehiculeService;
 
     // Endpoint pour récupérer tous les véhicules
-    @GetMapping("/")
+    @GetMapping("/getAll")
     public ResponseEntity<List<Vehicule>> getAllVehicules() {
         List<Vehicule> vehicules = vehiculeService.getAllVehicules();
         return new ResponseEntity<>(vehicules, HttpStatus.OK);
@@ -45,10 +46,10 @@ public class VehiculeController {
 
     // Endpoint pour ajouter un nouveau véhicule
     @PostMapping("/create")
-    public ResponseEntity<Vehicule> addVehicule(@RequestBody Vehicule vehicule) {
-        Vehicule createdVehicule = vehiculeService.addVehicule(vehicule);
-        return new ResponseEntity<>(createdVehicule, HttpStatus.CREATED);
-    }
+    public ResponseEntity<VehiculeDashboardDto> createVehicule(@RequestBody Vehicule vehicule) {
+    VehiculeDashboardDto dto = vehiculeService.addVehicule(vehicule);
+    return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+}
     // Endpoint pour mettre à jour un véhicule existant
     @PutMapping("/{imtrc}")
     public ResponseEntity<Vehicule> updateVehicule(@PathVariable String imtrc, @RequestBody Vehicule vehiculeDetails) {

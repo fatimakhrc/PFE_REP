@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import pfe.example.DAO.UtilisateurRep;
 import pfe.example.DAO.VehiculeRep;
 import pfe.example.DTO.CreeEmployeUtilisateurDto;
+import pfe.example.DTO.EmployeDashboardDto;
 import pfe.example.Entities.Agence;
 import pfe.example.Entities.Employe;
 import pfe.example.Entities.Roles;
@@ -56,7 +57,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public void createUtilisateurWithEmploye(CreeEmployeUtilisateurDto dto) {
+    public EmployeDashboardDto createUtilisateurWithEmploye(CreeEmployeUtilisateurDto dto) {
 
     // Vérification CIN doublon (commun à tous)
     if (employeRep.findByEmpCin(dto.getEmpCin()).isPresent()) {
@@ -116,6 +117,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     } else {
         throw new RuntimeException("Rôle non supporté pour la création.");
     }
+     return new EmployeDashboardDto(employe, role.getNom(), dto.getMot_passe());
 }
 
     @Override

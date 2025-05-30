@@ -60,7 +60,7 @@ public class EmployeServiceImpl implements EmployeService {
     }
 
     @Override
-public Employe affecterEmployeAgence(String employeCin, String agenceId) {
+    public Employe affecterEmployeAgence(String employeCin, String agenceId) {
     Optional<Employe> employeOpt = employeRepository.findByEmpCin(employeCin);
     if (employeOpt.isPresent()) {
         Employe employe = employeOpt.get();

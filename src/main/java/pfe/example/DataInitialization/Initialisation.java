@@ -67,8 +67,11 @@ public class Initialisation implements CommandLineRunner {
         // Création de l'employé
         Employe employe = new Employe();
         employe.setEmpCin("D1234");
-        employe.setNom_emp("flan");
-        employe.setPrenom_emp("flani");
+        employe.setNom_emp("admin");
+        employe.setPrenom_emp("adminTest");
+        employe.setEmp_adresse("123 Admin Street");
+        employe.setEmp_phone("0123456789");
+        employe.setRole(adminRole); // Associer le rôle ADMIN
         Employe savedEmploye = employeRep.save(employe);
 
         // Création de l'utilisateur
@@ -79,10 +82,14 @@ public class Initialisation implements CommandLineRunner {
         admin.setEmploye(savedEmploye); // Lier l'employé
         utilisateurRep.save(admin);
 
-        System.out.println("✅ Utilisateur ADMIN et Employé associés créés !");
+        System.out.println(" Utilisateur ADMIN et Employé associés créés !");
     } else {
-        System.out.println("ℹ️ L'utilisateur ADMIN existe déjà.");
+        System.out.println("L'utilisateur ADMIN existe déjà.");
     }
+        
+
+
+
         // Création des tranches de prix s'il n'y en a pas déjà
        /* if (pricingRep.count() == 0) {
             Pricing prix1 = new Pricing(0.0, 2.0, 20.0);

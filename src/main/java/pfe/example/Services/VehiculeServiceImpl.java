@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 /* import pfe.example.DAO.TrajetRep;
 import pfe.example.DAO.TransporteurRep; */
 import pfe.example.DAO.VehiculeRep;
+import pfe.example.DTO.VehiculeDashboardDto;
 /* import pfe.example.Entities.Trajet;
 import pfe.example.Entities.Transporteur; */
 import pfe.example.Entities.Vehicule;
@@ -35,9 +36,10 @@ public class VehiculeServiceImpl implements VehiculeService{
     }
 
     @Override
-    public Vehicule addVehicule(Vehicule vehicule) {
-        return vehiculeRepository.save(vehicule);
-    }
+    public VehiculeDashboardDto addVehicule(Vehicule vehicule) {
+    Vehicule savedVehicule = vehiculeRepository.save(vehicule);
+    return new VehiculeDashboardDto(savedVehicule);
+}
 
    @Override
 public Vehicule updateVehicule(String imtrc, Vehicule vehiculeDetails) {

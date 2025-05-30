@@ -3,6 +3,7 @@ package pfe.example.Services;
 import java.util.List;
 import java.util.Optional;
 
+import pfe.example.DTO.VehiculeDashboardDto;
 import pfe.example.Entities.Vehicule;
 
 public interface VehiculeService {
@@ -13,7 +14,7 @@ public interface VehiculeService {
     Optional<Vehicule> getVehiculeByImmatriculation(String imtrc);
 
     // Méthode pour ajouter un nouveau véhicule
-    Vehicule addVehicule(Vehicule vehicule);
+    VehiculeDashboardDto addVehicule(Vehicule vehicule);
 
     // Méthode pour mettre à jour un véhicule existant
     Vehicule updateVehicule(String imtrc, Vehicule vehiculeDetails);

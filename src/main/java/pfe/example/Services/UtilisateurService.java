@@ -1,6 +1,7 @@
 package pfe.example.Services;
 
 import pfe.example.DTO.CreeEmployeUtilisateurDto;
+import pfe.example.DTO.EmployeDashboardDto;
 import pfe.example.Entities.Roles;
 import pfe.example.Entities.Utilisateur;
 
@@ -10,7 +11,7 @@ public interface UtilisateurService {
     Utilisateur getUtilisateurByEmail(String email); // recupere l'utilisateur par son email
     Utilisateur createUtilisateur(Utilisateur utilisateur );//pour creer un nouveau Utilisateur
     boolean deleteUtilisateur(String email);
-    void createUtilisateurWithEmploye(CreeEmployeUtilisateurDto dto); // pour creer un utilisateur avec employe
+    EmployeDashboardDto createUtilisateurWithEmploye(CreeEmployeUtilisateurDto dto);  // pour creer un utilisateur avec employe
     //Utilisateur createUtilisateurAvecEmploye(String email, String motDePasse, String cin, String nom, String prenom, Roles role, String id_agence);
 
 

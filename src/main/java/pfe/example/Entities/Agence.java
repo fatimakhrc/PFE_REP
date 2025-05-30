@@ -68,8 +68,12 @@ public class Agence {
     public void setEmployes(List<Employe> employes) {
         this.employes = employes;
     }
-    
-  
+    public List<Transporteur> getTransporteurs(){
+        return transporteurs;
+    }
+    public void setTransporteurs(List<Transporteur> transporteurs) {
+        this.transporteurs = transporteurs;
+    }
 
     
 }

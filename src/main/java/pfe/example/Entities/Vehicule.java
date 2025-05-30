@@ -38,7 +38,7 @@ public class Vehicule {
     @JoinColumn (name = "trj_id" , referencedColumnName = "trj_id" ,insertable = false, updatable = false)
     private Trajet trajetVehicule;*/
 
-    @OneToOne(mappedBy = "vehicule")
+    @OneToOne(mappedBy = "vehiculeTransporteur")
     private Transporteur transporteurVehicule;
 
     
