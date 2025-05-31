@@ -36,7 +36,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
         // Retourner un token d'authentification valide avec le rôle de l'utilisateur
-       return new UsernamePasswordAuthenticationToken(email,password,Collections.singletonList(new SimpleGrantedAuthority(utilisateur.getRole().getNom())));
+        return new UsernamePasswordAuthenticationToken(
+            email, null,
+            Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + utilisateur.getRole().getNom().toUpperCase()))
+        );
     }
 
     @Override

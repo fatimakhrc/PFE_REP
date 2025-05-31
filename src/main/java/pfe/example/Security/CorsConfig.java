@@ -1,6 +1,7 @@
 package pfe.example.Security;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,9 +15,9 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(false);
-        config.setAllowedOrigins(Arrays.asList("http://localhost:5173" , "http://localhost:5174")); //frontend url 
-        config.setAllowedHeaders(Arrays.asList("*"));
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedOrigins(List.of("http://localhost:5173")); // vérifie que l’URL est correcte
+        config.setAllowedHeaders(List.of("*", "Authorization", "Content-Type"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

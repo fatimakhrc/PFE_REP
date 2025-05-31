@@ -32,6 +32,8 @@ import pfe.example.Services.UtilisateurService;
 @RestController
 @RequestMapping("/api/utilisateur")
 public class UtilisateurController {
+   
+    
     @Autowired 
     private UtilisateurService utilisateurService;
 
@@ -47,29 +49,27 @@ public class UtilisateurController {
     //METHODE DE L'AUTHENTIFICATION
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        try {
-            // Authentifie l'utilisateur avec Spring Security
-            Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getMot_passe())
-            );
+    try {
+        Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getMot_passe())
+        );
 
-            // Récupère le rôle à partir des autorités
-            String role = authentication.getAuthorities().iterator().next().getAuthority();
+        Utilisateur utilisateur = utilisateurService.getUtilisateurByEmail(loginRequest.getEmail());
 
-            // Crée le JWT
-            String token = Jwts.builder()
-                    .setSubject(loginRequest.getEmail())
-                    .claim("role", role)
-                    .setIssuedAt(new Date())
-                    .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // Token valide 24h
-                    .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)))
-                    .compact();
+        String token = Jwts.builder()
+                .setSubject(utilisateur.getEmail())
+                .claim("role", utilisateur.getRole().getNom())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
+                .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)))
+                .compact();
 
-            return ResponseEntity.ok(Collections.singletonMap("token", token));
-        } catch (AuthenticationException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou mot de passe incorrect.");
-        }
+        return ResponseEntity.ok(Collections.singletonMap("token", token));
+    } catch (AuthenticationException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email ou mot de passe incorrect.");
     }
+}
+
    /*  @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         Utilisateur utilisateur = utilisateurService.login(loginRequest.getEmail(), loginRequest.getMot_passe());

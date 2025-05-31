@@ -26,13 +26,17 @@ public class SecurityConfig {
     private CustomAuthenticationProvider customAuthenticationProvider;
 
     @Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http
+        .cors(cors -> {})
         .csrf(csrf -> csrf.disable())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(utilisateur -> utilisateur
-            .requestMatchers("/api/utilisateur/**").permitAll()
-            .anyRequest().authenticated())
+        .authorizeHttpRequests(auth -> auth
+        .requestMatchers("/api/utilisateur/login").permitAll()
+        .requestMatchers("/api/agence/**").hasRole("ADMIN")
+        .requestMatchers("/api/vehicule/**").hasAuthority("ROLE_ADMIN")
+        .anyRequest().authenticated()
+)
         .authenticationProvider(customAuthenticationProvider)
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
