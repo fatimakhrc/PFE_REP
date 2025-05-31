@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import pfe.example.DTO.CreeEmployeUtilisateurDto;
@@ -61,7 +62,7 @@ public class UtilisateurController {
                 .claim("role", utilisateur.getRole().getNom())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000))
-                .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)))
+                .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)),SignatureAlgorithm.HS384)
                 .compact();
 
         return ResponseEntity.ok(Collections.singletonMap("token", token));

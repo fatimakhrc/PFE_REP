@@ -38,7 +38,6 @@ public class JwtFilter extends OncePerRequestFilter {
         if (token != null) {
             try {
                 
-
                 Claims claims = Jwts.parser()
                 .verifyWith(getSigningKey())  // 
                 .build()
