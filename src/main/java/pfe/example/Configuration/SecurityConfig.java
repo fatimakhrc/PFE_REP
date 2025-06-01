@@ -28,13 +28,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http
-        .cors(cors -> {})
+        //.cors(cors -> {})
         .csrf(csrf -> csrf.disable())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(utilisateur -> utilisateur
         .requestMatchers("/api/utilisateur/login").permitAll()
         .requestMatchers("/api/utilisateur/**").permitAll() // Permettre l'accès à toutes les routes utilisateur
         .requestMatchers("/api/agence/**").hasRole("ADMIN")
+
         .requestMatchers("/api/vehicule/**").hasRole("ADMIN")
         .anyRequest().authenticated()
 )
