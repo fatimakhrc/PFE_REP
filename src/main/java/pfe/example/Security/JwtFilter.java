@@ -8,6 +8,7 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -30,25 +31,35 @@ public class JwtFilter extends OncePerRequestFilter {
     private String secretKey;  // Injecter la clé secrète ici
 
     @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,@NonNull FilterChain filterChain)
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
             throws ServletException, IOException {
-        
+
+        String path = request.getRequestURI();
+
+        // Ne pas filtrer la route login
+        if (path.contains("/api/utilisateur/login")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String token = extractToken(request);
 
         if (token != null) {
             try {
-                
                 Claims claims = Jwts.parser()
-                .verifyWith(getSigningKey())  // 
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+                    .verifyWith(getSigningKey())
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
+
                 String email = claims.getSubject();
                 String role = claims.get("role", String.class);
 
-                 // Crée un token standard avec email et rôle
+                // Injecter l’autorité au bon format : ROLE_ADMIN, ROLE_OPERATEUR, etc.
+                SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.toUpperCase());
+
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(email, null,Collections.singleton(() -> role));
+                        new UsernamePasswordAuthenticationToken(email, null, Collections.singletonList(authority));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 

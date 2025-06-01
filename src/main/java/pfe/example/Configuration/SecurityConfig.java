@@ -31,7 +31,7 @@ public class SecurityConfig {
         .cors(cors -> {})
         .csrf(csrf -> csrf.disable())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(auth -> auth
+        .authorizeHttpRequests(utilisateur -> utilisateur
         .requestMatchers("/api/utilisateur/login").permitAll()
         .requestMatchers("/api/agence/**").hasRole("ADMIN")
         .requestMatchers("/api/vehicule/**").hasRole("ADMIN")
