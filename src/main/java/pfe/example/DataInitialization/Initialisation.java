@@ -117,9 +117,6 @@ public class Initialisation implements CommandLineRunner {
     } else {
         System.out.println(" L'utilisateur OPERATEUR existe déjà.");
     }
-            
-
-
 
         // Création des tranches de prix s'il n'y en a pas déjà
         if (pricingRep.count() == 0) {
