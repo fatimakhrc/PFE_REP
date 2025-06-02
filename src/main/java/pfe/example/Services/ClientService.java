@@ -1,4 +1,4 @@
-/* package pfe.example.Services;
+package pfe.example.Services;
 
 import java.util.List;
 import pfe.example.Entities.Client;
@@ -9,4 +9,4 @@ public interface ClientService {
     List<Client> getAllClients();
     Client updateClient(String cin, Client updatedClient);
     boolean deleteClient(String cin);
-} */
+} 

@@ -1,4 +1,4 @@
-/* package pfe.example.DAO;
+package pfe.example.DAO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,4 +15,4 @@ public interface CourrierRep  extends JpaRepository <Courrier,Long>{
     long countByDateEnvoie(LocalDate dateEnvoie);
     List<Courrier> findByStatut(StatusCourrier statut);
     
-} */
+} 

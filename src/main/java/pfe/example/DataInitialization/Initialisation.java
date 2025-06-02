@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 
 import jakarta.transaction.Transactional;
 import pfe.example.DAO.EmployeRep;
-//import pfe.example.DAO.PricingRep;
+import pfe.example.DAO.PricingRep;
 import pfe.example.DAO.RoleRep;
 import pfe.example.DAO.UtilisateurRep;
 import pfe.example.Entities.Employe;
-//import pfe.example.Entities.Pricing;
+import pfe.example.Entities.Pricing;
 import pfe.example.Entities.Roles;
 import pfe.example.Entities.Utilisateur;
 
@@ -29,8 +29,8 @@ public class Initialisation implements CommandLineRunner {
     @Autowired
     private UtilisateurRep utilisateurRep;
 
-   /* @Autowired
-    private PricingRep pricingRep;*/
+   @Autowired
+    private PricingRep pricingRep;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -86,12 +86,43 @@ public class Initialisation implements CommandLineRunner {
     } else {
         System.out.println("L'utilisateur ADMIN existe déjà.");
     }
-        
+        // Création de l'opérateur si l'utilisateur n'existe pas
+    String emailOperateur = "operateur1@gmail.com";
+    if (utilisateurRep.findByEmail(emailOperateur) == null) {
+
+        // Récupérer le rôle OPERATEUR
+        Roles operateurRole = rolesRepository.findRoleByNom("OPERATEUR")
+            .orElseThrow(() -> new RuntimeException("Rôle OPERATEUR introuvable"));
+
+        // Création de l'employé opérateur
+        Employe employeOperateur = new Employe();
+        employeOperateur.setEmpCin("O5678");
+        employeOperateur.setNom_emp("Operateur");
+        employeOperateur.setPrenom_emp("Test");
+        employeOperateur.setEmp_adresse("456 Operator Street");
+        employeOperateur.setEmp_phone("0987654321");
+        employeOperateur.setRole(operateurRole); // Associer le rôle OPERATEUR
+        Employe savedOperateur = employeRep.save(employeOperateur);
+
+        // Création du compte utilisateur opérateur
+        Utilisateur operateur = new Utilisateur();
+        operateur.setEmail(emailOperateur);
+        operateur.setMot_passe(passwordEncoder.encode("operateur123"));
+        operateur.setRole(operateurRole);
+        operateur.setEmploye(savedOperateur); // Lier employé et utilisateur
+
+        utilisateurRep.save(operateur);
+
+        System.out.println(" Utilisateur OPERATEUR et Employé associés créés !");
+    } else {
+        System.out.println(" L'utilisateur OPERATEUR existe déjà.");
+    }
+            
 
 
 
         // Création des tranches de prix s'il n'y en a pas déjà
-       /* if (pricingRep.count() == 0) {
+        if (pricingRep.count() == 0) {
             Pricing prix1 = new Pricing(0.0, 2.0, 20.0);
             Pricing prix2 = new Pricing(2.1, 4.0, 35.0);
             Pricing prix3 = new Pricing(4.1, 6.0, 45.0);
@@ -113,7 +144,7 @@ public class Initialisation implements CommandLineRunner {
             System.out.println("✅ Tranches de prix enregistrées !");
         } else {
             System.out.println("ℹ️ Les tranches de prix existent déjà.");
-        }*/
+        }
     }
 }
 

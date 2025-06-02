@@ -44,6 +44,7 @@ public class AgenceServiceImpl implements AgenceService {
     public Agence createAgence(Agence agence) {
         return agenceRepository.save(agence);
     }
+    
     @Override
     public Agence updateAgence(String id, Agence agence) {
         Agence existingAgence = agenceRepository.findById(id)

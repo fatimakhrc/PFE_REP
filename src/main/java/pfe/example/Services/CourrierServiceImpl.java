@@ -1,4 +1,4 @@
-/*package pfe.example.Services;
+package pfe.example.Services;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pfe.example.DAO.CourrierRep;
-import pfe.example.DAO.TrajetRep;
+//import pfe.example.DAO.TrajetRep;
 import pfe.example.DAO.VehiculeRep;
 import pfe.example.DTO.CreeClientCourrierDto;
 import pfe.example.Entities.Courrier;
 import pfe.example.Entities.StatusCourrier;
-import pfe.example.Entities.Trajet;
+//import pfe.example.Entities.Trajet;
 import pfe.example.Entities.Transporteur;
 import pfe.example.Entities.Vehicule;
 import pfe.example.Entities.Client;
@@ -96,7 +96,7 @@ public class CourrierServiceImpl implements CourrierService {
 
     // Informations du destinataire
     courrier.setNom_complet_dest(dto.getNom_complet_dest());
-    courrier.setCin_dest(dto.getCin_dest());
+    //courrier.setCin_dest(dto.getCin_dest());
     courrier.setAdresse_dest(dto.getAdresse_dest());
     courrier.setAgenceExped(dto.getAgenceExped());
     courrier.setAgenceDest(dto.getAgenceDest());
@@ -114,4 +114,4 @@ public class CourrierServiceImpl implements CourrierService {
 }
  
     
-}*/
+}

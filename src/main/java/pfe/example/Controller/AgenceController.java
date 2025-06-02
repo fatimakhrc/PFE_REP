@@ -18,9 +18,11 @@ import pfe.example.DTO.AgenceDashboardDto;
 import pfe.example.DTO.AgenceDetailsDto;
 import pfe.example.Entities.Agence;
 import pfe.example.Services.AgenceService;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("/api/agence")
+@PreAuthorize("hasRole('ADMIN') ")
 public class AgenceController {
     @Autowired
     private AgenceService agenceService;

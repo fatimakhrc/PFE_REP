@@ -1,4 +1,4 @@
-/* package pfe.example.Entities;
+package pfe.example.Entities;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -40,7 +40,7 @@ public class Courrier {
     
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cIN_DEST", referencedColumnName = "CIN" )
+    @JoinColumn(name = "cin_dest", referencedColumnName = "CIN" )
     private Client clientDest;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -48,21 +48,21 @@ public class Courrier {
     private Client clientExped;
     
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    /* @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "trj_id" , referencedColumnName = "trj_id")
     private Trajet trajetCourrier;
-
+ */
 
 
     public Courrier(Long id, LocalDate dateEnvoie, double poids, StatusCourrier statut, double prixTransmission,
-            String cin_dest, String nom_complet_dest, String adresse_dest, Client clientDest, Client clientExped,
+             String nom_complet_dest, String adresse_dest, Client clientDest, Client clientExped,
             String agenceDest, String agenceExped) {
         this.id = id;
         this.dateEnvoie = dateEnvoie;
         this.poids = poids;
         this.statut = statut;
         this.prixTransmission = prixTransmission;
-        this.cin_dest = cin_dest;
+        
         this.nom_complet_dest = nom_complet_dest;
         this.adresse_dest = adresse_dest;
         this.clientDest = clientDest;
@@ -115,14 +115,14 @@ public class Courrier {
         this.prixTransmission = prixTransmission;
     }
 
-    public String getCin_dest() {
+    /* public String getCin_dest() {
         return cin_dest;
     }
 
     public void setCin_dest(String cin_dest) {
         this.cin_dest = cin_dest;
     }
-
+ */
     public String getNom_complet_dest() {
         return nom_complet_dest;
     }
@@ -155,13 +155,13 @@ public class Courrier {
         this.clientExped = clientExped;
     }
 
-    public Trajet getTrajetCourrier() {
+    /* public Trajet getTrajetCourrier() {
         return trajetCourrier;
     }
 
     public void setTrajetCourrier(Trajet trajetCourrier) {
         this.trajetCourrier = trajetCourrier;
-    }
+    } */
 
     public String getAgenceDest() {
         return agenceDest;
@@ -180,4 +180,4 @@ public class Courrier {
     }
     
 
-} */
+}

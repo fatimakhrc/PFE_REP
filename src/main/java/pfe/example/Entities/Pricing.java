@@ -1,4 +1,4 @@
-/* package pfe.example.Entities;
+package pfe.example.Entities;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -25,9 +25,9 @@ public class Pricing {
     private Double prix_uni ;
     
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    /* @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "trj_id", referencedColumnName = "trj_id") 
-    private Trajet trajetPricing;
+    private Trajet trajetPricing; */
     
 
     public Pricing(Double poids_min, Double poids_max, Double prix_uni) {
@@ -80,7 +80,7 @@ public class Pricing {
     }
 
 
-    public Trajet getTrajetPricing() {
+   /*  public Trajet getTrajetPricing() {
         return trajetPricing;
     }
 
@@ -88,8 +88,7 @@ public class Pricing {
     public void setTrajetPricing(Trajet trajetPricing) {
         this.trajetPricing = trajetPricing;
     }
-    
+     */
 
     
 }
- */

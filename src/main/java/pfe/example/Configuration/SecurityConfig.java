@@ -1,5 +1,7 @@
 package pfe.example.Configuration;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
 
 import pfe.example.Security.CustomAuthenticationProvider;
 import pfe.example.Security.JwtFilter;
@@ -27,29 +28,24 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    return http
-        //.cors(cors -> {})
-        .csrf(csrf -> csrf.disable())
-        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(utilisateur -> utilisateur
-        .requestMatchers("/api/utilisateur/login").permitAll()
-        .requestMatchers("/api/utilisateur/**").permitAll() // Permettre l'accès à toutes les routes utilisateur
-        .requestMatchers("/api/agence/**").hasRole("ADMIN")
-
-        .requestMatchers("/api/vehicule/**").hasRole("ADMIN")
-        .anyRequest().authenticated()
-)
-        .authenticationProvider(customAuthenticationProvider)
-        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-        .build();
-}
-
-
+        return http
+            .cors(withDefaults())  // ✅ Utilisation correcte
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/utilisateur/login").permitAll()
+                .requestMatchers("/api/utilisateur/**").permitAll()
+                .requestMatchers("/api/agence/**").hasRole("ADMIN")
+                .requestMatchers("/api/vehicule/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+            )
+            .authenticationProvider(customAuthenticationProvider)
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+            .build();
+    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
-
-    
 }
