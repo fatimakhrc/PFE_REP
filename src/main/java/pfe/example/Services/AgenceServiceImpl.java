@@ -35,7 +35,7 @@ public class AgenceServiceImpl implements AgenceService {
     private TransporteurRep transporteurRepository;
 
     @Override
-    public Agence getAgenceById(String id) {
+    public Agence getAgenceById(Long id) {
         Optional<Agence> agence = agenceRepository.findById(id);  // Appeler la méthode findById du repository
         return agence.orElse(null);  // Return the Agence object if found, otherwise return null
     }
@@ -44,9 +44,9 @@ public class AgenceServiceImpl implements AgenceService {
     public Agence createAgence(Agence agence) {
         return agenceRepository.save(agence);
     }
-    
+
     @Override
-    public Agence updateAgence(String id, Agence agence) {
+    public Agence updateAgence(Long id, Agence agence) {
         Agence existingAgence = agenceRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Agence not found"));
         existingAgence.setNomAgence(agence.getNomAgence());
@@ -54,7 +54,7 @@ public class AgenceServiceImpl implements AgenceService {
         return agenceRepository.save(existingAgence);
     }
     @Override
-    public void deleteAgence(String id) {
+    public void deleteAgence(Long id) {
         Agence agence = agenceRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Agence not found"));
             agenceRepository.delete(agence);

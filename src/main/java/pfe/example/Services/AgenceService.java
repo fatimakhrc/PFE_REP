@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface AgenceService {
     Agence createAgence (Agence agence);
-    Agence getAgenceById(String id);
-    Agence updateAgence(String id, Agence agence);
-    void deleteAgence(String id);
+    Agence getAgenceById(Long id);
+    Agence updateAgence(Long id, Agence agence);
+    void deleteAgence(Long id);
     List <String> getAllAdresses();
     AgenceDetailsDto getDetailsParNomAgence (String nomAgence);
     

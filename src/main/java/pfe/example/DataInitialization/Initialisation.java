@@ -15,6 +15,8 @@ import pfe.example.Entities.Employe;
 import pfe.example.Entities.Pricing;
 import pfe.example.Entities.Roles;
 import pfe.example.Entities.Utilisateur;
+import pfe.example.DAO.AgenceRep;
+import pfe.example.Entities.Agence;
 
 @Component
 @Transactional // Annotation pour indiquer que cette classe gère les transactions
@@ -34,6 +36,9 @@ public class Initialisation implements CommandLineRunner {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AgenceRep agenceRep;
 
     @Override
     public void run(String... args) {
@@ -118,7 +123,17 @@ public class Initialisation implements CommandLineRunner {
         System.out.println(" L'utilisateur OPERATEUR existe déjà.");
     }
             
+    String nomAgence = "Agence Centrale";
+    if (agenceRep.findByNomAgence(nomAgence).isEmpty()) {
+    Agence agence = new Agence();
+    agence.setNomAgence(nomAgence);
+    agence.setAdresse_agence("123 Rue Principale, Casablanca");
 
+    agenceRep.save(agence);
+    System.out.println("Agence créée : " + nomAgence);
+    } else {
+        System.out.println("L'agence " + nomAgence + " existe déjà.");
+    }
 
 
         // Création des tranches de prix s'il n'y en a pas déjà

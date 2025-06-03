@@ -10,6 +10,6 @@ public interface EmployeService {
     boolean deleteEmploye(String cin);
     Employe getEmployeByCin(String cin);
     List<Employe> getAllEmployes();
-    Employe affecterEmployeAgence(String employeCin, String agenceId);  //  méthode pour affecter un employé à une agence
+    Employe affecterEmployeAgence(String employeCin, Long agenceId);  //  méthode pour affecter un employé à une agence
 
 }

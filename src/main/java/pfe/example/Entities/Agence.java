@@ -19,14 +19,14 @@ public class Agence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_agence" , nullable = false )
-    private String id_agence;
+    private Long id_agence;
     @Column(name = "nom_agence")
     private String nomAgence;
     @Column(name = "adresse_agence")
     private String adresse_agence ;
 
 
-    public Agence(String id_agence, String nomAgence, String adresse_agence) {
+    public Agence(Long id_agence, String nomAgence, String adresse_agence) {
         this.id_agence = id_agence;
         this.nomAgence = nomAgence;
         this.adresse_agence = adresse_agence;
@@ -47,10 +47,10 @@ public class Agence {
     private List<Employe> employes;  // Liste des employés affectés à cette agence
     
     
-    public String getId_agence() {
+    public Long getId_agence() {
         return id_agence;
     }
-    public void setId_agence(String id_agence) {
+    public void setId_agence(Long id_agence) {
         this.id_agence = id_agence;
     }
     public String getNomAgence() {

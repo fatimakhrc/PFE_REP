@@ -3,7 +3,7 @@ package pfe.example.DTO;
 import pfe.example.Entities.Agence;
 
 public class AgenceDashboardDto {
-    private String id;
+    private Long id;
     private String nom;
     private String adresse;
     private int nombreEmployes;
@@ -24,11 +24,11 @@ public class AgenceDashboardDto {
     }
     
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

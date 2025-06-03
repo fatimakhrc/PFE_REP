@@ -34,18 +34,18 @@ public class AgenceController {
 }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Agence> updateAgence(@PathVariable String id, @RequestBody Agence agence) {
+    public ResponseEntity<Agence> updateAgence(@PathVariable Long id, @RequestBody Agence agence) {
         Agence updatedAgence = agenceService.updateAgence(id, agence);
         return ResponseEntity.ok(updatedAgence);
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteAgence(@PathVariable String id) {
+    public ResponseEntity<Void> deleteAgence(@PathVariable Long id) {
         agenceService.deleteAgence(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Agence> getAgenceById(@PathVariable String id) {
+    public ResponseEntity<Agence> getAgenceById(@PathVariable Long id) {
         Agence agence = agenceService.getAgenceById(id);
         return ResponseEntity.ok(agence);
     }

@@ -4,7 +4,7 @@ public class CreeEmployeUtilisateurDto {
     private String empCin;
     private String nom_emp;
     private String prenom_emp;
-    private String id_agence;
+    private Long id_agence;
     private String emp_phone;
     private String emp_adresse;
     private String immatriculation;
@@ -13,7 +13,7 @@ public class CreeEmployeUtilisateurDto {
     private String role;
 
 
-    public CreeEmployeUtilisateurDto(String empCin, String nom_emp, String prenom_emp, String id_agence,
+    public CreeEmployeUtilisateurDto(String empCin, String nom_emp, String prenom_emp, Long id_agence,
             String emp_phone, String emp_adresse, String immatriculation, String email, String mot_passe, String role) {
         this.empCin = empCin;
         this.nom_emp = nom_emp;
@@ -50,10 +50,10 @@ public class CreeEmployeUtilisateurDto {
     public void setPrenom_emp(String prenom_emp) {
         this.prenom_emp = prenom_emp;
     }
-    public String getId_agence() {
+    public Long getId_agence() {
         return id_agence;
     }
-    public void setId_agence(String id_agence) {
+    public void setId_agence(Long id_agence) {
         this.id_agence = id_agence;
     }
     public String getEmp_phone() {

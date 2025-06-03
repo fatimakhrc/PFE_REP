@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import pfe.example.Entities.Agence;
 
 @Repository
-public interface AgenceRep extends JpaRepository<Agence,String> {
+public interface AgenceRep extends JpaRepository<Agence,Long> {
     @Query("SELECT a.adresse_agence FROM Agence a ")
     List<String> findAllAdresses();
 

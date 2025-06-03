@@ -62,7 +62,7 @@ public class Courrier {
         this.poids = poids;
         this.statut = statut;
         this.prixTransmission = prixTransmission;
-        
+    
         this.nom_complet_dest = nom_complet_dest;
         this.adresse_dest = adresse_dest;
         this.clientDest = clientDest;
@@ -121,8 +121,8 @@ public class Courrier {
 
     public void setCin_dest(String cin_dest) {
         this.cin_dest = cin_dest;
-    }
- */
+    } */
+ 
     public String getNom_complet_dest() {
         return nom_complet_dest;
     }

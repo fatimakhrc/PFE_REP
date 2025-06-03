@@ -1,5 +1,7 @@
 package pfe.example.DTO;
 
+import java.util.function.LongBinaryOperator;
+
 import pfe.example.Entities.Employe;
 
 public class EmployeDashboardDto {
@@ -8,7 +10,7 @@ public class EmployeDashboardDto {
     private String prenom_emp;
     private String empAdresse;
     private String empPhone;
-    private String idAgence;
+    private Long idAgence;
     private String role;
     private String email;
     private String mot_passe; //mot de passe en clair uniquement pour retour
@@ -74,11 +76,11 @@ public class EmployeDashboardDto {
         this.empPhone = empPhone;
     }
 
-    public String getIdAgence() {
+    public Long getIdAgence() {
         return idAgence;
     }
 
-    public void setIdAgence(String idAgence) {
+    public void setIdAgence(Long idAgence) {
         this.idAgence = idAgence;
     }
 
