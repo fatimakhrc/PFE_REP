@@ -20,6 +20,7 @@ import pfe.example.Entities.Agence;
 import pfe.example.Services.AgenceService;
 import org.springframework.security.access.prepost.PreAuthorize;
 
+//done
 @RestController
 @RequestMapping("/api/agence")
 @PreAuthorize("hasRole('ADMIN') ")
