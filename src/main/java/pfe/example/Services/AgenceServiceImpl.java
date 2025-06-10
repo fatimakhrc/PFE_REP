@@ -95,23 +95,23 @@ public class AgenceServiceImpl implements AgenceService {
 
     // Transporteurs & Véhicules
     List<VehiculeDto> vehiculesDtos = new ArrayList<>();
-    List<Transporteur> transporteurs = transporteurRepository.findByAgenceTransporteur(agence);
-    for (Transporteur t : transporteurs) {
-        EmployeAgenceDto tDto = new EmployeAgenceDto();
-        tDto.setCin(t.getTrs_Cin());
-        tDto.setNom(t.getNom_trs());
-        tDto.setPrenom(t.getPrenom_trs());
-        tDto.setAdresse(t.getTrs_adress());
-        tDto.setEmail("-");
-        tDto.setMot_passe("-");
-        employesDtos.add(tDto);
+    List<Vehicule> vehicules = vehiculeRepository.findByAgenceVehicule(agence);
+    for (Vehicule v : vehicules) {
+        Transporteur t = v.getTransporteurVehicule();
+        if (t != null) {
+            EmployeAgenceDto tDto = new EmployeAgenceDto();
+            tDto.setCin(t.getTrs_Cin());
+            tDto.setNom(t.getNom_trs());
+            tDto.setPrenom(t.getPrenom_trs());
+            tDto.setAdresse(t.getTrs_adress());
+            tDto.setEmail("-");
+            tDto.setMot_passe("-");
+            employesDtos.add(tDto);
 
-        Vehicule vehicule = t.getVehiculeTransporteur();
-        if (vehicule != null) {
             VehiculeDto vdto = new VehiculeDto();
-            vdto.setImmatriculation(vehicule.getImtrc());
-            vdto.setCapacite(vehicule.getCapacite());
-            vdto.setType(vehicule.getType());
+            vdto.setImmatriculation(v.getImtrc());
+            vdto.setCapacite(v.getCapacite());
+            vdto.setType(v.getType());
             vehiculesDtos.add(vdto);
         }
     }

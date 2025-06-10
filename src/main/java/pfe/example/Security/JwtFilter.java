@@ -28,7 +28,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     // Charger la clé secrète depuis application.properties
     @Value("${jwt.secret}")
-    private String secretKey;  // Injecter la clé secrète ici
+    private String secretKey;  // Injecte la clé secrète 
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)

@@ -41,6 +41,10 @@ public class Vehicule {
     @OneToOne(mappedBy = "vehiculeTransporteur")
     private Transporteur transporteurVehicule;
 
+    @ManyToOne
+    @JoinColumn(name = "id_agence")
+    private Agence agenceVehicule;
+
     
     public String getImtrc() {
         return immatriculation;
@@ -71,6 +75,14 @@ public class Vehicule {
     }
     public void setTransporteurVehicule(Transporteur transporteurVehicule) {
         this.transporteurVehicule = transporteurVehicule;
+    }
+
+    public Agence getAgenceVehicule() {
+    return agenceVehicule;
+    }
+
+    public void setAgenceVehicule(Agence agenceVehicule) {
+        this.agenceVehicule = agenceVehicule;
     }
 
 

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import pfe.example.Entities.Agence;
 import pfe.example.Entities.Vehicule;
 
 @Repository
@@ -17,5 +18,8 @@ public interface VehiculeRep extends JpaRepository<Vehicule,String> {
 
     // Méthode pour récupérer un véhicule par son immatriculation
     Optional<Vehicule> findByImmatriculation(String immatriculation);
+
+    //permet de recuperer les vehicules d'une agence 
+    List<Vehicule> findByAgenceVehicule(Agence agence);
 
 }

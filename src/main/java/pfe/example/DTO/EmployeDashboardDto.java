@@ -1,6 +1,5 @@
 package pfe.example.DTO;
 
-import java.util.function.LongBinaryOperator;
 
 import pfe.example.Entities.Employe;
 

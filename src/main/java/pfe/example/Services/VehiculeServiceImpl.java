@@ -6,12 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/* import pfe.example.DAO.TrajetRep;
-import pfe.example.DAO.TransporteurRep; */
+/* import pfe.example.DAO.TrajetRep;*/
+import pfe.example.DAO.TransporteurRep; 
 import pfe.example.DAO.VehiculeRep;
 import pfe.example.DTO.VehiculeDashboardDto;
-/* import pfe.example.Entities.Trajet;
-import pfe.example.Entities.Transporteur; */
+/* import pfe.example.Entities.Trajet;*/
+import pfe.example.Entities.Transporteur;
 import pfe.example.Entities.Vehicule;
 
 @Service
@@ -20,10 +20,10 @@ public class VehiculeServiceImpl implements VehiculeService{
     private VehiculeRep vehiculeRepository;
 
     /* @Autowired
-    private TrajetRep trajetRepository;
+    private TrajetRep trajetRepository;*/
 
     @Autowired
-    private TransporteurRep transporteurRepository; */
+    private TransporteurRep transporteurRepository; 
 
     @Override
     public List<Vehicule> getAllVehicules() {
@@ -57,13 +57,13 @@ public Vehicule updateVehicule(String imtrc, Vehicule vehiculeDetails) {
             Trajet trajet = trajetRepository.findById(vehiculeDetails.getTrajetVehicule().getTrj_id())
                                            .orElseThrow(() -> new RuntimeException("Trajet non trouvé"));
             vehicule.setTrajetVehicule(trajet);
-        }
+        }*/
 
         if (vehiculeDetails.getTransporteurVehicule() != null) {
             Transporteur transporteur = transporteurRepository.findById(vehiculeDetails.getTransporteurVehicule().getTrs_Cin())
                                                                .orElseThrow(() -> new RuntimeException("Transporteur non trouvé"));
             vehicule.setTransporteurVehicule(transporteur);
-        } */
+        } 
 
         // Sauvegarde de l'entité mise à jour
         return vehiculeRepository.save(vehicule);

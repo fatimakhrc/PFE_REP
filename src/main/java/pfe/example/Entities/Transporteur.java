@@ -24,10 +24,7 @@ public class Transporteur {
    
 
 
-    @ManyToOne 
-    @JoinColumn (name = "id_agence" , referencedColumnName = "id_agence")
-    private Agence agenceTransporteur;
-
+    
     @OneToOne
     @JoinColumn(name = "immatriculation")
     private Vehicule vehiculeTransporteur;
@@ -93,14 +90,6 @@ public class Transporteur {
 
     public void setTrs_adress(String trs_adress) {
         this.trs_adress = trs_adress;
-    }
-
-    public Agence getAgenceTransporteur() {
-        return agenceTransporteur;
-    }
-
-    public void setAgenceTransporteur(Agence agenceTransporteur) {
-        this.agenceTransporteur = agenceTransporteur;
     }
 
     public Vehicule getVehiculeTransporteur() {

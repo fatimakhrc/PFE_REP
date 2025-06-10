@@ -16,13 +16,8 @@ public class VehiculeDashboardDto {
         this.type = vehicule.getType();
         this.capacite = vehicule.getCapacite();
 
-        if (vehicule.getTransporteurVehicule() != null &&
-            vehicule.getTransporteurVehicule().getEmploye() != null &&
-            vehicule.getTransporteurVehicule().getEmploye().getAgence() != null) {
-            this.nomAgence = vehicule.getTransporteurVehicule()
-                                     .getEmploye()
-                                     .getAgence()
-                                     .getNomAgence();
+        if (vehicule.getAgenceVehicule() != null) {
+            this.nomAgence = vehicule.getAgenceVehicule().getNomAgence();
         } else {
             this.nomAgence = "-";
         }

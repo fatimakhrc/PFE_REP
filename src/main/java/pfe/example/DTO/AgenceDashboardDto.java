@@ -13,14 +13,11 @@ public class AgenceDashboardDto {
         this.id = agence.getId_agence();
         this.nom = agence.getNomAgence();
         this.adresse = agence.getAdresse_agence();
-        //
+        //recuperer le nombre des employes , vehicule dans l'agnece 
         this.nombreEmployes = agence.getEmployes() != null ? agence.getEmployes().size() : 0;
-        this.nombreVehicules = agence.getTransporteurs() != null
-            ? agence.getTransporteurs()
-            .stream()
-            .mapToInt(t -> t.getVehiculeTransporteur() != null ? 1 : 0)
-            .sum()
-            : 0;
+        this.nombreVehicules = agence.getVehicules() != null
+        ? agence.getVehicules().size()
+        : 0;
     }
     
 

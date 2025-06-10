@@ -4,7 +4,7 @@ public class LoginRequest {
     //loginRequest est un dto data transmission object qui permet de recuperer les informations necessere pour le login 
     private String email ;
     private String mot_passe;
-    private String role;// role selectionne par l'utilisateur (admin ou operateur )
+    private String role;
 
     public LoginRequest() {
     }

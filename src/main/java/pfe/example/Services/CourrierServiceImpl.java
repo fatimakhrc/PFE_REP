@@ -96,7 +96,7 @@ public class CourrierServiceImpl implements CourrierService {
 
     // Informations du destinataire
     courrier.setNom_complet_dest(dto.getNom_complet_dest());
-    //courrier.setCin_dest(dto.getCin_dest());
+    courrier.setCin_dest(dto.getCin_dest());
     courrier.setAdresse_dest(dto.getAdresse_dest());
     courrier.setAgenceExped(dto.getAgenceExped());
     courrier.setAgenceDest(dto.getAgenceDest());

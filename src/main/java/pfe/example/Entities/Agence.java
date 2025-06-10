@@ -37,8 +37,8 @@ public class Agence {
     }
 
 
-    @OneToMany (mappedBy = "agenceTransporteur",cascade = CascadeType.ALL)   // on utilise mappedby pour dire que la relation entre transporteur et agence est geree par agence.
-    private List <Transporteur> transporteurs;
+    @OneToMany(mappedBy = "agenceVehicule", cascade = CascadeType.ALL)
+    private List<Vehicule> vehicules;
 
     /*@OneToMany (mappedBy = "agenceRecus",cascade = CascadeType.ALL)
     private List <Recus> recus; */
@@ -71,11 +71,11 @@ public class Agence {
     public void setEmployes(List<Employe> employes) {
         this.employes = employes;
     }
-    public List<Transporteur> getTransporteurs(){
-        return transporteurs;
+    public List<Vehicule> getVehicules(){
+        return vehicules;
     }
-    public void setTransporteurs(List<Transporteur> transporteurs) {
-        this.transporteurs = transporteurs;
+    public void setVehicules(List<Vehicule> vehicules) {
+        this.vehicules = vehicules;
     }
 
     

@@ -12,7 +12,5 @@ public interface UtilisateurService {
     Utilisateur createUtilisateur(Utilisateur utilisateur );//pour creer un nouveau Utilisateur
     boolean deleteUtilisateur(String email);
     EmployeDashboardDto createUtilisateurWithEmploye(CreeEmployeUtilisateurDto dto);  // pour creer un utilisateur avec employe
-    //Utilisateur createUtilisateurAvecEmploye(String email, String motDePasse, String cin, String nom, String prenom, Roles role, String id_agence);
-
-
+    
 }
