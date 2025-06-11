@@ -11,6 +11,6 @@ import java.util.List;
 
 @Repository
 public interface TransporteurRep extends JpaRepository <Transporteur,String> {
-    List<Transporteur> findByAgenceTransporteur(Agence agence);
+    
 
 } 

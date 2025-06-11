@@ -42,8 +42,7 @@ public class Client {
     }
 
 
-    @OneToMany(mappedBy = "clientDest",cascade = CascadeType.ALL)
-    private List<Courrier> courriersDest;
+   
   
     @OneToMany(mappedBy = "clientExped",cascade = CascadeType.ALL)
     private List<Courrier> courriersExped;

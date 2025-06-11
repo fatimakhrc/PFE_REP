@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import pfe.example.DTO.VehiculeDashboardDto;
 import pfe.example.Entities.Vehicule;
 import pfe.example.Services.VehiculeService;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("/api/vehicule")
+@PreAuthorize("hasRole('ADMIN') ")
 public class VehiculeController {
     @Autowired
     private VehiculeService vehiculeService;
@@ -46,7 +48,7 @@ public class VehiculeController {
 
     // Endpoint pour ajouter un nouveau véhicule
     @PostMapping("/create")
-    public ResponseEntity<VehiculeDashboardDto> createVehicule(@RequestBody Vehicule vehicule) {
+    public ResponseEntity<VehiculeDashboardDto> addVehicule(@RequestBody Vehicule vehicule) {
     VehiculeDashboardDto dto = vehiculeService.addVehicule(vehicule);
     return ResponseEntity.status(HttpStatus.CREATED).body(dto);
 }

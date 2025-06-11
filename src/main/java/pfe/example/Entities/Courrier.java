@@ -40,9 +40,7 @@ public class Courrier {
     private String cin_dest;
     
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cin_dest", referencedColumnName = "CIN" )
-    private Client clientDest;
+    
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cIN_EXP", referencedColumnName = "CIN")
@@ -56,7 +54,7 @@ public class Courrier {
 
 
     public Courrier(Long id, LocalDate dateEnvoie, double poids, StatusCourrier statut, double prixTransmission,
-             String nom_complet_dest, String adresse_dest, Client clientDest, Client clientExped,
+             String nom_complet_dest, String adresse_dest, Client clientExped,
             String agenceDest, String agenceExped,String cin_dest) {
         this.id = id;
         this.dateEnvoie = dateEnvoie;
@@ -66,7 +64,6 @@ public class Courrier {
         this.cin_dest = cin_dest;
         this.nom_complet_dest = nom_complet_dest;
         this.adresse_dest = adresse_dest;
-        this.clientDest = clientDest;
         this.clientExped = clientExped;
         this.agenceDest = agenceDest;
         this.agenceExped = agenceExped;
@@ -139,14 +136,7 @@ public class Courrier {
     public void setAdresse_dest(String adresse_dest) {
         this.adresse_dest = adresse_dest;
     }
-
-    public Client getClientDest() {
-        return clientDest;
-    }
-
-    public void setClientDest(Client clientDest) {
-        this.clientDest = clientDest;
-    }
+    
 
     public Client getClientExped() {
         return clientExped;

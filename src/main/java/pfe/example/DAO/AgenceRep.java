@@ -15,6 +15,5 @@ import pfe.example.Entities.Agence;
 public interface AgenceRep extends JpaRepository<Agence,Long> {
     @Query("SELECT a.adresse_agence FROM Agence a ")
     List<String> findAllAdresses();
-
     Optional<Agence> findByNomAgence(String nomAgence);
 }
