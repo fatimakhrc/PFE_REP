@@ -1,6 +1,5 @@
 package pfe.example.Security;
 
-
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
@@ -23,6 +22,4 @@ public class CorsConfig {
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
-
-
 }

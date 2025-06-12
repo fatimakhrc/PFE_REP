@@ -14,6 +14,7 @@ import pfe.example.DAO.UtilisateurRep;
 import pfe.example.Entities.Employe;
 import pfe.example.Entities.Pricing;
 import pfe.example.Entities.Roles;
+import pfe.example.Entities.Transporteur;
 import pfe.example.Entities.Utilisateur;
 import pfe.example.DAO.AgenceRep;
 import pfe.example.Entities.Agence;
@@ -105,7 +106,7 @@ public class Initialisation implements CommandLineRunner {
         employeOperateur.setNom_emp("Operateur");
         employeOperateur.setPrenom_emp("Test");
         employeOperateur.setEmp_adresse("456 Operator Street");
-        employeOperateur.setEmp_phone("0987654321");
+        employeOperateur.setEmp_phone("098765432");
         employeOperateur.setRole(operateurRole); // Associer le rôle OPERATEUR
         Employe savedOperateur = employeRep.save(employeOperateur);
 
@@ -122,6 +123,9 @@ public class Initialisation implements CommandLineRunner {
     } else {
         System.out.println(" L'utilisateur OPERATEUR existe déjà.");
     }
+
+    //creation de transporteur 
+   
             
     /* String nomAgence = "Agence Centrale";
     if (agenceRep.findByNomAgence(nomAgence).isEmpty()) {
