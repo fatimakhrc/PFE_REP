@@ -11,6 +11,8 @@ public interface AgenceService {
     void deleteAgence(Long id);
     List <String> getAllAdresses();
     AgenceDetailsDto getDetailsParNomAgence (String nomAgence);
+    List<Long> getAllAgenceIds();
+
     
     
 }

@@ -10,14 +10,23 @@ import org.springframework.stereotype.Service;
 import pfe.example.DAO.TransporteurRep; 
 import pfe.example.DAO.VehiculeRep;
 import pfe.example.DTO.VehiculeDashboardDto;
+import pfe.example.Entities.Agence;
 /* import pfe.example.Entities.Trajet;*/
 import pfe.example.Entities.Transporteur;
 import pfe.example.Entities.Vehicule;
+import pfe.example.DTO.CreateVehiculeDto;
+import pfe.example.DAO.AgenceRep;
 
 @Service
 public class VehiculeServiceImpl implements VehiculeService{
     @Autowired
     private VehiculeRep vehiculeRepository;
+
+
+    @Autowired
+    private AgenceRep agenceRepository;
+
+ 
 
     /* @Autowired
     private TrajetRep trajetRepository;*/
@@ -35,10 +44,21 @@ public class VehiculeServiceImpl implements VehiculeService{
         return vehiculeRepository.findById(imtrc);
     }
 
-    @Override
-    public VehiculeDashboardDto addVehicule(Vehicule vehicule) {
-    Vehicule savedVehicule = vehiculeRepository.save(vehicule);
-    return new VehiculeDashboardDto(savedVehicule);
+    
+
+@Override
+public VehiculeDashboardDto addVehicule(CreateVehiculeDto dto) {
+    Vehicule vehicule = new Vehicule();
+    vehicule.setImtrc(dto.getImmatriculation());
+    vehicule.setType(dto.getType());
+    vehicule.setCapacite(dto.getCapacite());
+
+    Agence agence = agenceRepository.findById(dto.getIdAgence())
+        .orElseThrow(() -> new RuntimeException("Agence non trouvée avec id: " + dto.getIdAgence()));
+    vehicule.setAgenceVehicule(agence);
+
+    Vehicule saved = vehiculeRepository.save(vehicule);
+    return new VehiculeDashboardDto(saved);
 }
 
    @Override

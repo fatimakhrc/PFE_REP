@@ -17,12 +17,12 @@ public class Vehicule {
     @Column (name = "immatriculation" , nullable = false )
     private String immatriculation;
     @Column (name = "capacite")
-    private float capacite ;
+    private int capacite ;
     @Column (name = "type")
     private String type ;
 
 
-    public Vehicule(String immatriculation, float capacite, String type) {
+    public Vehicule(String immatriculation, int capacite, String type) {
         this.immatriculation = immatriculation;
         this.capacite = capacite;
         this.type = type;
@@ -52,10 +52,10 @@ public class Vehicule {
     public void setImtrc(String immatriculation) {
         this.immatriculation = immatriculation;
     }
-    public float getCapacite() {
+    public int getCapacite() {
         return capacite;
     }
-    public void setCapacite(float capacite) {
+    public void setCapacite(int capacite) {
         this.capacite = capacite;
     }
     public String getType() {

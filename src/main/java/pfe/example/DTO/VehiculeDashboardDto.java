@@ -6,7 +6,7 @@ public class VehiculeDashboardDto {
 
     private String immatriculation;
     private String type;
-    private float capacite;
+    private int capacite;
     private String nomAgence;
 
     public VehiculeDashboardDto() {}
@@ -39,11 +39,11 @@ public class VehiculeDashboardDto {
         this.type = type;
     }
 
-    public float getCapacite() {
+    public int getCapacite() {
         return capacite;
     }
 
-    public void setCapacite(float capacite) {
+    public void setCapacite(int capacite) {
         this.capacite = capacite;
     }
 

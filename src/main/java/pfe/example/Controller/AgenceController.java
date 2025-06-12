@@ -34,6 +34,11 @@ public class AgenceController {
     return ResponseEntity.status(HttpStatus.CREATED).body(new AgenceDashboardDto(saved));
 }
 
+    @GetMapping("/ids")
+    public List<Long> getAllAgenceIds() {
+        return agenceService.getAllAgenceIds();
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<Agence> updateAgence(@PathVariable Long id, @RequestBody Agence agence) {
         Agence updatedAgence = agenceService.updateAgence(id, agence);

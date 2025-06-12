@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pfe.example.DTO.CreateVehiculeDto;
 
 import pfe.example.DTO.VehiculeDashboardDto;
 import pfe.example.Entities.Vehicule;
@@ -48,10 +49,10 @@ public class VehiculeController {
 
     // Endpoint pour ajouter un nouveau véhicule
     @PostMapping("/create")
-    public ResponseEntity<VehiculeDashboardDto> addVehicule(@RequestBody Vehicule vehicule) {
-    VehiculeDashboardDto dto = vehiculeService.addVehicule(vehicule);
-    return ResponseEntity.status(HttpStatus.CREATED).body(dto);
-}
+    public ResponseEntity<VehiculeDashboardDto> addVehicule(@RequestBody CreateVehiculeDto dto) {
+        VehiculeDashboardDto result = vehiculeService.addVehicule(dto);
+        return ResponseEntity.ok(result);
+    }
     // Endpoint pour mettre à jour un véhicule existant
     @PutMapping("/{imtrc}")
     public ResponseEntity<Vehicule> updateVehicule(@PathVariable String imtrc, @RequestBody Vehicule vehiculeDetails) {

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import pfe.example.DAO.AgenceRep;
 import pfe.example.DAO.TransporteurRep;
@@ -38,6 +39,14 @@ public class AgenceServiceImpl implements AgenceService {
     public Agence getAgenceById(Long id) {
         Optional<Agence> agence = agenceRepository.findById(id);  // Appeler la méthode findById du repository
         return agence.orElse(null);  // Return the Agence object if found, otherwise return null
+    }
+
+    @Override
+    public List<Long> getAllAgenceIds() {
+        return agenceRepository.findAll()
+                        .stream()
+                        .map(Agence::getId_agence) 
+                        .collect(Collectors.toList());
     }
 
     @Override
